@@ -157,7 +157,7 @@ def process_speeches(input_file, output_dir, model_name):
     
     # Read and process speeches
     print("Processing speeches...")
-    with open(input_file, 'r', encoding='utf-8') as f:
+    with open(input_file, 'r', encoding='iso-8559-1') as f:
         # Skip header if present
         header = f.readline()
         if not header.startswith('speech_id|speech'):
