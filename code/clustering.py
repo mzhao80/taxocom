@@ -14,9 +14,16 @@ import filenames
 
 class Clusterer:
     def __init__(self, data, n_cluster):
+        if data is None:
+            raise ValueError("Input data cannot be None")
+        if not isinstance(data, np.ndarray):
+            raise ValueError(f"Input data must be a numpy array, got {type(data)}")
+        if len(data.shape) != 2:
+            raise ValueError(f"Input data must be 2-dimensional, got shape {data.shape}")
+            
         self.data = data
-        self.n_cluster = n_cluster
-        self.clus = SphericalKMeans(n_cluster)
+        self.n_cluster = min(n_cluster, len(data))  # Ensure n_cluster <= n_samples
+        self.clus = SphericalKMeans(self.n_cluster)
         self.assignment = None  # a list contain the membership of the data points
         self.confidence = None  # a list contain the confidence of the data points
         self.center_ids = None  # a list contain the ids of the cluster centers
@@ -200,13 +207,33 @@ def novel_cluster_detection(dataset, n_cluster):
     print(f"Number of novel terms: {len(dataset.novel_terms)}")
     print(f"First few novel terms: {dataset.novel_terms[:5]}")
     
-    novel_term_ids = [dataset.term_to_id[novel_term] for novel_term in dataset.novel_terms]
+    # Get IDs for novel terms
+    novel_term_ids = []
+    for term in dataset.novel_terms:
+        if term in dataset.term_to_id:
+            novel_term_ids.append(dataset.term_to_id[term])
+        else:
+            print(f"Warning: Term '{term}' not found in term_to_id mapping")
+    
+    if not novel_term_ids:
+        print("No valid novel term IDs found. Skipping clustering.")
+        return {}, {}, []
+        
     print(f"Novel term IDs: {novel_term_ids[:5]}")
     
-    novel_term_embeddings = dataset.term_embeddings[novel_term_ids]
-    print(f"Shape of novel term embeddings: {novel_term_embeddings.shape if novel_term_embeddings is not None else None}")
-    
-    clus = Clusterer(novel_term_embeddings, n_cluster).fit()
+    # Get embeddings for novel terms
+    try:
+        novel_term_embeddings = dataset.term_embeddings[novel_term_ids]
+        print(f"Shape of novel term embeddings: {novel_term_embeddings.shape}")
+        
+        if len(novel_term_embeddings) < n_cluster:
+            print(f"Warning: Number of novel terms ({len(novel_term_embeddings)}) is less than n_cluster ({n_cluster})")
+            n_cluster = len(novel_term_embeddings)
+            
+        clus = Clusterer(novel_term_embeddings, n_cluster).fit()
+    except Exception as e:
+        print(f"Error during clustering: {str(e)}")
+        return {}, {}, []
 
     term_scores = {}
     term_clusters = {clus_id: [] for clus_id in range(n_cluster)}
