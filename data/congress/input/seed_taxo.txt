@@ -1,0 +1,6 @@
+Root
+	Domestic Policy
+	Foreign Policy
+	Economic Policy
+	Social Issues
+	National Security
