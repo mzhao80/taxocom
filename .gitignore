@@ -3,3 +3,4 @@ josd/
 *.tar.gz
 data/nyt/input/
 data/arxiv/input/
+*.DS_Store

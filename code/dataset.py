@@ -79,6 +79,10 @@ class SubDataSet:
         self.center_embeddings = self.load_embeddings(cemb_file)
         
         self.term_idf = self.build_term_idf()
+        
+        # Load novel terms from novelty scores file
+        novelty_scores_file = os.path.join(os.path.dirname(term_file), filenames.novelty_scores)
+        self.novel_terms = self.load_novelty_scores(novelty_scores_file) if os.path.exists(novelty_scores_file) else []
 
     def load_terms(self, term_file):
         terms = []
@@ -159,6 +163,16 @@ class SubDataSet:
             term_idf[w] = math.log(1.0 + N / term_idf[w])
         return term_idf
 
+    def load_novelty_scores(self, novelty_scores_file):
+        novel_terms = []
+        with open(novelty_scores_file, 'r') as fin:
+            threshold = float(fin.readline().strip().split('\t')[1])
+            for line in fin:
+                term, score = line.strip().split('\t')
+                if float(score) > threshold:
+                    novel_terms.append(term)
+        return novel_terms
+
     def get_doc_assignment(self, n_cluster, document, term_assignment, term_scores):
         doc_membership = [0.0] * n_cluster
         for term in document:
@@ -183,4 +197,3 @@ class SubDataSet:
             doc_assignment = self.get_doc_assignment(n_cluster, doc, term_assignment, term_scores)
             doc_clusters[doc_assignment].append(idx)
         return doc_clusters
-
