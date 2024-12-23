@@ -302,10 +302,15 @@ def process_speeches(input_file, output_dir, model_name):
         for term in vocab:
             f.write(f"{term} {term_freq[term]}\n")
     
-    # 6. index.txt - term to ID mapping
+    # 6. index.txt - term to document indices mapping
     with open(os.path.join(output_dir, 'index.txt'), 'w') as f:
-        for i, term in enumerate(vocab):
-            f.write(f"{i}\t{term}\n")
+        # For each term, find all documents that contain it
+        for term in vocab:
+            doc_indices = []
+            for i, doc in enumerate(documents):
+                if term in doc.split():
+                    doc_indices.append(str(i))
+            f.write(f"{term}\t{','.join(doc_indices)}\n")
     
     # 7. seed_taxo.txt - initial taxonomy with congressional categories
     with open(os.path.join(output_dir, 'seed_taxo.txt'), 'w') as f:
