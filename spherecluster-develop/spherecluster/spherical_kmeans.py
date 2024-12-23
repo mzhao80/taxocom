@@ -6,14 +6,11 @@ from joblib import Parallel, delayed
 
 from sklearn.cluster import KMeans
 
-# from sklearn.cluster import _k_means
-from sklearn.cluster import _k_means_common as _k_means
-from sklearn.cluster.k_means_ import (
+from sklearn.cluster import _kmeans
+from sklearn.cluster._kmeans import (
     _check_sample_weight,
-    _init_centroids,
     _labels_inertia,
     _tolerance,
-    _validate_center_shape,
 )
 from sklearn.preprocessing import normalize
 from sklearn.utils import check_array, check_random_state
@@ -43,7 +40,7 @@ def _spherical_kmeans_single_lloyd(
     best_labels, best_inertia, best_centers = None, None, None
 
     # init
-    centers = _init_centroids(
+    centers = KMeans._init_centroids(
         X, n_clusters, init, random_state=random_state, x_squared_norms=x_squared_norms
     )
     if verbose:
@@ -72,11 +69,11 @@ def _spherical_kmeans_single_lloyd(
 
         # computation of the means
         if sp.issparse(X):
-            centers = _k_means._centers_sparse(
+            centers = _kmeans._centers_sparse(
                 X, sample_weight, labels, n_clusters, distances
             )
         else:
-            centers = _k_means._centers_dense(
+            centers = _kmeans._centers_dense(
                 X.astype(np.float),
                 sample_weight.astype(np.float),
                 labels,
@@ -134,8 +131,7 @@ def spherical_k_means(
     algorithm="auto",
     return_n_iter=False,
 ):
-    """Modified from sklearn.cluster.k_means_.k_means.
-    """
+    """Modified from sklearn.cluster.k_means_.k_means."""
     if n_init <= 0:
         raise ValueError(
             "Invalid number of initializations."
@@ -149,22 +145,21 @@ def spherical_k_means(
             " got %d instead" % max_iter
         )
 
-    best_inertia = np.infty
-    # avoid forcing order when copy_x=False
-    order = "C" if copy_x else None
+    best_inertia = None
     X = check_array(
-        X, accept_sparse="csr", dtype=[np.float64, np.float32], order=order, copy=copy_x
+        X, accept_sparse="csr", dtype=[np.float64, np.float32], order="C", copy=copy_x
     )
     # verify that the number of samples given is larger than k
     if _num_samples(X) < n_clusters:
         raise ValueError(
             "n_samples=%d should be >= n_clusters=%d" % (_num_samples(X), n_clusters)
         )
-    tol = _tolerance(X, tol)
+
+    KMeans._validate_center_shape(X, n_clusters, init)
 
     if hasattr(init, "__array__"):
         init = check_array(init, dtype=X.dtype.type, order="C", copy=True)
-        _validate_center_shape(X, n_clusters, init)
+        KMeans._validate_center_shape(X, n_clusters, init)
 
         if n_init != 1:
             warnings.warn(

@@ -1,6 +1,7 @@
 from collections import defaultdict
 from scipy.spatial.distance import cosine
-from spherecluster import SphericalKMeans, VonMisesFisherMixture
+from spherecluster import SphericalKMeans
+from sklearn.preprocessing import normalize
 
 from dataset import SubDataSet
 from case_slim import run_caseolap
@@ -29,7 +30,7 @@ class Clusterer:
         
         self.n_cluster = min(n_cluster, len(data))  # Ensure n_cluster <= n_samples
         print(f"Initializing SphericalKMeans with n_clusters={self.n_cluster}, data shape={self.data.shape}")
-        self.clus = SphericalKMeans(n_clusters=self.n_cluster)
+        self.clus = SphericalKMeans(n_clusters=self.n_cluster, n_init=10)
         self.assignment = None
         self.confidence = None
         self.center_ids = None
@@ -57,6 +58,8 @@ class Clusterer:
 
     def compute_confidence(self):
         centers = self.clus.cluster_centers_
+        # Normalize cluster centers
+        centers = centers / np.linalg.norm(centers, axis=1, keepdims=True)
         membership = np.matmul(self.data, centers.T)
         confidence = np.max(membership, axis=1)
         return confidence
@@ -70,6 +73,7 @@ class Clusterer:
 
     def find_center_idx_for_one_cluster(self, cluster_id):
         query_vec = self.clus.cluster_centers_[cluster_id]
+        query_vec = query_vec / np.linalg.norm(query_vec)  # Normalize center vector
         members = np.where(self.assignment == cluster_id)[0]
         best_similarity, ret = -1, -1
         for member_idx in members:
