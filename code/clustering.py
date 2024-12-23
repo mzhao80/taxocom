@@ -21,10 +21,15 @@ class Clusterer:
         if len(data.shape) != 2:
             raise ValueError(f"Input data must be 2-dimensional, got shape {data.shape}")
             
-        self.data = data
+        # Normalize the data to unit length
+        norms = np.linalg.norm(data, axis=1, keepdims=True)
+        norms[norms == 0] = 1  # Avoid division by zero
+        self.data = data / norms
+        print(f"Data norms after normalization: min={np.min(np.linalg.norm(self.data, axis=1)):.6f}, max={np.max(np.linalg.norm(self.data, axis=1)):.6f}")
+        
         self.n_cluster = min(n_cluster, len(data))  # Ensure n_cluster <= n_samples
-        print(f"Initializing SphericalKMeans with n_clusters={self.n_cluster}, data shape={data.shape}")
-        self.clus = SphericalKMeans(n_clusters=self.n_cluster)  # Fix: use n_clusters instead of n_cluster
+        print(f"Initializing SphericalKMeans with n_clusters={self.n_cluster}, data shape={self.data.shape}")
+        self.clus = SphericalKMeans(n_clusters=self.n_cluster)
         self.assignment = None
         self.confidence = None
         self.center_ids = None
@@ -33,6 +38,10 @@ class Clusterer:
     def fit(self):
         print(f"Fitting SphericalKMeans with data shape={self.data.shape}")
         try:
+            if np.any(np.isnan(self.data)) or np.any(np.isinf(self.data)):
+                print("Warning: Data contains NaN or Inf values")
+                self.data = np.nan_to_num(self.data)
+            
             self.clus.fit(self.data)
             print("SphericalKMeans fit successful")
             self.assignment = self.clus.labels_
@@ -42,6 +51,8 @@ class Clusterer:
             return self
         except Exception as e:
             print(f"Error in SphericalKMeans fit: {str(e)}")
+            print(f"Data stats: shape={self.data.shape}, mean={np.mean(self.data):.6f}, std={np.std(self.data):.6f}")
+            print(f"Any NaN: {np.any(np.isnan(self.data))}, Any Inf: {np.any(np.isinf(self.data))}")
             raise
 
     def compute_confidence(self):
