@@ -2,6 +2,7 @@ from collections import defaultdict
 from scipy.spatial.distance import cosine
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import normalize
+from spherecluster import SphericalKMeans, VonMisesFisherMixture
 
 from dataset import SubDataSet
 from case_slim import run_caseolap
@@ -29,29 +30,29 @@ class Clusterer:
         print(f"Data norms after normalization: min={np.min(np.linalg.norm(self.data, axis=1)):.6f}, max={np.max(np.linalg.norm(self.data, axis=1)):.6f}")
         
         self.n_cluster = min(n_cluster, len(data))  # Ensure n_cluster <= n_samples
-        print(f"Initializing KMeans with n_clusters={self.n_cluster}, data shape={self.data.shape}")
-        self.clus = KMeans(n_clusters=self.n_cluster, n_init=10)
+        print(f"Initializing SphericalKMeans with n_clusters={self.n_cluster}, data shape={self.data.shape}")
+        self.clus = SphericalKMeans(n_clusters=self.n_cluster, n_init=10)
         self.assignment = None
         self.confidence = None
         self.center_ids = None
         self.inertia_scores = None
 
     def fit(self):
-        print(f"Fitting KMeans with data shape={self.data.shape}")
+        print(f"Fitting SphericalKMeans with data shape={self.data.shape}")
         try:
             if np.any(np.isnan(self.data)) or np.any(np.isinf(self.data)):
                 print("Warning: Data contains NaN or Inf values")
                 self.data = np.nan_to_num(self.data)
             
             self.clus.fit(self.data)
-            print("KMeans fit successful")
+            print("SphericalKMeans fit successful")
             self.assignment = self.clus.labels_
             self.center_ids = self.generate_center_idx()
             self.confidence = self.compute_confidence()
             self.inertia_scores = self.clus.inertia_
             return self
         except Exception as e:
-            print(f"Error in KMeans fit: {str(e)}")
+            print(f"Error in SphericalKMeans fit: {str(e)}")
             print(f"Data stats: shape={self.data.shape}, mean={np.mean(self.data):.6f}, std={np.std(self.data):.6f}")
             print(f"Any NaN: {np.any(np.isnan(self.data))}, Any Inf: {np.any(np.isinf(self.data))}")
             raise
