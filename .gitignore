@@ -1,5 +1,5 @@
 __pycache__/
-josd/
+code/josd
 *.tar.gz
 data/nyt/input/
 data/arxiv/input/
