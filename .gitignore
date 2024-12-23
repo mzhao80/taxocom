@@ -4,13 +4,5 @@ code/josd
 #data/nyt/input/
 data/arxiv/input/
 *.DS_Store
-#congress/*
-!congress/*.zip
-data/nyt/input/terms.txt
-data/nyt/input/term_freq.txt
-data/nyt/input/seed_taxo.txt
-data/nyt/input/index.txt
-data/nyt/input/embeddings.txt
-data/nyt/input/docs.txt
-data/nyt/input/doc_ids.txt
+data/nyt/*
 data/congress/speeches_114.txt
