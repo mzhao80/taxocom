@@ -23,19 +23,26 @@ class Clusterer:
             
         self.data = data
         self.n_cluster = min(n_cluster, len(data))  # Ensure n_cluster <= n_samples
-        self.clus = SphericalKMeans(self.n_cluster)
-        self.assignment = None  # a list contain the membership of the data points
-        self.confidence = None  # a list contain the confidence of the data points
-        self.center_ids = None  # a list contain the ids of the cluster centers
+        print(f"Initializing SphericalKMeans with n_clusters={self.n_cluster}, data shape={data.shape}")
+        self.clus = SphericalKMeans(n_clusters=self.n_cluster)  # Fix: use n_clusters instead of n_cluster
+        self.assignment = None
+        self.confidence = None
+        self.center_ids = None
         self.inertia_scores = None
 
     def fit(self):
-        self.clus.fit(self.data)
-        self.assignment = self.clus.labels_
-        self.center_ids = self.generate_center_idx()
-        self.confidence = self.compute_confidence()
-        self.inertia_scores = self.clus.inertia_
-        return self
+        print(f"Fitting SphericalKMeans with data shape={self.data.shape}")
+        try:
+            self.clus.fit(self.data)
+            print("SphericalKMeans fit successful")
+            self.assignment = self.clus.labels_
+            self.center_ids = self.generate_center_idx()
+            self.confidence = self.compute_confidence()
+            self.inertia_scores = self.clus.inertia_
+            return self
+        except Exception as e:
+            print(f"Error in SphericalKMeans fit: {str(e)}")
+            raise
 
     def compute_confidence(self):
         centers = self.clus.cluster_centers_
