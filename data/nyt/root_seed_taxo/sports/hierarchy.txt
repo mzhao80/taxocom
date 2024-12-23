@@ -1,0 +1,8 @@
+basketball	sports
+tennis	sports
+golf	sports
+baseball	sports
+hockey	sports
+quarterback	sports
+striker	sports
+fans	sports

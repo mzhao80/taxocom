@@ -1,0 +1,4 @@
+stocks	
+electricity	
+economy	
+euro	

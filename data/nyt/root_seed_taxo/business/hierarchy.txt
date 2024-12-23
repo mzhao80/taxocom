@@ -1,0 +1,7 @@
+stocks	business
+electricity	business
+economy	business
+euro	business
+products	business
+euro_zone	business
+volkswagen	business

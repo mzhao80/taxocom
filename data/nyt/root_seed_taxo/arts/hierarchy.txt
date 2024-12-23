@@ -1,0 +1,6 @@
+dance	arts
+television	arts
+movies	arts
+ms	arts
+images	arts
+comic	arts

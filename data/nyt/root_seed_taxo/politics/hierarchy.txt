@@ -1,0 +1,10 @@
+budget	politics
+surveillance	politics
+immigration	politics
+law_enforcement	politics
+gay_rights	politics
+abortion	politics
+insurance	politics
+rules	politics
+republican	politics
+law	politics

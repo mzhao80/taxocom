@@ -1,0 +1,3 @@
+buffalo	city
+scientists	city
+inning	city
