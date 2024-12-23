@@ -182,18 +182,4 @@ class SubDataSet:
                 idf = self.term_idf[term]
                 rel = term_scores[term]
                 doc_membership[clus_id] += idf * rel
-        doc_assignment = doc_membership.index(max(doc_membership))
-        return doc_assignment
-
-    def get_doc_clusters(self, term_clusters, term_scores):
-        term_assignment = [None] * len(self.term_to_id)
-        for clus_id, terms in term_clusters.items():
-            for term in terms:
-                term_id = self.term_to_id[term]
-                term_assignment[term_id] = clus_id
-        n_cluster = len(term_clusters)
-        doc_clusters = defaultdict(list)
-        for idx, doc in zip(self.doc_ids, self.docs):
-            doc_assignment = self.get_doc_assignment(n_cluster, doc, term_assignment, term_scores)
-            doc_clusters[doc_assignment].append(idx)
-        return doc_clusters
+        doc_assignment = doc_m

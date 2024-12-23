@@ -141,6 +141,13 @@ def run_clustering(input_corpus, filter_thre, betas, node_name, node_dir, level)
     return center_terms
 
 def novel_term_identification(dataset, node_dir, temperature=0.1, beta=1.5):
+    # Check if there are any terms to process
+    if not dataset.terms:
+        print("No terms found. Skipping novel term identification.")
+        dataset.known_terms = []
+        dataset.novel_terms = []
+        return
+        
     # in case of newly-inserted nodes
     if len(dataset.center_embeddings) == 0: 
         dataset.known_terms = []
@@ -186,8 +193,19 @@ def known_cluster_assignment(dataset):
     return term_clusters, term_scores
 
 def novel_cluster_detection(dataset, n_cluster):
+    if not dataset.novel_terms:
+        print("No novel terms found. Skipping clustering.")
+        return {}, {}, []
+        
+    print(f"Number of novel terms: {len(dataset.novel_terms)}")
+    print(f"First few novel terms: {dataset.novel_terms[:5]}")
+    
     novel_term_ids = [dataset.term_to_id[novel_term] for novel_term in dataset.novel_terms]
+    print(f"Novel term IDs: {novel_term_ids[:5]}")
+    
     novel_term_embeddings = dataset.term_embeddings[novel_term_ids]
+    print(f"Shape of novel term embeddings: {novel_term_embeddings.shape if novel_term_embeddings is not None else None}")
+    
     clus = Clusterer(novel_term_embeddings, n_cluster).fit()
 
     term_scores = {}
