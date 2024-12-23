@@ -1,0 +1,262 @@
+#!/usr/bin/env python3
+
+import os
+import re
+import argparse
+from collections import Counter, defaultdict
+import numpy as np
+import torch
+from transformers import AutoTokenizer, AutoModel
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from tqdm import tqdm
+
+def ensure_dir(directory):
+    """Create directory if it doesn't exist."""
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+# Congressional stopwords from the paper
+CONGRESS_STOPWORDS = {
+    'absent', 'adjourn', 'ask', 'can', 'chairman',
+    'committee', 'con', 'democrat', 'etc', 'gentleladies',
+    'gentlelady', 'gentleman', 'gentlemen', 'gentlewoman', 'gentlewomen',
+    'hereabout', 'hereafter', 'hereat', 'hereby', 'herein',
+    'hereinafter', 'hereinbefore', 'hereinto', 'hereof', 'hereon',
+    'hereto', 'heretofore', 'hereunder', 'hereunto', 'hereupon',
+    'herewith', 'month', 'mr', 'mrs', 'nay',
+    'none', 'now', 'part', 'per', 'pro',
+    'republican', 'say', 'senator', 'shall', 'sir',
+    'speak', 'speaker', 'tell', 'thank', 'thereabout',
+    'thereafter', 'thereagainst', 'thereat', 'therebefore', 'therebeforn',
+    'thereby', 'therefor', 'therefore', 'therefrom', 'therein',
+    'thereinafter', 'thereof', 'thereon', 'thereto', 'theretofore',
+    'thereunder', 'thereunto', 'thereupon', 'therewith', 'therewithal',
+    'today', 'whereabouts', 'whereafter', 'whereas', 'whereat',
+    'whereby', 'wherefore', 'wherefrom', 'wherein', 'whereinto',
+    'whereof', 'whereon', 'whereto', 'whereunder', 'whereupon',
+    'wherever', 'wherewith', 'wherewithal', 'will', 'yea',
+    'yes', 'yield'
+}
+
+# US state names for additional stopwords
+US_STATES = {
+    'alabama', 'alaska', 'arizona', 'arkansas', 'california',
+    'colorado', 'connecticut', 'delaware', 'florida', 'georgia',
+    'hawaii', 'idaho', 'illinois', 'indiana', 'iowa',
+    'kansas', 'kentucky', 'louisiana', 'maine', 'maryland',
+    'massachusetts', 'michigan', 'minnesota', 'mississippi', 'missouri',
+    'montana', 'nebraska', 'nevada', 'hampshire', 'jersey',
+    'mexico', 'york', 'carolina', 'dakota', 'ohio',
+    'oklahoma', 'oregon', 'pennsylvania', 'rhode', 'island',
+    'tennessee', 'texas', 'utah', 'vermont', 'virginia',
+    'washington', 'wisconsin', 'wyoming'
+}
+
+def has_bad_syntax(word):
+    """Check if a word has bad syntax according to paper rules."""
+    # Contains numbers, symbols, or punctuation
+    if not word.isalpha():
+        return True
+    
+    # Fewer than five characters
+    if len(word) < 5:
+        return True
+    
+    # One-letter word
+    if len(word) == 1:
+        return True
+    
+    # Word beginning with first three letters of a month
+    months = ['january', 'february', 'march', 'april', 'may', 'june',
+              'july', 'august', 'september', 'october', 'november', 'december']
+    for month in months:
+        if word.lower().startswith(month[:3]):
+            return True
+    
+    return False
+
+def clean_congress_text(text):
+    """Clean congressional speech text."""
+    # Remove special characters and normalize whitespace
+    text = re.sub(r'\s+', ' ', text)  # Normalize whitespace
+    text = re.sub(r'(?<=\w)\.(?=\w)', ' ', text)  # Split words joined by periods
+    text = re.sub(r'(?<=\w)(?=[A-Z])', ' ', text)  # Split camelCase
+    text = re.sub(r'\([^)]*\)', '', text)  # Remove parenthetical expressions
+    return text.strip()
+
+def preprocess_text(text):
+    """Clean and tokenize text."""
+    # First apply congress-specific cleaning
+    text = clean_congress_text(text)
+    
+    # Convert to lowercase
+    text = text.lower()
+    
+    # Tokenize
+    tokens = word_tokenize(text)
+    
+    # Remove stopwords and apply syntax rules
+    stop_words = set(stopwords.words('english'))
+    stop_words.update(CONGRESS_STOPWORDS)
+    stop_words.update(US_STATES)
+    
+    # Filter tokens based on stopwords and syntax rules
+    tokens = [t for t in tokens if 
+             t not in stop_words and 
+             not has_bad_syntax(t)]
+    
+    # Lemmatize
+    lemmatizer = WordNetLemmatizer()
+    tokens = [lemmatizer.lemmatize(t) for t in tokens]
+    
+    return tokens
+
+def get_bert_embeddings(terms, model_name='bert-base-uncased'):
+    """Get BERT embeddings for terms."""
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    
+    # Load model and tokenizer
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModel.from_pretrained(model_name).to(device)
+    model.eval()
+    
+    embeddings = {}
+    batch_size = 32
+    
+    print(f"Generating BERT embeddings using {model_name}...")
+    for i in tqdm(range(0, len(terms), batch_size)):
+        batch_terms = terms[i:i + batch_size]
+        
+        # Tokenize terms
+        encoded = tokenizer(batch_terms, padding=True, truncation=True, return_tensors='pt')
+        encoded = {k: v.to(device) for k, v in encoded.items()}
+        
+        # Get embeddings
+        with torch.no_grad():
+            outputs = model(**encoded)
+            # Use [CLS] token embedding as term representation
+            batch_embeddings = outputs.last_hidden_state[:, 0, :].cpu().numpy()
+        
+        # Store embeddings
+        for term, embedding in zip(batch_terms, batch_embeddings):
+            embeddings[term] = embedding
+    
+    return embeddings
+
+def process_speeches(input_file, output_dir, model_name):
+    """Process congressional speeches and create required files."""
+    ensure_dir(output_dir)
+    
+    # Initialize containers
+    documents = []  # List of processed documents
+    doc_ids = []   # List of document IDs
+    term_freq = defaultdict(int)  # Term frequency counter
+    
+    # Read and process speeches
+    print("Processing speeches...")
+    with open(input_file, 'r', encoding='utf-8') as f:
+        # Skip header if present
+        header = f.readline()
+        if not header.startswith('speech_id|speech'):
+            f.seek(0)  # Reset if no header
+            
+        for i, line in enumerate(f):
+            if i % 1000 == 0:
+                print(f"Processed {i} speeches...")
+            
+            try:
+                # Split on pipe character
+                parts = line.strip().split('|')
+                if len(parts) != 2:
+                    continue
+                
+                speech_id, text = parts
+                
+                # Process text
+                tokens = preprocess_text(text)
+                if tokens:  # Only keep non-empty documents
+                    documents.append(' '.join(tokens))
+                    doc_ids.append(speech_id)
+                    
+                    # Update term frequencies
+                    for token in tokens:
+                        term_freq[token] += 1
+            except Exception as e:
+                print(f"Error processing line {i}: {str(e)}")
+                continue
+    
+    # Get unique terms that appear at least 5 times
+    vocab = [term for term, freq in term_freq.items() if freq >= 5]
+    print(f"Vocabulary size: {len(vocab)}")
+    
+    # Get BERT embeddings for terms
+    embeddings_dict = get_bert_embeddings(vocab, model_name)
+    
+    # Write files
+    print("Writing output files...")
+    
+    # 1. terms.txt - vocabulary
+    with open(os.path.join(output_dir, 'terms.txt'), 'w') as f:
+        for term in vocab:
+            f.write(f"{term}\n")
+    
+    # 2. docs.txt - processed documents
+    with open(os.path.join(output_dir, 'docs.txt'), 'w') as f:
+        for doc in documents:
+            f.write(f"{doc}\n")
+    
+    # 3. doc_ids.txt - document IDs
+    with open(os.path.join(output_dir, 'doc_ids.txt'), 'w') as f:
+        for doc_id in doc_ids:
+            f.write(f"{doc_id}\n")
+    
+    # 4. embeddings.txt - BERT embeddings
+    with open(os.path.join(output_dir, 'embeddings.txt'), 'w') as f:
+        for term in vocab:
+            embedding_str = ' '.join([f"{x:.6f}" for x in embeddings_dict[term]])
+            f.write(f"{term} {embedding_str}\n")
+    
+    # 5. term_freq.txt - term frequencies
+    with open(os.path.join(output_dir, 'term_freq.txt'), 'w') as f:
+        for term in vocab:
+            f.write(f"{term} {term_freq[term]}\n")
+    
+    # 6. index.txt - term to ID mapping
+    with open(os.path.join(output_dir, 'index.txt'), 'w') as f:
+        for i, term in enumerate(vocab):
+            f.write(f"{i}\t{term}\n")
+    
+    # 7. seed_taxo.txt - initial taxonomy with congressional categories
+    with open(os.path.join(output_dir, 'seed_taxo.txt'), 'w') as f:
+        f.write("Root\n")
+        f.write("\tDomestic Policy\n")
+        f.write("\tForeign Policy\n")
+        f.write("\tEconomic Policy\n")
+        f.write("\tSocial Issues\n")
+        f.write("\tNational Security\n")
+
+    print("Processing complete!")
+
+def main():
+    parser = argparse.ArgumentParser(description='Process congressional speeches into TaxoCom format')
+    parser.add_argument('--input', type=str, required=True,
+                      help='Path to speeches_114.txt file')
+    parser.add_argument('--output', type=str, required=True,
+                      help='Output directory for processed files')
+    parser.add_argument('--model', type=str, default='bert-base-uncased',
+                      help='BERT model to use for embeddings')
+    
+    args = parser.parse_args()
+    
+    # Download required NLTK data
+    nltk.download('punkt')
+    nltk.download('stopwords')
+    nltk.download('wordnet')
+    
+    process_speeches(args.input, args.output, args.model)
+
+if __name__ == "__main__":
+    main()
