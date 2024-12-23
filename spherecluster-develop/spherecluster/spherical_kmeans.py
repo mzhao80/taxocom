@@ -119,7 +119,7 @@ def _spherical_kmeans_single_lloyd(
     return best_labels, best_inertia, best_centers, i + 1
 
 
-def spherical_k_means(
+def spherical_kmeans(
     X,
     n_clusters,
     sample_weight=None,
@@ -134,8 +134,7 @@ def spherical_k_means(
     algorithm="auto",
     return_n_iter=False,
 ):
-    """Modified from sklearn.cluster.k_means_.k_means.
-    """
+    """Modified from sklearn.cluster.k_means_.k_means."""
     if n_init <= 0:
         raise ValueError(
             "Invalid number of initializations."
@@ -150,51 +149,30 @@ def spherical_k_means(
         )
 
     best_inertia = np.infty
-    # avoid forcing order when copy_x=False
-    order = "C" if copy_x else None
-    X = check_array(
-        X, accept_sparse="csr", dtype=[np.float64, np.float32], order=order, copy=copy_x
-    )
-    # verify that the number of samples given is larger than k
-    if _num_samples(X) < n_clusters:
-        raise ValueError(
-            "n_samples=%d should be >= n_clusters=%d" % (_num_samples(X), n_clusters)
-        )
+    X = check_array(X, dtype=[np.float64, np.float32], copy=copy_x)
     tol = _tolerance(X, tol)
 
-    if hasattr(init, "__array__"):
-        init = check_array(init, dtype=X.dtype.type, order="C", copy=True)
+    # Validate init array if provided
+    if hasattr(init, '__array__'):
+        init = check_array(init, dtype=X.dtype.type, copy=True)
         _validate_center_shape(X, n_clusters, init)
 
-        if n_init != 1:
-            warnings.warn(
-                "Explicit initial center position passed: "
-                "performing only one init in k-means instead of n_init=%d" % n_init,
-                RuntimeWarning,
-                stacklevel=2,
-            )
-            n_init = 1
-
-    # precompute squared norms of data points
-    x_squared_norms = row_norms(X, squared=True)
-
+    # parallelization of k-means runs
+    seeds = random_state.randint(np.iinfo(np.int32).max, size=n_init)
     if n_jobs == 1:
-        # For a single thread, less memory is needed if we just store one set
-        # of the best results (as opposed to one set per run per thread).
-        for it in range(n_init):
+        # For a single thread, less memory is needed
+        for idx in range(n_init):
             # run a k-means once
             labels, inertia, centers, n_iter_ = _spherical_kmeans_single_lloyd(
                 X,
                 n_clusters,
-                sample_weight,
+                sample_weight=sample_weight,
                 max_iter=max_iter,
                 init=init,
                 verbose=verbose,
                 tol=tol,
-                x_squared_norms=x_squared_norms,
-                random_state=random_state,
+                random_state=seeds[idx],
             )
-
             # determine if these results are the best so far
             if best_inertia is None or inertia < best_inertia:
                 best_labels = labels.copy()
@@ -202,25 +180,21 @@ def spherical_k_means(
                 best_inertia = inertia
                 best_n_iter = n_iter_
     else:
-        # parallelisation of k-means runs
-        seeds = random_state.randint(np.iinfo(np.int32).max, size=n_init)
+        # parallelization of k-means runs
         results = Parallel(n_jobs=n_jobs, verbose=0)(
             delayed(_spherical_kmeans_single_lloyd)(
                 X,
                 n_clusters,
-                sample_weight,
+                sample_weight=sample_weight,
                 max_iter=max_iter,
                 init=init,
                 verbose=verbose,
                 tol=tol,
-                x_squared_norms=x_squared_norms,
-                # Change seed to ensure variety
                 random_state=seed,
             )
             for seed in seeds
         )
-
-        # Get results with the lowest inertia
+        # Get results with the best inertia
         labels, inertia, centers, n_iters = zip(*results)
         best = np.argmin(inertia)
         best_labels = labels[best]
@@ -351,10 +325,23 @@ class SphericalKMeans(KMeans):
             X = normalize(X)
 
         random_state = check_random_state(self.random_state)
+        X = check_array(X, accept_sparse='csr', dtype=[np.float64, np.float32])
+        
+        # Pre-compute distances between rows if sparse
+        if sp.issparse(X):
+            X = X.toarray()
 
-        # TODO: add check that all data is unit-normalized
+        # Validate init array if provided
+        init = self.init
+        if hasattr(init, '__array__'):
+            init = check_array(init, dtype=X.dtype.type, copy=True)
+            _validate_center_shape(X, self.n_clusters, init)
 
-        self.cluster_centers_, self.labels_, self.inertia_, self.n_iter_ = spherical_k_means(
+        # Check data
+        if X.shape[0] < self.n_clusters:
+            raise ValueError(f"n_samples={X.shape[0]} should be >= n_clusters={self.n_clusters}")
+
+        self.cluster_centers_, self.labels_, self.inertia_, self.n_iter_ = spherical_kmeans(
             X,
             n_clusters=self.n_clusters,
             sample_weight=sample_weight,
