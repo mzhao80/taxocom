@@ -1,0 +1,5 @@
+*	sports	politics	business	arts
+sports	basketball	tennis	golf	baseball	hockey
+politics	budget	surveillance	immigration	law_enforcement	gay_rights	abortion	insurance
+business	stocks	electricity	economy	euro
+arts	dance	television	movies
