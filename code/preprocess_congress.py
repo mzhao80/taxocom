@@ -43,20 +43,6 @@ CONGRESS_STOPWORDS = {
     'yes', 'yield'
 }
 
-# US state names for additional stopwords
-US_STATES = {
-    'alabama', 'alaska', 'arizona', 'arkansas', 'california',
-    'colorado', 'connecticut', 'delaware', 'florida', 'georgia',
-    'hawaii', 'idaho', 'illinois', 'indiana', 'iowa',
-    'kansas', 'kentucky', 'louisiana', 'maine', 'maryland',
-    'massachusetts', 'michigan', 'minnesota', 'mississippi', 'missouri',
-    'montana', 'nebraska', 'nevada', 'hampshire', 'jersey',
-    'mexico', 'york', 'carolina', 'dakota', 'ohio',
-    'oklahoma', 'oregon', 'pennsylvania', 'rhode', 'island',
-    'tennessee', 'texas', 'utah', 'vermont', 'virginia',
-    'washington', 'wisconsin', 'wyoming'
-}
-
 def has_bad_syntax(word):
     """Check if a word has bad syntax according to paper rules."""
     # Contains numbers, symbols, or punctuation (except underscores)
