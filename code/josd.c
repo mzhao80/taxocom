@@ -48,7 +48,7 @@ long long *doc_sizes;
 int binary = 0, debug_mode = 2, window = 5, min_count = 5, num_threads = 20, min_reduce = 1;
 int num_per_topic = 10; // top-k words per topic to show
 int *vocab_hash, *docs;
-long long vocab_max_size = 1000, vocab_size = 0, corpus_size = 0, layer1_size = 100;
+long long vocab_max_size = 1000, vocab_size = 0, corpus_size = 0, layer1_size = 768;  // Default to BERT dimension
 long long train_words = 0, word_count_actual = 0, iter = 10, pretrain_iter = 0, file_size = 0, iter_count;
 real alpha = 0.025, starting_alpha, sample = 1e-3, global_lambda = 1.5, lambda_dis = 1.0, lambda_cat = 1.0;
 real word_margin = 0.3, cat_margin = 0.9, dis_margin;
@@ -978,9 +978,11 @@ int ArgPos(char *str, int argc, char **argv) {
 int main(int argc, char **argv) {
   int i;
   if (argc == 1) {
-    printf("Parameters:\n");
-
-    printf("\t##########   Input/Output:   ##########\n");
+    printf("JOSD embedding learning\n\n");
+    printf("Options:\n");
+    printf("Parameters for training:\n");
+    printf("\t-size <int>\n");
+    printf("\t\tSet dimension of text embeddings; default is 768 (BERT)\n");
     printf("\t-train <file> (mandatory argument)\n");
     printf("\t\tUse text data from <file> to train the model\n");
     printf("\t-category-file <file>\n");
@@ -1008,8 +1010,6 @@ int main(int argc, char **argv) {
     
 
     printf("\n\t##########   Embedding Training:   ##########\n");
-    printf("\t-size <int>\n");
-    printf("\t\tSet dimension of text embeddings; default is 100\n");
     printf("\t-iter <int>\n");
     printf("\t\tSet the number of iterations to train on the corpus (performing topic mining); default is 5\n");
     printf("\t-pretrain <int>\n");

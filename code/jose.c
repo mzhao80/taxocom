@@ -31,7 +31,7 @@ struct vocab_word *vocab;
 int debug_mode = 2, window = 5, min_count = 5, num_threads = 20, min_reduce = 1;
 int *vocab_hash;
 long long *doc_sizes;
-long long vocab_max_size = 1000, vocab_size = 0, corpus_size = 0, layer1_size = 100;
+long long vocab_max_size = 1000, vocab_size = 0, corpus_size = 0, layer1_size = 768;  // Default to BERT dimension
 long long train_words = 0, word_count_actual = 0, iter = 10, file_size = 0;
 int negative = 2;
 const int table_size = 1e8;
@@ -688,16 +688,14 @@ int main(int argc, char **argv) {
   int i;
   if (argc == 1) {
     printf("Parameters:\n");
-    printf("\t-train <file> (mandatory argument)\n");
+    printf("\t-train <file>\n");
     printf("\t\tUse text data from <file> to train the model\n");
     printf("\t-word-emb <file>\n");
-    printf("\t\tUse <file> to save the resulting word vectors\n");
-    printf("\t-context-emb <file>\n");
-    printf("\t\tUse <file> to save the resulting word context vectors\n");
+    printf("\t\tUse <file> to save the resulting word embeddings\n");
     printf("\t-doc-emb <file>\n");
-    printf("\t\tUse <file> to save the resulting document vectors\n");
+    printf("\t\tUse <file> to save the resulting document embeddings\n");
     printf("\t-size <int>\n");
-    printf("\t\tSet size of word vectors; default is 100\n");
+    printf("\t\tSet size of word vectors; default is 768 (BERT)\n");
     printf("\t-window <int>\n");
     printf("\t\tSet max skip length between words; default is 5\n");
     printf("\t-sample <float>\n");
@@ -724,8 +722,7 @@ int main(int argc, char **argv) {
     printf("\t-load-emb <file>\n");
     printf("\t\tThe pretrained embeddings will be read from <file>\n");
     printf("\nExamples:\n");
-    printf(
-        "./jose -train text.txt -word-emb jose.txt -size 100 -margin 0.15 -window 5 -sample 1e-3 -negative 2 -iter 10\n\n");
+    printf("./jose -train text.txt -word-emb jose.txt -size 768 -margin 0.15 -window 5 -sample 1e-3 -negative 2 -iter 10\n\n");
     return 0;
   }
   word_emb[0] = 0;
