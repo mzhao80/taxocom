@@ -9,7 +9,7 @@
 **Step 2. Run the preprocessing codes at the working directory `../code/`** 
 
 ```
-bash run_preprocss.sh <dataset-name>
+bash run_preprocess.sh <dataset-name>
 ```
 
 - It first pre-trains term embedding vectors by using your own corpus

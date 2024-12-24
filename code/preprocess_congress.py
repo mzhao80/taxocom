@@ -105,28 +105,37 @@ def preprocess_text(text):
     
     return tokens
 
+def process_autophrase_output(text):
+    """Process AutoPhrase segmented text to extract phrases and clean text."""
+    # AutoPhrase marks phrases with <phrase>...</phrase>
+    phrases = re.findall(r'<phrase>([^<]+)</phrase>', text)
+    
+    # Clean text by removing XML tags and normalizing
+    clean_text = re.sub(r'<[^>]+>', '', text)
+    clean_text = clean_congress_text(clean_text)
+    
+    return clean_text, phrases
+
 def process_speeches(input_file, output_dir, raw_dir):
     """Process congressional speeches and create required files."""
     ensure_dir(output_dir)
     ensure_dir(raw_dir)
     
-    # First pass: collect all sentences and create raw/docs.txt
-    print("First pass: processing speeches...")
-    with open(input_file, 'r', encoding='iso-8859-1') as f, open(os.path.join(raw_dir, 'docs.txt'), 'w') as fout:
-        # Skip header if present
-        header = f.readline()
-        if not header.startswith('speech_id|speech'):
-            f.seek(0)
-            
+    # Process segmented speeches and collect phrases
+    print("Processing AutoPhrase segmented speeches...")
+    all_phrases = set()
+    
+    with open(input_file, 'r', encoding='utf-8') as f, \
+         open(os.path.join(raw_dir, 'docs.txt'), 'w') as fout:
         for line in f:
             try:
-                parts = line.strip().split('|')
-                if len(parts) != 2:
-                    continue
+                # Process AutoPhrase output
+                clean_text, phrases = process_autophrase_output(line)
+                tokens = preprocess_text(clean_text)
                 
-                _, text = parts
-                # Process text
-                tokens = preprocess_text(text)
+                # Add any multi-word phrases that passed preprocessing
+                all_phrases.update(phrases)
+                
                 if tokens:  # Only keep non-empty documents
                     fout.write(' '.join(tokens) + '\n')
                     
@@ -134,8 +143,8 @@ def process_speeches(input_file, output_dir, raw_dir):
                 print(f"Error processing line: {str(e)}")
                 continue
 
-    # Create raw/terms.txt with taxonomy terms
-    print("Creating raw/terms.txt with taxonomy terms...")
+    # Add taxonomy terms
+    print("Creating raw/terms.txt with taxonomy and extracted terms...")
     categories = [
         "agriculture_and_food",
         "animals",
@@ -170,19 +179,26 @@ def process_speeches(input_file, output_dir, raw_dir):
         "water_resources_development"
     ]
     
-    # Write categories to raw/terms.txt
+    # Write terms.txt with both taxonomy terms and extracted phrases
     with open(os.path.join(raw_dir, 'terms.txt'), 'w') as f:
+        # Write taxonomy terms first
         for term in categories:
             f.write(f"{term}\n")
+        # Then write extracted phrases
+        for phrase in sorted(all_phrases):
+            if not has_bad_syntax(phrase):  # Only include valid phrases
+                f.write(f"{phrase}\n")
 
-    # Create seed_taxo.txt
-    print("Creating seed_taxo.txt")
-    with open(os.path.join(output_dir, 'seed_taxo.txt'), 'w') as f:
-        f.write("*\t" + "\t".join(categories) + "\n")
+    # Create seed_taxo.txt if it doesn't exist
+    seed_taxo_path = os.path.join(output_dir, 'seed_taxo.txt')
+    if not os.path.exists(seed_taxo_path):
+        print("Creating seed_taxo.txt")
+        with open(seed_taxo_path, 'w') as f:
+            f.write("*\t" + "\t".join(categories) + "\n")
 
     print("Done preprocessing speeches. Now run:")
-    print("1. jose -train raw/docs.txt -word-emb input/embeddings.txt -size 100")
-    print("2. python preprocess.py to generate the final files")
+    print("1. in home folder: ./code/jose -train data/congress/raw/docs.txt -word-emb data/congress/input/embeddings.txt -size 100")
+    print("2. in home folder: python code/preprocess.py --data_dir data --dataset congress")
 
 def main():
     parser = argparse.ArgumentParser(description='Preprocess congressional speeches')
