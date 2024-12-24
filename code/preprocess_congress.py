@@ -275,12 +275,62 @@ def process_speeches(input_file, output_dir, model_name):
             except Exception as e:
                 print(f"Error processing line {i}: {str(e)}")
                 continue
-    
-    # Get vocabulary (terms that appear at least 5 times)
+
+    # Get initial vocabulary (terms that appear at least 5 times)
     vocab = [term for term, freq in term_freq.items() if freq >= 5]
-    print(f"Vocabulary size: {len(vocab)}")
+    print(f"Initial vocabulary size: {len(vocab)}")
+
+    # Create seed_taxo.txt - initial taxonomy with congressional categories
+    print("Creating seed_taxo.txt")
+    categories = [
+        "Agriculture_and_Food",
+        "Animals",
+        "Armed_Forces_and_National_Security",
+        "Arts_Culture_Religion"
+        "Civil_Rights_and_Liberties_Minority_Issues",
+        "Commerce",
+        "Crime_and_Law_Enforcement",
+        "Economics_and_Public_Finance",
+        "Education",
+        "Emergency_Management"
+        "Energy",
+        "Environmental_Protection",
+        "Foreign_Trade_and_International_Finance",
+        "Geographic_Areas_Entities_Committees"
+        "Government_Operations_and_Politics",
+        "Health",
+        "Housing_and_Community_Development",
+        "Immigration",
+        "International_Affairs",
+        "Labor_and_Employment",
+        "Law",
+        "Native_Americans",
+        "Private_Legislation",
+        "Public_Lands_and_Natural_Resources",
+        "Science_Technology_Communications",
+        "Social_Sciences_and_History",
+        "Social_Welfare",
+        "Sports_and_Recreation",
+        "Taxation",
+        "Transportation_and_Public_Works",
+        "Water_Resources_Development"
+    ]
+    with open(os.path.join(output_dir, 'seed_taxo.txt'), 'w') as f:
+        f.write("*\t" + "\t".join(categories) + "\n")
+
+    # Add taxonomy terms to vocabulary
+    print("Adding taxonomy terms to vocabulary...")
+    for term in categories:
+        if term not in vocab:
+            vocab.append(term)
+            # Initialize term frequency and document index for new terms
+            term_freq[term] = 5  # Minimum frequency threshold
+            term_to_docs[term] = {0}  # Add to first document for minimal presence
     
-    # Get BERT embeddings for terms
+    print(f"Final vocabulary size after adding taxonomy terms: {len(vocab)}")
+    
+    # Get BERT embeddings for all terms (including taxonomy terms)
+    print("Generating embeddings for all terms...")
     embeddings_dict = get_bert_embeddings(vocab, model_name)
     
     # Write files
@@ -339,46 +389,7 @@ def process_speeches(input_file, output_dir, model_name):
         for term in vocab:
             doc_indices = sorted(term_to_docs[term])  # Sort indices for consistency
             f.write(f"{term}\t{','.join(map(str, doc_indices))}\n")
-    
-    # 7. seed_taxo.txt - initial taxonomy with congressional categories
-    print("seed_taxo.txt")
-    with open(os.path.join(output_dir, 'seed_taxo.txt'), 'w') as f:
-        # Write root with all top-level categories
-        f.write("*")
-        categories = [
-            "Agriculture_and_Food",
-            "Animals",
-            "Armed_Forces_and_National_Security",
-            "Arts_Culture_Religion"
-            "Civil_Rights_and_Liberties_Minority_Issues",
-            "Commerce",
-            "Crime_and_Law_Enforcement",
-            "Economics_and_Public_Finance",
-            "Education",
-            "Emergency_Management"
-            "Energy",
-            "Environmental_Protection",
-            "Foreign_Trade_and_International_Finance",
-            "Geographic_Areas_Entities_Committees"
-            "Government_Operations_and_Politics",
-            "Health",
-            "Housing_and_Community_Development",
-            "Immigration",
-            "International_Affairs",
-            "Labor_and_Employment",
-            "Law",
-            "Native_Americans",
-            "Private_Legislation",
-            "Public_Lands_and_Natural_Resources",
-            "Science_Technology_Communications",
-            "Social_Sciences_and_History",
-            "Social_Welfare",
-            "Sports_and_Recreation",
-            "Taxation",
-            "Transportation_and_Public_Works",
-            "Water_Resources_Development"
-        ]
-        f.write("\t" + "\t".join(categories) + "\n")
+ 
     
     print("Processing complete!")
 
