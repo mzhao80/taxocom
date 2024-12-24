@@ -110,7 +110,6 @@ def preprocess_text(text, bigrams=None):
     # Remove stopwords
     stop_words = set(stopwords.words('english'))
     stop_words.update(CONGRESS_STOPWORDS)
-    stop_words.update(US_STATES)
     
     # Filter tokens based on stopwords
     tokens = [t for t in tokens if t not in stop_words]
@@ -355,9 +354,6 @@ def process_speeches(input_file, output_dir, model_name):
     # 5. term_freq.txt - term frequencies per document
     print("term_freq.txt")
     with open(os.path.join(output_dir, 'term_freq.txt'), 'w') as f:
-        # Write header: number of documents and vocab size
-        f.write(f"{len(documents)} {len(vocab)}\n")
-        
         # For each document, write its term frequencies
         for i, doc_freqs in enumerate(doc_term_freqs):
             # Only include terms that are in our vocabulary
