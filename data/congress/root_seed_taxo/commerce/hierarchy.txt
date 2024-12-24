@@ -1,0 +1,3 @@
+education	commerce
+health	commerce
+commerce	commerce

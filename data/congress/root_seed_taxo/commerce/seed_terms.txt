@@ -1,5 +1,3 @@
 commerce
 education
-energy
 health
-law

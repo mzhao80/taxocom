@@ -1,0 +1,7 @@
+*/commerce	commerce,education,health
+*/law	energy,law
+*/commerce/education	education
+*/commerce/health	health
+*/commerce/commerce	commerce
+*/law/energy	energy
+*/law/law	law
