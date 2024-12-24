@@ -78,25 +78,7 @@ def clean_congress_text(text):
     text = re.sub(r'\([^)]*\)', '', text)  # Remove parenthetical expressions
     return text.strip()
 
-def get_significant_bigrams(sentences, min_freq=5):
-    """Find statistically significant bigrams using PMI."""
-    # Flatten sentences into words
-    words = [word for sent in sentences for word in sent]
-    
-    # Find bigram collocations
-    bigram_measures = BigramAssocMeasures()
-    finder = BigramCollocationFinder.from_words(words)
-    
-    # Apply frequency filter
-    finder.apply_freq_filter(min_freq)
-    
-    # Score bigrams by PMI
-    scored = finder.score_ngrams(bigram_measures.pmi)
-    
-    # Convert to dictionary for faster lookup
-    return {f"{w1}_{w2}": score for ((w1, w2), score) in scored}
-
-def preprocess_text(text, bigrams=None):
+def preprocess_text(text):
     """Clean and tokenize text."""
     # First apply congress-specific cleaning
     text = clean_congress_text(text)
@@ -118,79 +100,19 @@ def preprocess_text(text, bigrams=None):
     lemmatizer = WordNetLemmatizer()
     tokens = [lemmatizer.lemmatize(t) for t in tokens]
     
-    # If bigrams dictionary is provided, look for multi-word terms
-    if bigrams is not None:
-        # Get bigrams from tokens
-        token_bigrams = list(ngrams(tokens, 2))
-        
-        # Replace qualifying bigrams with combined form
-        final_tokens = []
-        skip_next = False
-        for i in range(len(tokens)):
-            if skip_next:
-                skip_next = False
-                continue
-                
-            if i < len(tokens) - 1:
-                bigram = f"{tokens[i]}_{tokens[i+1]}"
-                if bigram in bigrams:
-                    final_tokens.append(bigram)
-                    skip_next = True
-                else:
-                    final_tokens.append(tokens[i])
-            else:
-                final_tokens.append(tokens[i])
-        
-        tokens = final_tokens
-    
     # Apply syntax rules
     tokens = [t for t in tokens if not has_bad_syntax(t)]
     
     return tokens
 
-def get_bert_embeddings(terms, model_name='bert-base-uncased'):
-    """Get BERT embeddings for terms."""
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    
-    # Load model and tokenizer
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModel.from_pretrained(model_name).to(device)
-    model.eval()
-    
-    embeddings = {}
-    batch_size = 32
-    
-    print(f"Generating BERT embeddings using {model_name}...")
-    for i in tqdm(range(0, len(terms), batch_size)):
-        batch_terms = terms[i:i + batch_size]
-        
-        # For multi-word terms, replace underscore with space for better tokenization
-        batch_terms = [t.replace('_', ' ') for t in batch_terms]
-        
-        # Tokenize terms
-        encoded = tokenizer(batch_terms, padding=True, truncation=True, return_tensors='pt')
-        encoded = {k: v.to(device) for k, v in encoded.items()}
-        
-        # Get embeddings
-        with torch.no_grad():
-            outputs = model(**encoded)
-            # Use [CLS] token embedding as term representation
-            batch_embeddings = outputs.last_hidden_state[:, 0, :].cpu().numpy()
-        
-        # Store embeddings with original terms (with underscores)
-        for term, embedding in zip(terms[i:i + batch_size], batch_embeddings):
-            embeddings[term] = embedding
-    
-    return embeddings
-
-def process_speeches(input_file, output_dir, model_name):
+def process_speeches(input_file, output_dir, raw_dir):
     """Process congressional speeches and create required files."""
     ensure_dir(output_dir)
+    ensure_dir(raw_dir)
     
-    # First pass: collect all sentences for bigram analysis
-    print("First pass: collecting sentences for bigram analysis...")
-    all_sentences = []
-    with open(input_file, 'r', encoding='iso-8859-1') as f:
+    # First pass: collect all sentences and create raw/docs.txt
+    print("First pass: processing speeches...")
+    with open(input_file, 'r', encoding='iso-8859-1') as f, open(os.path.join(raw_dir, 'docs.txt'), 'w') as fout:
         # Skip header if present
         header = f.readline()
         if not header.startswith('speech_id|speech'):
@@ -203,70 +125,17 @@ def process_speeches(input_file, output_dir, model_name):
                     continue
                 
                 _, text = parts
-                # Basic preprocessing to get sentences
-                text = clean_congress_text(text)
-                tokens = word_tokenize(text.lower())
-                all_sentences.append(tokens)
-                
-            except Exception as e:
-                continue
-    
-    # Find significant bigrams
-    print("Finding significant bigrams...")
-    bigrams = get_significant_bigrams(all_sentences)
-    
-    # Second pass: process speeches with bigram information
-    print("Second pass: processing speeches with bigrams...")
-    documents = []  # List of processed documents
-    doc_ids = []   # List of document IDs
-    term_freq = defaultdict(int)  # Overall term frequency counter
-    term_to_docs = defaultdict(set)  # Map terms to document indices
-    doc_term_freqs = []  # List of term frequency dicts for each document
-    
-    with open(input_file, 'r', encoding='iso-8859-1') as f:
-        # Skip header if present
-        header = f.readline()
-        if not header.startswith('speech_id|speech'):
-            f.seek(0)
-            
-        for i, line in enumerate(f):
-            if i % 10000 == 0:
-                print(f"Processed {i} speeches...")
-            
-            try:
-                parts = line.strip().split('|')
-                if len(parts) != 2:
-                    continue
-                
-                speech_id, text = parts
-                
-                # Process text with bigram information
-                tokens = preprocess_text(text, bigrams)
+                # Process text
+                tokens = preprocess_text(text)
                 if tokens:  # Only keep non-empty documents
-                    doc = ' '.join(tokens)
-                    documents.append(doc)
-                    doc_ids.append(speech_id)
+                    fout.write(' '.join(tokens) + '\n')
                     
-                    # Count term frequencies for this document
-                    doc_term_freq = Counter(tokens)
-                    doc_term_freqs.append(doc_term_freq)
-                    
-                    # Update overall term frequencies and document indices
-                    doc_idx = len(documents) - 1
-                    for term in doc_term_freq:
-                        term_freq[term] += doc_term_freq[term]
-                        term_to_docs[term].add(doc_idx)
-                        
             except Exception as e:
-                print(f"Error processing line {i}: {str(e)}")
+                print(f"Error processing line: {str(e)}")
                 continue
 
-    # Get initial vocabulary (terms that appear at least 5 times)
-    vocab = [term for term, freq in term_freq.items() if freq >= 5]
-    print(f"Initial vocabulary size: {len(vocab)}")
-
-    # Create seed_taxo.txt - initial taxonomy with congressional categories
-    print("Creating seed_taxo.txt")
+    # Create raw/terms.txt with taxonomy terms
+    print("Creating raw/terms.txt with taxonomy terms...")
     categories = [
         "agriculture_and_food",
         "animals",
@@ -300,87 +169,26 @@ def process_speeches(input_file, output_dir, model_name):
         "transportation_and_public_works",
         "water_resources_development"
     ]
+    
+    # Write categories to raw/terms.txt
+    with open(os.path.join(raw_dir, 'terms.txt'), 'w') as f:
+        for term in categories:
+            f.write(f"{term}\n")
+
+    # Create seed_taxo.txt
+    print("Creating seed_taxo.txt")
     with open(os.path.join(output_dir, 'seed_taxo.txt'), 'w') as f:
         f.write("*\t" + "\t".join(categories) + "\n")
 
-    # Add taxonomy terms to vocabulary
-    print("Adding taxonomy terms to vocabulary...")
-    for term in categories:
-        if term not in vocab:
-            vocab.append(term)
-    
-    print(f"Final vocabulary size after adding taxonomy terms: {len(vocab)}")
-    
-    # Get BERT embeddings for all terms (including taxonomy terms)
-    print("Generating embeddings for all terms...")
-    embeddings_dict = get_bert_embeddings(vocab, model_name)
-    
-    # Write files
-    print("Writing output files...")
-    
-    # 1. terms.txt - vocabulary
-    print("terms.txt")
-    with open(os.path.join(output_dir, 'terms.txt'), 'w') as f:
-        for term in vocab:
-            f.write(f"{term}\n")
-    
-    # 2. docs.txt - processed documents
-    print("docs.txt")
-    with open(os.path.join(output_dir, 'docs.txt'), 'w') as f:
-        for doc in documents:
-            f.write(f"{doc}\n")
-    
-    # 3. doc_ids.txt - zero-based document indices
-    print("doc_ids.txt")
-    with open(os.path.join(output_dir, 'doc_ids.txt'), 'w') as f:
-        for i in range(len(documents)):
-            f.write(f"{i}\n")
-    
-    # 4. embeddings.txt - BERT embeddings with header
-    print("embeddings.txt")
-    with open(os.path.join(output_dir, 'embeddings.txt'), 'w') as f:
-        # Write header: number of terms and embedding dimension
-        emb_dim = len(next(iter(embeddings_dict.values())))
-        f.write(f"{len(vocab)} {emb_dim}\n")
-        
-        # Write embeddings
-        for term in vocab:
-            embedding_str = ' '.join([f"{x:.6f}" for x in embeddings_dict[term]])
-            f.write(f"{term} {embedding_str}\n")
-    
-    # 5. term_freq.txt - term frequencies per document
-    print("term_freq.txt")
-    with open(os.path.join(output_dir, 'term_freq.txt'), 'w') as f:
-        # For each document, write its term frequencies
-        for i, doc_freqs in enumerate(doc_term_freqs):
-            # Only include terms that are in our vocabulary
-            vocab_freqs = {term: freq for term, freq in doc_freqs.items() if term in vocab}
-            if vocab_freqs:  # Only write if document has terms from vocab
-                line_parts = [str(i)]  # Document index
-                for term, count in sorted(vocab_freqs.items()):  # Sort terms for consistency
-                    line_parts.extend([term, str(count)])
-                f.write('\t'.join(line_parts) + '\n')
-    
-    # 6. index.txt - term to document indices mapping
-    print("index.txt")
-    with open(os.path.join(output_dir, 'index.txt'), 'w') as f:
-        # Write term to document indices mapping (already collected during processing)
-        for term in vocab:
-            doc_indices = sorted(term_to_docs[term])  # Sort indices for consistency
-            f.write(f"{term}\t{','.join(map(str, doc_indices))}\n")
- 
-    
-    print("Processing complete!")
+    print("Done preprocessing speeches. Now run:")
+    print("1. jose -train raw/docs.txt -word-emb input/embeddings.txt -size 100")
+    print("2. python preprocess.py to generate the final files")
 
 def main():
-    parser = argparse.ArgumentParser(description='Process congressional speeches into TaxoCom format')
-    parser.add_argument('--input', type=str, required=True,
-                      help='Path to speeches_114.txt file')
-    parser.add_argument('--output', type=str, required=True,
-                      help='Output directory for processed files')
-    parser.add_argument('--model', type=str, default='bert-base-uncased',
-                      help='BERT model to use for embeddings')
-    
+    parser = argparse.ArgumentParser(description='Preprocess congressional speeches')
+    parser.add_argument('--input', type=str, required=True, help='Input speeches file')
+    parser.add_argument('--output_dir', type=str, required=True, help='Output directory')
+    parser.add_argument('--raw_dir', type=str, required=True, help='Raw directory')
     args = parser.parse_args()
     
     # Download required NLTK data
@@ -388,7 +196,7 @@ def main():
     nltk.download('stopwords')
     nltk.download('wordnet')
     
-    process_speeches(args.input, args.output, args.model)
+    process_speeches(args.input, args.output_dir, args.raw_dir)
 
 if __name__ == "__main__":
     main()
