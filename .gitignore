@@ -1,7 +1,7 @@
 __pycache__/
 code/josd
 *.tar.gz
-#data/nyt/input/
 data/arxiv/input/
 *.DS_Store
 data/congress/speeches_114.txt
+*embeddings.txt
