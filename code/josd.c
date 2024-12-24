@@ -65,6 +65,33 @@ int negative = 2, expand = 1;
 const int table_size = 1e8;
 int *table;
 
+FILE *debug_log = NULL;
+
+void init_debug_log() {
+    debug_log = fopen("taxocom_debug.log", "w");
+    if (debug_log == NULL) {
+        printf("Error: Could not create debug log file\n");
+        exit(1);
+    }
+    fprintf(debug_log, "=== TaxoCom Debug Log ===\n\n");
+    fflush(debug_log);
+}
+
+void close_debug_log() {
+    if (debug_log != NULL) {
+        fclose(debug_log);
+    }
+}
+
+void debug_print(const char* format, ...) {
+    if (debug_log != NULL) {
+        va_list args;
+        va_start(args, format);
+        vfprintf(debug_log, format, args);
+        va_end(args);
+        fflush(debug_log);
+    }
+}
 
 void InitUnigramTable() {
   int a, i;
@@ -129,17 +156,17 @@ int SearchVocab(char *word) {
   int tries = 0;
   while (1) {
     if (vocab_hash[hash] == -1) {
-      printf("[DEBUG] Word '%s' not found in vocabulary (hash=%u)\n", word, hash);
+      debug_print("[DEBUG] Word '%s' not found in vocabulary (hash=%u)\n", word, hash);
       return -1;
     }
     if (!strcmp(word, vocab[vocab_hash[hash]].word)) {
-      printf("[DEBUG] Found word '%s' at position %d\n", word, vocab_hash[hash]);
+      debug_print("[DEBUG] Found word '%s' at position %d\n", word, vocab_hash[hash]);
       return vocab_hash[hash];
     }
     hash = (hash + 1) % vocab_hash_size;
     tries++;
     if (tries > vocab_hash_size) {
-      printf("[DEBUG] Exceeded maximum tries looking for word '%s'\n", word);
+      debug_print("[DEBUG] Exceeded maximum tries looking for word '%s'\n", word);
       return -1;
     }
   }
@@ -249,7 +276,7 @@ void LearnVocabFromTrainFile() {
   for (a = 0; a < vocab_hash_size; a++) vocab_hash[a] = -1;
   fin = fopen(train_file, "rb");
   if (fin == NULL) {
-    printf("[ERROR]: training data file not found!\n");
+    debug_print("[ERROR]: training data file not found!\n");
     exit(1);
   }
   vocab_size = 0;
@@ -260,8 +287,8 @@ void LearnVocabFromTrainFile() {
     train_words++;
     wc++;
     if ((debug_mode > 1) && (wc >= 1000000)) {
-      printf("%lldM%c", train_words / 1000000, 13);
-      fflush(stdout);
+      debug_print("%lldM%c", train_words / 1000000, 13);
+      fflush(debug_log);
       wc = 0;
     }
     i = SearchVocab(word);
@@ -274,7 +301,7 @@ void LearnVocabFromTrainFile() {
       doc_sizes[corpus_size] = ftell(fin);
       corpus_size++;
       if (corpus_size >= corpus_max_size) {
-        printf("[ERROR] Number of documents in corpus larger than \"corpus_max_size\"! Set a larger \"corpus_max_size\" in Line 20 of cate.c!\n");
+        debug_print("[ERROR] Number of documents in corpus larger than \"corpus_max_size\"! Set a larger \"corpus_max_size\" in Line 20 of cate.c!\n");
         exit(1);
       }
     }
@@ -302,10 +329,10 @@ void ReadVocab() {
   char word[MAX_STRING];
   FILE *fin = fopen(read_vocab_file, "rb");
   if (fin == NULL) {
-    printf("Vocabulary file not found: %s\n", read_vocab_file);
+    debug_print("Vocabulary file not found: %s\n", read_vocab_file);
     exit(1);
   }
-  printf("[DEBUG] Reading vocabulary from %s\n", read_vocab_file);
+  debug_print("[DEBUG] Reading vocabulary from %s\n", read_vocab_file);
   for (a = 0; a < vocab_hash_size; a++) vocab_hash[a] = -1;
   vocab_size = 0;
   while (1) {
@@ -315,12 +342,12 @@ void ReadVocab() {
     fscanf(fin, "%lld%c", &vocab[a].cn, &c);
     i++;
   }
-  printf("[DEBUG] Read %lld words into vocabulary\n", i);
+  debug_print("[DEBUG] Read %lld words into vocabulary\n", i);
   SortVocab();
-  printf("[DEBUG] Vocabulary size after sorting: %lld\n", vocab_size);
+  debug_print("[DEBUG] Vocabulary size after sorting: %lld\n", vocab_size);
   fin = fopen(train_file, "rb");
   if (fin == NULL) {
-    printf("[ERROR]: training data file not found!\n");
+    debug_print("[ERROR]: training data file not found!\n");
     exit(1);
   }
   fseek(fin, 0, SEEK_END);
@@ -352,10 +379,10 @@ void ReadCategoryName() {
   real norm;
   char *tmp_word;
 
-  printf("[DEBUG] Opening category file: %s\n", category_file);
+  debug_print("[DEBUG] Opening category file: %s\n", category_file);
   f = fopen(category_file, "rb");
   if (f == NULL) {
-    printf("[ERROR] Category file not found!\n");
+    debug_print("[ERROR] Category file not found!\n");
     exit(1);
   }
 
@@ -384,24 +411,25 @@ void ReadCategoryName() {
         tmp_word[k] = tolower(tmp_word[k]);
     }
     strcpy(topic_list[i].node_name, tmp_word);
-    printf("[DEBUG] Processing category line: %s\n", line);
-    printf("[DEBUG] Target category %s:\n", tmp_word);
+    debug_print("[DEBUG] Processing category line: %s\n", line);
+    debug_print("[DEBUG] Target category %s:\n", tmp_word);
     while (tmp_word != NULL) {
         // Convert each category to lowercase
         for (int k = 0; tmp_word[k]; k++) {
             tmp_word[k] = tolower(tmp_word[k]);
         }
-        printf("[DEBUG] Searching for term: '%s'\n", tmp_word);
+        debug_print("[DEBUG] Searching for term: '%s'\n", tmp_word);
         if ((vocab_idx = SearchVocab(tmp_word)) != -1) {
             topic_list[i].cur_words[topic_list[i].init_size++] = vocab_idx;
-            printf("[DEBUG] Added term '%s' (index %d)\n", tmp_word, vocab_idx);
+            debug_print("[DEBUG] Added term '%s' (index %d)\n", tmp_word, vocab_idx);
         } else {
+            debug_print("[ERROR] Category name '%s' not found in vocabulary!\n", tmp_word);
             printf("[ERROR] Category name '%s' not found in vocabulary!\n", tmp_word);
             exit(1);
         }
         tmp_word = strtok(NULL, "\t");
     }
-    printf("\n");
+    debug_print("\n");
 
     topic_list[i].cur_size = topic_list[i].init_size;
     for (j = 0; j < topic_list[i].cur_size; j++) {
@@ -428,12 +456,12 @@ void LoadEmb(char *emb_file, real *emb_ptr) {
   unsigned long long next_random = 1;
   a = posix_memalign((void **) &syn_tmp, 128, (long long) layer1_size * sizeof(real));
   if (syn_tmp == NULL) {
-    printf("[ERROR] Memory allocation failed\n");
+    debug_print("[ERROR] Memory allocation failed\n");
     exit(1);
   }
-  printf("Loading embedding from file %s\n", emb_file);
+  debug_print("Loading embedding from file %s\n", emb_file);
   if (access(emb_file, R_OK) == -1) {
-    printf("[ERROR] File %s does not exist\n", emb_file);
+    debug_print("[ERROR] File %s does not exist\n", emb_file);
     exit(1);
   }
   // read embedding file
@@ -441,7 +469,7 @@ void LoadEmb(char *emb_file, real *emb_ptr) {
   fscanf(fp, "%d", &pretrain_vocab_size);
   fscanf(fp, "%d", &word_dim);
   if (layer1_size != word_dim) {
-    printf("[ERROR] Embedding dimension incompatible with pretrained file!\n");
+    debug_print("[ERROR] Embedding dimension incompatible with pretrained file!\n");
     exit(1);
   }
 
@@ -499,15 +527,15 @@ void InitNet() {
   a = posix_memalign((void **) &syn1neg, 128, (long long) vocab_size * layer1_size * sizeof(real));
   a = posix_memalign((void **) &syn1doc, 128, (long long) corpus_size * layer1_size * sizeof(real));
   if (syn0 == NULL) {
-    printf("Memory allocation failed (syn0)\n");
+    debug_print("Memory allocation failed (syn0)\n");
     exit(1);
   }
   if (syn1neg == NULL) {
-    printf("Memory allocation failed (syn1neg)\n");
+    debug_print("Memory allocation failed (syn1neg)\n");
     exit(1);
   }
   if (syn1doc == NULL) {
-    printf("Memory allocation failed (syn1doc)\n");
+    debug_print("Memory allocation failed (syn1doc)\n");
     exit(1);
   }
   
@@ -716,11 +744,11 @@ void *TrainModelThread(void *id) {
       last_word_count = word_count;
       if ((debug_mode > 1)) {
         now=clock();
-        printf("%cAlpha: %f  Discrimination Loss: %f  Category Loss: %f  Progress: %.2f%%  Words/thread/sec: %.2fk", 
+        debug_print("%cAlpha: %f  Discrimination Loss: %f  Category Loss: %f  Progress: %.2f%%  Words/thread/sec: %.2fk", 
          13, alpha, dis_loss, cat_loss,
          word_count_actual / (real)(iter * train_words + 1) * 100,
          word_count_actual / ((real)(now - start + 1) / (real)CLOCKS_PER_SEC * 1000));
-        fflush(stdout);
+        fflush(debug_log);
       }
       alpha = starting_alpha * (1 - word_count_actual / (real)(iter * train_words + 1));
       if (alpha < starting_alpha * 0.0001) alpha = starting_alpha * 0.0001;
@@ -901,7 +929,7 @@ void TrainModel() {
   long a, b;
   FILE *fo;
   pthread_t *pt = (pthread_t *)malloc(num_threads * sizeof(pthread_t));
-  printf("Starting training using file %s\n", train_file);
+  debug_print("Starting training using file %s\n", train_file);
   starting_alpha = alpha;
   if (read_vocab_file[0] != 0) ReadVocab(); else LearnVocabFromTrainFile();
   if (save_vocab_file[0] != 0) SaveVocab();
@@ -918,7 +946,7 @@ void TrainModel() {
     for (a = 0; a < num_threads; a++) pthread_join(pt[a], NULL);
     if (iter_count >= pretrain_iter) ExpandTopic();
   }
-  printf("\n");
+  debug_print("\n");
 
   fo = fopen(word_emb_file, "wb");
   // Save the word vectors
@@ -989,7 +1017,7 @@ int ArgPos(char *str, int argc, char **argv) {
   int a;
   for (a = 1; a < argc; a++) if (!strcmp(str, argv[a])) {
     if (a == argc - 1) {
-      printf("Argument missing for %s\n", str);
+      debug_print("Argument missing for %s\n", str);
       exit(1);
     }
     return a;
@@ -1000,75 +1028,49 @@ int ArgPos(char *str, int argc, char **argv) {
 int main(int argc, char **argv) {
   int i;
   if (argc == 1) {
-    printf("JOSD embedding learning\n\n");
+    printf("Joint Spherical Distance (JoSD) for Taxonomy Completion\n\n");
     printf("Options:\n");
     printf("Parameters for training:\n");
-    printf("\t-size <int>\n");
-    printf("\t\tSet dimension of text embeddings; default is 768 (BERT)\n");
-    printf("\t-train <file> (mandatory argument)\n");
+    printf("\t-train <file>\n");
     printf("\t\tUse text data from <file> to train the model\n");
-    printf("\t-category-file <file>\n");
-    printf("\t\tUse <file> to provide the topic names/keywords\n");
-    printf("\t-matrix-file <file>\n");
-    printf("\t\tUse <file> to provide the taxonomy file in matrix form; generated by read_taxo.py\n");
-    printf("\t-level-file <file>\n");
-    printf("\t\tUse <file> to provide the node level information file; generated by read_taxo.py\n");
-    printf("\t-res <file>\n");
-    printf("\t\tUse <file> to save the hierarchical topic mining results\n");
-    printf("\t-k <int>\n");
-    printf("\t\tSet the number of terms per topic in the output file; default is 10\n");
-    printf("\t-word-emb <file>\n");
-    printf("\t\tUse <file> to save the resulting word embeddings\n");
-    printf("\t-tree-emb <file>\n");
-    printf("\t\tUse <file> to save the resulting category embeddings\n");
-    printf("\t-load-emb <file>\n");
-    printf("\t\tThe pretrained embeddings will be read from <file>\n");
+    printf("\t-category <file>\n");
+    printf("\t\tUse category names from <file> to initialize taxonomy\n");
+    printf("\t-read-vocab <file>\n");
+    printf("\t\tThe vocabulary will be read from <file>\n");
     printf("\t-binary <int>\n");
-    printf("\t\tSave the resulting vectors in binary moded; default is 0 (off)\n");
+    printf("\t\tSet to 1 if input embeddings are stored in binary format; default is 0\n");
+    printf("\t-size <int>\n");
+    printf("\t\tSet size of embedding vectors; default is 100\n");
+    printf("\t-iter <int>\n");
+    printf("\t\tRun more training iterations (default 5)\n");
     printf("\t-save-vocab <file>\n");
     printf("\t\tThe vocabulary will be saved to <file>\n");
-    printf("\t-read-vocab <file>\n");
-    printf("\t\tThe vocabulary will be read from <file>, not constructed from the training data\n");
-    
-
-    printf("\n\t##########   Embedding Training:   ##########\n");
-    printf("\t-iter <int>\n");
-    printf("\t\tSet the number of iterations to train on the corpus (performing topic mining); default is 5\n");
-    printf("\t-pretrain <int>\n");
-    printf("\t\tSet the number of iterations to pretrain on the corpus (without performing topic mining); default is 2\n");
-    printf("\t-expand <int>\n");
-    printf("\t\tSet the number of terms to be added per topic per iteration; default is 1\n");
-    printf("\t-window <int>\n");
-    printf("\t\tSet max skip length between words; default is 5\n");
-    printf("\t-word-margin <float>\n");
-    printf("\t\tSet the word embedding learning margin; default is 0.25\n");
-    printf("\t-cat-margin <float>\n");
-    printf("\t\tSet the intra-category coherence margin m_intra; default is 0.9\n");
+    printf("\t-min-count <int>\n");
+    printf("\t\tThis will discard words that appear less than <int> times; default is 5\n");
+    printf("\t-threads <int>\n");
+    printf("\t\tUse <int> threads (default 12)\n");
     printf("\t-sample <float>\n");
     printf("\t\tSet threshold for occurrence of words. Those that appear with higher frequency in the training data\n");
     printf("\t\twill be randomly down-sampled; default is 1e-3, useful range is (0, 1e-5)\n");
-    printf("\t-negative <int>\n");
-    printf("\t\tNumber of negative examples; default is 2, common values are 3 - 5 (0 = not used)\n");
-    printf("\t-threads <int>\n");
-    printf("\t\tUse <int> threads (default 12)\n");
-    printf("\t-min-count <int>\n");
-    printf("\t\tThis will discard words that appear less than <int> times; default is 5\n");
-    printf("\t-alpha <float>\n");
-    printf("\t\tSet the starting learning rate; default is 0.025\n");
-    printf("\t-debug <int>\n");
-    printf("\t\tSet the debug mode (default = 2 = more info during training)\n");
-    
-    printf("\nSee run.sh for an example to set the arguments\n");
-    
+    printf("\t-margin <float>\n");
+    printf("\t\tMargin in hinge loss; default is 0.2\n");
+    printf("\t-learning-rate <float>\n");
+    printf("\t\tSet the starting learning rate; default is 0.05\n");
+    printf("\t-output <file>\n");
+    printf("\t\tUse <file> to save the resulting taxonomy\n");
+    printf("\nExamples:\n");
+    printf("./josd -train data.txt -category category.txt -read-vocab vocab.txt -binary 1 -size 100 -output taxonomy.txt\n\n");
     return 0;
   }
+
+  init_debug_log();  // Initialize debug log file
   word_emb_file[0] = 0;
   save_vocab_file[0] = 0;
   read_vocab_file[0] = 0;
   res_file[0] = 0;
   if ((i = ArgPos((char *)"-size", argc, argv)) > 0) layer1_size = atoi(argv[i + 1]);
   if ((i = ArgPos((char *)"-train", argc, argv)) > 0) strcpy(train_file, argv[i + 1]);
-  if ((i = ArgPos((char *)"-category-file", argc, argv)) > 0) strcpy(category_file, argv[i + 1]);
+  if ((i = ArgPos((char *)"-category", argc, argv)) > 0) strcpy(category_file, argv[i + 1]);
   if ((i = ArgPos((char *)"-res", argc, argv)) > 0) strcpy(res_file, argv[i + 1]);
   if ((i = ArgPos((char *)"-k", argc, argv)) > 0) num_per_topic = atoi(argv[i + 1]);
   if ((i = ArgPos((char *)"-matrix-file", argc, argv)) > 0) strcpy(matrix_file, argv[i + 1]);
@@ -1102,5 +1104,6 @@ int main(int argc, char **argv) {
   doc_sizes = (long long *)calloc(corpus_max_size, sizeof(long long));
   TrainModel();
   //WriteResult();
+  close_debug_log();  // Close debug log file
   return 0;
 }
