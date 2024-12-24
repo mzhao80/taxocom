@@ -268,37 +268,37 @@ def process_speeches(input_file, output_dir, model_name):
     # Create seed_taxo.txt - initial taxonomy with congressional categories
     print("Creating seed_taxo.txt")
     categories = [
-        "Agriculture_and_Food",
-        "Animals",
-        "Armed_Forces_and_National_Security",
-        "Arts_Culture_Religion"
-        "Civil_Rights_and_Liberties_Minority_Issues",
-        "Commerce",
-        "Crime_and_Law_Enforcement",
-        "Economics_and_Public_Finance",
-        "Education",
-        "Emergency_Management"
-        "Energy",
-        "Environmental_Protection",
-        "Foreign_Trade_and_International_Finance",
-        "Geographic_Areas_Entities_Committees"
-        "Government_Operations_and_Politics",
-        "Health",
-        "Housing_and_Community_Development",
-        "Immigration",
-        "International_Affairs",
-        "Labor_and_Employment",
-        "Law",
-        "Native_Americans",
-        "Private_Legislation",
-        "Public_Lands_and_Natural_Resources",
-        "Science_Technology_Communications",
-        "Social_Sciences_and_History",
-        "Social_Welfare",
-        "Sports_and_Recreation",
-        "Taxation",
-        "Transportation_and_Public_Works",
-        "Water_Resources_Development"
+        "agriculture_and_food",
+        "animals",
+        "armed_forces_and_national_security",
+        "arts_culture_religion",
+        "civil_rights_and_liberties_minority_issues",
+        "commerce",
+        "crime_and_law_enforcement",
+        "economics_and_public_finance",
+        "education",
+        "emergency_management",
+        "energy",
+        "environmental_protection",
+        "foreign_trade_and_international_finance",
+        "geographic_areas_entities_committees",
+        "government_operations_and_politics",
+        "health",
+        "housing_and_community_development",
+        "immigration",
+        "international_affairs",
+        "labor_and_employment",
+        "law",
+        "native_americans",
+        "private_legislation",
+        "public_lands_and_natural_resources",
+        "science_technology_communications",
+        "social_sciences_and_history",
+        "social_welfare",
+        "sports_and_recreation",
+        "taxation",
+        "transportation_and_public_works",
+        "water_resources_development"
     ]
     with open(os.path.join(output_dir, 'seed_taxo.txt'), 'w') as f:
         f.write("*\t" + "\t".join(categories) + "\n")
@@ -308,9 +308,6 @@ def process_speeches(input_file, output_dir, model_name):
     for term in categories:
         if term not in vocab:
             vocab.append(term)
-            # Initialize term frequency and document index for new terms
-            term_freq[term] = 5  # Minimum frequency threshold
-            term_to_docs[term] = {0}  # Add to first document for minimal presence
     
     print(f"Final vocabulary size after adding taxonomy terms: {len(vocab)}")
     
