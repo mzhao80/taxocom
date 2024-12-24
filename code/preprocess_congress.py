@@ -234,7 +234,9 @@ def process_speeches(input_file, output_dir, model_name):
     print("Second pass: processing speeches with bigrams...")
     documents = []  # List of processed documents
     doc_ids = []   # List of document IDs
-    term_freq = defaultdict(int)  # Term frequency counter
+    term_freq = defaultdict(int)  # Overall term frequency counter
+    term_to_docs = defaultdict(set)  # Map terms to document indices
+    doc_term_freqs = []  # List of term frequency dicts for each document
     
     with open(input_file, 'r', encoding='iso-8859-1') as f:
         # Skip header if present
@@ -256,17 +258,25 @@ def process_speeches(input_file, output_dir, model_name):
                 # Process text with bigram information
                 tokens = preprocess_text(text, bigrams)
                 if tokens:  # Only keep non-empty documents
-                    documents.append(' '.join(tokens))
+                    doc = ' '.join(tokens)
+                    documents.append(doc)
                     doc_ids.append(speech_id)
                     
-                    # Update term frequencies
-                    for token in tokens:
-                        term_freq[token] += 1
+                    # Count term frequencies for this document
+                    doc_term_freq = Counter(tokens)
+                    doc_term_freqs.append(doc_term_freq)
+                    
+                    # Update overall term frequencies and document indices
+                    doc_idx = len(documents) - 1
+                    for term in doc_term_freq:
+                        term_freq[term] += doc_term_freq[term]
+                        term_to_docs[term].add(doc_idx)
+                        
             except Exception as e:
                 print(f"Error processing line {i}: {str(e)}")
                 continue
     
-    # Get unique terms that appear at least 5 times
+    # Get vocabulary (terms that appear at least 5 times)
     vocab = [term for term, freq in term_freq.items() if freq >= 5]
     print(f"Vocabulary size: {len(vocab)}")
     
@@ -306,37 +316,29 @@ def process_speeches(input_file, output_dir, model_name):
             embedding_str = ' '.join([f"{x:.6f}" for x in embeddings_dict[term]])
             f.write(f"{term} {embedding_str}\n")
     
-    print("term_freq.txt")
     # 5. term_freq.txt - term frequencies per document
+    print("term_freq.txt")
     with open(os.path.join(output_dir, 'term_freq.txt'), 'w') as f:
         # Write header: number of documents and vocab size
         f.write(f"{len(documents)} {len(vocab)}\n")
         
-        # For each document, count term frequencies
-        for i, doc in enumerate(documents):
-            doc_terms = doc.split()
-            term_counts = Counter(doc_terms)
-            
+        # For each document, write its term frequencies
+        for i, doc_freqs in enumerate(doc_term_freqs):
             # Only include terms that are in our vocabulary
-            term_counts = {term: count for term, count in term_counts.items() if term in vocab}
-            
-            # Write in format: doc_id term1 freq1 term2 freq2 ...
-            if term_counts:  # Only write if document has terms from vocab
+            vocab_freqs = {term: freq for term, freq in doc_freqs.items() if term in vocab}
+            if vocab_freqs:  # Only write if document has terms from vocab
                 line_parts = [str(i)]  # Document index
-                for term, count in sorted(term_counts.items()):  # Sort terms for consistency
+                for term, count in sorted(vocab_freqs.items()):  # Sort terms for consistency
                     line_parts.extend([term, str(count)])
                 f.write('\t'.join(line_parts) + '\n')
     
-    print("index.txt")
     # 6. index.txt - term to document indices mapping
+    print("index.txt")
     with open(os.path.join(output_dir, 'index.txt'), 'w') as f:
-        # For each term, find all documents that contain it
+        # Write term to document indices mapping (already collected during processing)
         for term in vocab:
-            doc_indices = []
-            for i, doc in enumerate(documents):
-                if term in doc.split():
-                    doc_indices.append(str(i))
-            f.write(f"{term}\t{','.join(doc_indices)}\n")
+            doc_indices = sorted(term_to_docs[term])  # Sort indices for consistency
+            f.write(f"{term}\t{','.join(map(str, doc_indices))}\n")
     
     # 7. seed_taxo.txt - initial taxonomy with congressional categories
     print("seed_taxo.txt")
