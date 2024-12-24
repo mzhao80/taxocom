@@ -243,7 +243,7 @@ def process_speeches(input_file, output_dir, model_name):
             f.seek(0)
             
         for i, line in enumerate(f):
-            if i % 1000 == 0:
+            if i % 10000 == 0:
                 print(f"Processed {i} speeches...")
             
             try:
@@ -277,21 +277,25 @@ def process_speeches(input_file, output_dir, model_name):
     print("Writing output files...")
     
     # 1. terms.txt - vocabulary
+    print("terms.txt")
     with open(os.path.join(output_dir, 'terms.txt'), 'w') as f:
         for term in vocab:
             f.write(f"{term}\n")
     
     # 2. docs.txt - processed documents
+    print("docs.txt")
     with open(os.path.join(output_dir, 'docs.txt'), 'w') as f:
         for doc in documents:
             f.write(f"{doc}\n")
     
     # 3. doc_ids.txt - zero-based document indices
+    print("doc_ids.txt")
     with open(os.path.join(output_dir, 'doc_ids.txt'), 'w') as f:
         for i in range(len(documents)):
             f.write(f"{i}\n")
     
     # 4. embeddings.txt - BERT embeddings with header
+    print("embeddings.txt")
     with open(os.path.join(output_dir, 'embeddings.txt'), 'w') as f:
         # Write header: number of terms and embedding dimension
         emb_dim = len(next(iter(embeddings_dict.values())))
@@ -302,6 +306,7 @@ def process_speeches(input_file, output_dir, model_name):
             embedding_str = ' '.join([f"{x:.6f}" for x in embeddings_dict[term]])
             f.write(f"{term} {embedding_str}\n")
     
+    print("term_freq.txt")
     # 5. term_freq.txt - term frequencies per document
     with open(os.path.join(output_dir, 'term_freq.txt'), 'w') as f:
         # Write header: number of documents and vocab size
@@ -322,6 +327,7 @@ def process_speeches(input_file, output_dir, model_name):
                     line_parts.extend([term, str(count)])
                 f.write('\t'.join(line_parts) + '\n')
     
+    print("index.txt")
     # 6. index.txt - term to document indices mapping
     with open(os.path.join(output_dir, 'index.txt'), 'w') as f:
         # For each term, find all documents that contain it
@@ -333,19 +339,25 @@ def process_speeches(input_file, output_dir, model_name):
             f.write(f"{term}\t{','.join(doc_indices)}\n")
     
     # 7. seed_taxo.txt - initial taxonomy with congressional categories
+    print("seed_taxo.txt")
     with open(os.path.join(output_dir, 'seed_taxo.txt'), 'w') as f:
         # Write root with all top-level categories
         f.write("*")
         categories = [
             "Agriculture_and_Food",
+            "Animals",
             "Armed_Forces_and_National_Security",
+            "Arts_Culture_Religion"
             "Civil_Rights_and_Liberties_Minority_Issues",
+            "Commerce",
             "Crime_and_Law_Enforcement",
             "Economics_and_Public_Finance",
             "Education",
+            "Emergency_Management"
             "Energy",
             "Environmental_Protection",
             "Foreign_Trade_and_International_Finance",
+            "Geographic_Areas_Entities_Committees"
             "Government_Operations_and_Politics",
             "Health",
             "Housing_and_Community_Development",
@@ -353,39 +365,18 @@ def process_speeches(input_file, output_dir, model_name):
             "International_Affairs",
             "Labor_and_Employment",
             "Law",
+            "Native_Americans",
+            "Private_Legislation",
             "Public_Lands_and_Natural_Resources",
             "Science_Technology_Communications",
+            "Social_Sciences_and_History",
             "Social_Welfare",
-            "Transportation_and_Public_Works"
+            "Sports_and_Recreation",
+            "Taxation",
+            "Transportation_and_Public_Works",
+            "Water_Resources_Development"
         ]
         f.write("\t" + "\t".join(categories) + "\n")
-        
-        # Write subcategories for each main category
-        subcategories = {
-            "Agriculture_and_Food": ["farming", "food_safety", "agricultural_trade", "livestock"],
-            "Armed_Forces_and_National_Security": ["military_operations", "veterans", "defense_spending", "military_personnel"],
-            "Civil_Rights_and_Liberties_Minority_Issues": ["discrimination", "civil_rights", "voting_rights", "equal_rights"],
-            "Crime_and_Law_Enforcement": ["law_enforcement", "criminal_justice", "police", "prisons"],
-            "Economics_and_Public_Finance": ["budget", "taxation", "federal_spending", "economic_policy"],
-            "Education": ["higher_education", "public_schools", "student_loans", "education_policy"],
-            "Energy": ["renewable_energy", "fossil_fuels", "energy_policy", "nuclear_power"],
-            "Environmental_Protection": ["climate_change", "pollution", "conservation", "environmental_regulations"],
-            "Foreign_Trade_and_International_Finance": ["trade_agreements", "tariffs", "international_trade", "trade_policy"],
-            "Government_Operations_and_Politics": ["elections", "federal_agencies", "government_reform", "oversight"],
-            "Health": ["healthcare", "public_health", "medical_research", "health_insurance"],
-            "Housing_and_Community_Development": ["housing_policy", "urban_development", "affordable_housing", "community_programs"],
-            "Immigration": ["immigration_policy", "border_security", "citizenship", "refugees"],
-            "International_Affairs": ["foreign_policy", "diplomacy", "international_relations", "foreign_aid"],
-            "Labor_and_Employment": ["jobs", "workers_rights", "labor_laws", "workplace_safety"],
-            "Law": ["legislation", "courts", "legal_system", "constitutional_law"],
-            "Public_Lands_and_Natural_Resources": ["public_lands", "natural_resources", "conservation", "land_management"],
-            "Science_Technology_Communications": ["research", "technology", "telecommunications", "innovation"],
-            "Social_Welfare": ["social_security", "welfare_programs", "poverty", "social_services"],
-            "Transportation_and_Public_Works": ["infrastructure", "transportation", "public_transit", "highways"]
-        }
-        
-        for category, subcats in subcategories.items():
-            f.write(f"{category}\t" + "\t".join(subcats) + "\n")
     
     print("Processing complete!")
 
