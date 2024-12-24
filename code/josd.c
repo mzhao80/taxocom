@@ -7,7 +7,6 @@
 #include <math.h>
 #include <pthread.h>
 #include <unistd.h>
-#include <ctype.h>
 
 #define MAX_STRING 100
 #define MAX_WORDS_NODE 100
@@ -49,7 +48,7 @@ long long *doc_sizes;
 int binary = 0, debug_mode = 2, window = 5, min_count = 5, num_threads = 20, min_reduce = 1;
 int num_per_topic = 10; // top-k words per topic to show
 int *vocab_hash, *docs;
-long long vocab_max_size = 1000, vocab_size = 0, corpus_size = 0, layer1_size = 768;  // Default to BERT dimension
+long long vocab_max_size = 1000, vocab_size = 0, corpus_size = 0, layer1_size = 100;
 long long train_words = 0, word_count_actual = 0, iter = 10, pretrain_iter = 0, file_size = 0, iter_count;
 real alpha = 0.025, starting_alpha, sample = 1e-3, global_lambda = 1.5, lambda_dis = 1.0, lambda_cat = 1.0;
 real word_margin = 0.3, cat_margin = 0.9, dis_margin;
@@ -126,21 +125,10 @@ int GetWordHash(char *word) {
 // Returns position of a word in the vocabulary; if the word is not found, returns -1
 int SearchVocab(char *word) {
   unsigned int hash = GetWordHash(word);
-  int tries = 0;
   while (1) {
-    if (vocab_hash[hash] == -1) {
-      printf("[ERROR] Word '%s' not found in vocabulary (hash=%u)\n", word, hash);
-      return -1;
-    }
-    if (!strcmp(word, vocab[vocab_hash[hash]].word)) {
-      return vocab_hash[hash];
-    }
+    if (vocab_hash[hash] == -1) return -1;
+    if (!strcmp(word, vocab[vocab_hash[hash]].word)) return vocab_hash[hash];
     hash = (hash + 1) % vocab_hash_size;
-    tries++;
-    if (tries > vocab_hash_size) {
-      printf("[ERROR] Hash table is full, cannot find word '%s'\n", word);
-      return -1;
-    }
   }
   return -1;
 }
@@ -301,7 +289,7 @@ void ReadVocab() {
   char word[MAX_STRING];
   FILE *fin = fopen(read_vocab_file, "rb");
   if (fin == NULL) {
-    printf("[ERROR] Vocabulary file not found: %s\n", read_vocab_file);
+    printf("Vocabulary file not found\n");
     exit(1);
   }
   for (a = 0; a < vocab_hash_size; a++) vocab_hash[a] = -1;
@@ -340,19 +328,24 @@ void UpdateRoot() {
 }
 
 void ReadCategoryName() {
-  FILE *f;
+  long long a, i = 0, j;
+  int vocab_idx;
+  //char tmp_word[MAX_STRING];
+  char *tmp_word = NULL;
+  real norm = 0.0;
+  //memset(tmp_word, '\0', sizeof(tmp_word));
+
+  // Read category name file
+  FILE *f = fopen(category_file, "rb");
+  printf("Category name file: %s\n", category_file);
+  if (f == NULL) {
+    printf("Category name not found\n");
+    exit(1);
+  }
+
   char *line = NULL;
   size_t len = 0;
   ssize_t read;
-  int i, j, a, vocab_idx;
-  real norm;
-  char *tmp_word;
-
-  f = fopen(category_file, "rb");
-  if (f == NULL) {
-    printf("[ERROR] Category file not found!\n");
-    exit(1);
-  }
 
   // allocate and initialize topic_nodes
   topic_list = (struct topic_node *)calloc(topic_max_num, sizeof(struct topic_node));
@@ -374,24 +367,19 @@ void ReadCategoryName() {
       line[read - 2] = 0;
 
     tmp_word = strtok (line, "\t");
-    // Convert node name to lowercase
-    for (int k = 0; tmp_word[k]; k++) {
-        tmp_word[k] = tolower(tmp_word[k]);
-    }
     strcpy(topic_list[i].node_name, tmp_word);
+    printf("Target category %s : ", tmp_word);
     while (tmp_word != NULL) {
-        // Convert each category to lowercase
-        for (int k = 0; tmp_word[k]; k++) {
-            tmp_word[k] = tolower(tmp_word[k]);
-        }
-        if ((vocab_idx = SearchVocab(tmp_word)) != -1) {
-            topic_list[i].cur_words[topic_list[i].init_size++] = vocab_idx;
-        } else {
-            printf("[ERROR] Category name '%s' not found in vocabulary!\n", tmp_word);
-            exit(1);
-        }
-        tmp_word = strtok(NULL, "\t");
+      if ((vocab_idx = SearchVocab(tmp_word)) != -1) {
+        topic_list[i].cur_words[topic_list[i].init_size++] = vocab_idx;
+        printf("%s ", tmp_word);
+      } else {
+        printf("[ERROR] Category name %s not found in vocabulary!\n", tmp_word);
+        exit(1);
+      }
+      tmp_word = strtok(NULL, "\t");
     }
+    printf("\n");
 
     topic_list[i].cur_size = topic_list[i].init_size;
     for (j = 0; j < topic_list[i].cur_size; j++) {
@@ -990,11 +978,9 @@ int ArgPos(char *str, int argc, char **argv) {
 int main(int argc, char **argv) {
   int i;
   if (argc == 1) {
-    printf("JOSD embedding learning\n\n");
-    printf("Options:\n");
-    printf("Parameters for training:\n");
-    printf("\t-size <int>\n");
-    printf("\t\tSet dimension of text embeddings; default is 768 (BERT)\n");
+    printf("Parameters:\n");
+
+    printf("\t##########   Input/Output:   ##########\n");
     printf("\t-train <file> (mandatory argument)\n");
     printf("\t\tUse text data from <file> to train the model\n");
     printf("\t-category-file <file>\n");
@@ -1022,6 +1008,8 @@ int main(int argc, char **argv) {
     
 
     printf("\n\t##########   Embedding Training:   ##########\n");
+    printf("\t-size <int>\n");
+    printf("\t\tSet dimension of text embeddings; default is 100\n");
     printf("\t-iter <int>\n");
     printf("\t\tSet the number of iterations to train on the corpus (performing topic mining); default is 5\n");
     printf("\t-pretrain <int>\n");
