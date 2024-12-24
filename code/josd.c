@@ -129,17 +129,16 @@ int SearchVocab(char *word) {
   int tries = 0;
   while (1) {
     if (vocab_hash[hash] == -1) {
-      printf("[DEBUG] Word '%s' not found in vocabulary (hash=%u)\n", word, hash);
+      printf("[ERROR] Word '%s' not found in vocabulary (hash=%u)\n", word, hash);
       return -1;
     }
     if (!strcmp(word, vocab[vocab_hash[hash]].word)) {
-      printf("[DEBUG] Found word '%s' at position %d\n", word, vocab_hash[hash]);
       return vocab_hash[hash];
     }
     hash = (hash + 1) % vocab_hash_size;
     tries++;
     if (tries > vocab_hash_size) {
-      printf("[DEBUG] Exceeded maximum tries looking for word '%s'\n", word);
+      printf("[ERROR] Hash table is full, cannot find word '%s'\n", word);
       return -1;
     }
   }
@@ -302,10 +301,9 @@ void ReadVocab() {
   char word[MAX_STRING];
   FILE *fin = fopen(read_vocab_file, "rb");
   if (fin == NULL) {
-    printf("Vocabulary file not found: %s\n", read_vocab_file);
+    printf("[ERROR] Vocabulary file not found: %s\n", read_vocab_file);
     exit(1);
   }
-  printf("[DEBUG] Reading vocabulary from %s\n", read_vocab_file);
   for (a = 0; a < vocab_hash_size; a++) vocab_hash[a] = -1;
   vocab_size = 0;
   while (1) {
@@ -315,9 +313,7 @@ void ReadVocab() {
     fscanf(fin, "%lld%c", &vocab[a].cn, &c);
     i++;
   }
-  printf("[DEBUG] Read %lld words into vocabulary\n", i);
   SortVocab();
-  printf("[DEBUG] Vocabulary size after sorting: %lld\n", vocab_size);
   fin = fopen(train_file, "rb");
   if (fin == NULL) {
     printf("[ERROR]: training data file not found!\n");
@@ -352,7 +348,6 @@ void ReadCategoryName() {
   real norm;
   char *tmp_word;
 
-  printf("[DEBUG] Opening category file: %s\n", category_file);
   f = fopen(category_file, "rb");
   if (f == NULL) {
     printf("[ERROR] Category file not found!\n");
@@ -384,24 +379,19 @@ void ReadCategoryName() {
         tmp_word[k] = tolower(tmp_word[k]);
     }
     strcpy(topic_list[i].node_name, tmp_word);
-    printf("[DEBUG] Processing category line: %s\n", line);
-    printf("[DEBUG] Target category %s:\n", tmp_word);
     while (tmp_word != NULL) {
         // Convert each category to lowercase
         for (int k = 0; tmp_word[k]; k++) {
             tmp_word[k] = tolower(tmp_word[k]);
         }
-        printf("[DEBUG] Searching for term: '%s'\n", tmp_word);
         if ((vocab_idx = SearchVocab(tmp_word)) != -1) {
             topic_list[i].cur_words[topic_list[i].init_size++] = vocab_idx;
-            printf("[DEBUG] Added term '%s' (index %d)\n", tmp_word, vocab_idx);
         } else {
             printf("[ERROR] Category name '%s' not found in vocabulary!\n", tmp_word);
             exit(1);
         }
         tmp_word = strtok(NULL, "\t");
     }
-    printf("\n");
 
     topic_list[i].cur_size = topic_list[i].init_size;
     for (j = 0; j < topic_list[i].cur_size; j++) {
