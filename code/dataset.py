@@ -186,11 +186,14 @@ class SubDataSet:
         return doc_assignment
 
     def get_doc_clusters(self, term_clusters, term_scores):
-        term_assignment = [None] * len(self.term_to_id)
+        # Find the maximum term ID to properly size the assignment list
+        max_term_id = max(self.term_to_id.values()) if self.term_to_id else 0
+        term_assignment = [None] * (max_term_id + 1)
         for clus_id, terms in term_clusters.items():
             for term in terms:
-                term_id = self.term_to_id[term]
-                term_assignment[term_id] = clus_id
+                if term in self.term_to_id:  # Only assign if term exists in mapping
+                    term_id = self.term_to_id[term]
+                    term_assignment[term_id] = clus_id
         n_cluster = len(term_clusters)
         doc_clusters = defaultdict(list)
         for idx, doc in zip(self.doc_ids, self.docs):
