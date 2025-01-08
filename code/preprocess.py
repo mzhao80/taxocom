@@ -3,9 +3,16 @@ import filenames
 import argparse
 from collections import Counter
 
-def trim_terms(raw_term_file, term_file, embedding_file):
+def trim_terms(raw_term_file, term_file, embedding_file, taxo_file=None):
     terms = load_terms(raw_term_file)
     embedded_terms = load_embedding_terms(embedding_file)
+    
+    # Add taxonomy terms if provided
+    if taxo_file:
+        taxo_terms = load_taxonomy_terms(taxo_file)
+        terms.extend(taxo_terms)
+        terms = list(set(terms))  # Remove duplicates
+    
     with open(term_file, 'w') as fout:
         for w in terms:
             if w in embedded_terms:
@@ -17,6 +24,15 @@ def load_terms(seed_word_file):
         for line in fin:
             seed_words.append(line.strip())
     return seed_words
+
+def load_taxonomy_terms(taxo_file):
+    terms = []
+    with open(taxo_file, 'r') as fin:
+        for line in fin:
+            segments = line.strip().split('\t')
+            if segments[0] == '*':  
+                terms.extend(segments[1:])  
+    return terms
 
 def load_embedding_terms(embedding_file):
     term_set = set()
@@ -114,6 +130,7 @@ def main(raw_dir, input_dir):
     raw_doc_label_file = os.path.join(raw_dir, filenames.doc_labels)
     raw_term_file = os.path.join(raw_dir, filenames.terms)
     emb_file = os.path.join(input_dir, filenames.embeddings)
+    taxo_file = os.path.join(input_dir, filenames.seed_taxo)
 
     ## Following are four output files
     doc_file = os.path.join(input_dir, filenames.docs)
@@ -123,7 +140,7 @@ def main(raw_dir, input_dir):
     doc_id_file = os.path.join(input_dir, filenames.doc_ids)
     index_file = os.path.join(input_dir, filenames.index)
 
-    trim_terms(raw_term_file, term_file, emb_file)
+    trim_terms(raw_term_file, term_file, emb_file, taxo_file)
     print('Done trimming the terms.')
 
     trim_document_set(raw_doc_file, raw_doc_label_file, doc_file, doc_label_file, term_file, doc_label_flag=False)

@@ -1,4 +1,3 @@
-
 # Input files 
 index = 'index.txt'
 term_freq = 'term_freq.txt'
@@ -13,6 +12,7 @@ terms = 'terms.txt'
 seed_terms = 'seed_terms.txt'
 term_integrity = 'term_integrity.txt'
 novelty_scores = 'novelty_scores.txt'
+seed_taxo = 'seed_taxo.txt'  # Added seed taxonomy filename
 
 # Embedding files
 embeddings = 'embeddings.txt'
