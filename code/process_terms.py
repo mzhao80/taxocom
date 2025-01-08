@@ -17,18 +17,15 @@ def main():
 
     autophrase_file = sys.argv[1]
     output_file = sys.argv[2]
-    min_score = 0.5  # Minimum quality score threshold
 
     with open(autophrase_file, 'r', encoding='utf-8') as f_in:
         with open(output_file, 'w', encoding='utf-8') as f_out:
             for line in f_in:
                 try:
                     score, phrase = line.strip().split('\t')
-                    score = float(score)
-                    if score >= min_score:
-                        cleaned_phrase = clean_phrase(phrase)
-                        if cleaned_phrase:
-                            f_out.write(cleaned_phrase + '\n')
+                    cleaned_phrase = clean_phrase(phrase)
+                    if cleaned_phrase:
+                        f_out.write(cleaned_phrase + '\n')
                 except:
                     continue
 
