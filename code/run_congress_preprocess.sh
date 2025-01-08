@@ -5,6 +5,7 @@ CONGRESS_DIR="../data/congress"
 RAW_DIR="$CONGRESS_DIR/raw"
 INPUT_DIR="$CONGRESS_DIR/input"
 AUTOPHRASE_DIR="../AutoPhrase-master"
+CODE_DIR="../code"
 
 echo "Step 1: Cleaning crec2023.csv..."
 # Use Python script to properly extract speeches from CSV
@@ -23,7 +24,7 @@ cd $AUTOPHRASE_DIR
 cp models/DBLP/segmentation.txt $RAW_DIR/segmented_speeches.txt
 
 # Return to code directory
-cd - > /dev/null
+cd $CODE_DIR
 
 echo "Step 3: Processing segmented speeches..."
 # Run our preprocessing script to convert segmented speeches to docs.txt and terms.txt
@@ -32,7 +33,20 @@ python preprocess_congress.py \
     --output_dir $INPUT_DIR \
     --raw_dir $RAW_DIR
 
-echo "Step 4: Running standard preprocessing..."
+echo "Step 4: Extracting term integrity scores..."
+# Extract term integrity scores from AutoPhrase output
+python extract_term_integrity.py $AUTOPHRASE_DIR/models/DBLP/AutoPhrase.txt $INPUT_DIR/term_integrity.txt
+
+echo "Step 5: create docs.txt and terms.txt"
+# Create docs.txt and terms.txt from AutoPhrase output
+python create_docs_terms.py \
+    --segmentation $RAW_DIR/segmented_speeches.txt \
+    --autophrase $AUTOPHRASE_DIR/models/DBLP/AutoPhrase.txt \
+    --docs_output $RAW_DIR/docs.txt \
+    --terms_output $RAW_DIR/terms.txt \
+    --min_freq 5
+
+echo "Step 6: Running standard preprocessing..."
 # Run the standard preprocessing pipeline
 bash run_preprocess.sh congress
 
