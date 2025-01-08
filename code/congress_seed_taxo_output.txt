@@ -1,8 +1,6 @@
-*/these	or,biden_administration,these,administration,government,already,congress,should,even,any
-*/she	church,pastor,savannah,excelled,congregation,dedication,career,club,bennett,baptist
-*/these/program	program,projects,investment,improvements,market,programs,improve,existing,usda,investments
-*/these/political	israeli,hamas,jews,protests,palestinian,gaza,terrorists,redline,israel,protesters
-*/she/her	boundless,koka,yossi,great_leaders,resonates,armand,kindness,humility,rosalynn,holyoke
-*/she/served	assigned,command,battalion,deployed,commander,squadron,warrant_officer,detachment,naval,enlisted
-*/she/john	gerardo,adrian,whisenhunt,lopez,vernetta,melanie,luis,daly,colin,joshua
-*/she/community	farmington,festival,performing_arts,festivals,hosts,longest_running,hosted,lumber,public_library,boasts
+*/these	biden_administration,or,congress,administration,already,government,these,instead,simply,even
+*/he	pastor,church,savannah,congregation,excelled,baptist,career,barbara,legendary,club
+*/these/these	projects,program,investment,regulatory,existing,improvements,programs,regulations,improve,infrastructure
+*/these/political	hamas,israeli,jews,israel,protesting,silence,posters,southern_poverty_law_center,communists,protests
+*/he/served	sergeant,corporal,officer,commander,marine_corps,rank,army,lieutenant,navy,daniel
+*/he/community	music,art,she,community,community,artists,founded,hosts,her,organization

@@ -1,6 +1,5 @@
 jim_crow
 donald_trump
-barack_obama
 justice_alito
 express_scripts
 george_floyd
@@ -13,7 +12,6 @@ chesapeake_bay
 hillary_clinton
 julie_su
 big_tech
-bristol_bay
 el_salvador
 highland_park
 silicon_valley
@@ -22,6 +20,7 @@ ron_desantis
 ecohealth_alliance
 pete_buttigieg
 lia_thomas
+norfolk_southern
 endangered_species_act
 fox_news
 big_pharma
@@ -29,6 +28,7 @@ wall_street
 guantanamo_bay
 anthony_fauci
 mitch_mcconnell
+paul_whelan
 soviet_union
 united_kingdom
 benjamin_netanyahu
@@ -43,6 +43,7 @@ north_atlantic
 janet_yellen
 census_bureau
 acting_secretary_su
+gerry_connolly
 consumer_financial_protection_bureau
 southeast_asia
 alexander_hamilton
@@ -82,11 +83,11 @@ cato_institute
 christopher_wray
 hong_kong
 north_korea
+emancipation_proclamation
 gavin_newsom
 nazi_germany
 harlan_crow
 representative_omar
-ilhan_omar
 metropolitan_police_department
 hurricane_sandy
 chairwoman_rodgers
@@ -111,6 +112,7 @@ john_kerry
 lung_cancer
 foreign_intelligence_surveillance_act
 pact_act
+jeh_johnson
 manhattan_project
 supplemental_nutrition_assistance_program
 pell_grants
@@ -120,6 +122,7 @@ southern_poverty_law_center
 pacific_ocean
 gaza_strip
 communist_party
+leader_jeffries
 middle_eastern
 east_palestine
 european_union
@@ -135,6 +138,7 @@ congressional_hispanic_caucus
 middle_east
 national_labor_relations_board
 congressional_budget_office
+oswaldo_paya
 dietary_guidelines
 adolf_hitler
 alejandro_nicholas_mayorkas
@@ -143,7 +147,6 @@ ndo_fairness_act
 suicide_prevention
 smoke_exposure
 los_vaqueros
-mayor_eric_adams
 soo_locks
 energy_information_administration
 west_bank
@@ -151,10 +154,11 @@ affordable_care_act
 falun_gong
 chinese_communist_party
 palestinian_authority
-cyber_command
+nbc_news
 navigable_waters
 world_trade_center
 republican_party
+sri_lanka
 deb_haaland
 indian_health_service
 korean_peninsula
@@ -163,7 +167,6 @@ palestinian_islamic_jihad
 crown_prince
 north_korean
 lower_energy_costs_act
-national_science_foundation
 richard_nixon
 bipartisan_safer_communities_act
 ocean_acidification
@@ -172,6 +175,7 @@ united_nations
 supreme_court
 ivy_league
 social_security
+treasure_island
 california_aqueduct
 settlement_agreement_information_database
 outdoor_recreation
@@ -202,13 +206,13 @@ parliamentary_assembly
 pol_pot
 flight_attendants
 national_collegiate_athletic_association
-united_airlines
 administrative_procedure_act
 mahsa_amini
 leader_schumer
 national_nuclear_security_administration
 article_iii
 reduce_exacerbated_inflation_negatively_impacting
+anna_gomez
 merrick_garland
 judiciary_committee
 prescription_drugs
@@ -219,7 +223,6 @@ islamic_revolutionary_guard
 toxic_exposure
 crop_insurance
 consent_decree
-behavioral_health
 inflation_reduction_act
 homeland_security
 al_shabaab
@@ -239,7 +242,6 @@ special_drawing_rights
 federal_emergency_management_agency
 maga_republicans
 justice_scalia
-hudson_river
 congressional_research_service
 burn_pits
 gender_identity
@@ -267,6 +269,7 @@ electric_grid
 national_archives
 cluster_bombs
 strategic_national_stockpile
+american_battlefield_protection_program
 newt_gingrich
 muriel_bowser
 shenandoah_mountain
@@ -274,7 +277,6 @@ forced_organ_harvesting
 mask_mandates
 clean_water_act
 african_union
-bipartisan_rural_health_caucus
 paperwork_reduction_act
 financial_stability
 grizzly_bear
@@ -288,13 +290,14 @@ credit_unions
 oval_office
 epoch_times
 parental_involvement
-tule_river_tribe
 gun_violence_prevention
 sb_tactical
 uncle_sam
+kathy_hochul
 keystone_xl_pipeline
 renewable_energy
 terror_watchlist
+equal_rights_amendment
 rogue_regimes
 defense_department
 junk_fees
@@ -328,7 +331,6 @@ drinking_water
 weatherization_assistance
 motor_vehicle
 deterrent_act
-chief_economist
 infectious_diseases
 drag_queen
 world_trade_center_health_program
@@ -346,7 +348,6 @@ enes_kanter
 national_cyber_director
 congressional_review_act
 defense_health_agency
-rare_disease
 homeland_security_committee
 affirmative_action
 stabilizing_braces
@@ -407,7 +408,6 @@ executive_orders
 national_instant_criminal_background_check
 president_obama
 ethnic_cleansing
-radioactive_contamination
 mental_health
 special_immigrant_visa
 gun_violence
@@ -501,6 +501,7 @@ staffing_shortages
 government_accountability_office
 forest_management
 title_iv
+sacramento_valley
 drug_enforcement_administration
 environmental_reviews
 pfas_contamination
@@ -526,13 +527,13 @@ job_creators
 pharmacy_benefit_managers
 national_parks
 universal_background_checks
-wastewater_treatment
 deferred_maintenance
 smoke_taint
 working_waterfront
 hate_crimes
 gene_therapy
 illegal_alien
+dc_circuit
 ad_hoc
 rate_hikes
 forced_arbitration
@@ -552,7 +553,6 @@ conspiracy_theory
 armed_robbery
 serv_act
 presidential_proclamation
-iraq_war
 enhanced_background_checks
 felony_murder
 child_nutrition
@@ -611,7 +611,6 @@ land_repurposing
 lesser_prairie_chicken
 clean_drinking_water
 essential_air_service
-primary_care
 disaster_relief_fund
 rare_kidney_disease
 police_brutality
@@ -630,6 +629,8 @@ toxic_exposures_fund
 appropriations_subcommittee
 spy_balloon
 biological_men
+enhancement_act
+shook_hands
 malign_actors
 climate_change
 permitting_reform
@@ -678,6 +679,7 @@ environmental_justice
 woefully_inadequate
 corporate_cronyism
 weight_gain
+majority_leader
 civil_liberties
 humanitarian_assistance
 radical_environmentalists
@@ -708,6 +710,7 @@ god_forbid
 deficit_reduction
 law_enforcement
 global_warming
+locker_room
 income_inequality
 price_hikes
 satellite_communications
@@ -727,6 +730,8 @@ maga_extremists
 detention_beds
 slippery_slope
 arctic_council
+covenant_school_shooting
+wall_street_journal_editorial_page
 inextricably_linked
 mutually_beneficial
 clean_air
@@ -743,6 +748,7 @@ clarence_thomas
 investigative_subcommittee
 drug_overdose
 electric_vehicle_charging_stations
+fought_antilynching
 lavish_gifts
 structural_deficit
 toxic_substances
@@ -841,6 +847,7 @@ ev_battery
 social_media
 agency_rulemaking
 common_ground
+natural_resources_committee
 improvement_act
 trigger_leads
 warning_signs
@@ -874,13 +881,11 @@ maximum_pressure
 phone_calls
 student_loan
 controlled_substances_act
-commanding_officers
 afghan_refugees
 treated_differently
 quantum_computing
 coastal_communities
 disclosure_requirements
-remaining_electronic_votes
 child_trafficking
 emergency_declaration
 representative_bowman
@@ -922,7 +927,6 @@ unaccompanied_alien
 criminal_gangs
 national_security_advisor
 campaign_finance
-senate_appropriations_committee
 employer_reporting
 international_financing
 ev_batteries
@@ -979,6 +983,7 @@ united_states_code
 banning_gas_stoves
 bargaining_chips
 postsecondary_education
+pala_band_of_mission_indians
 economically_disadvantaged
 personal_hospitality
 economic_growth
@@ -1011,6 +1016,7 @@ natural_disasters
 public_health
 moral_imperative
 blatant_disregard
+censuring_representative
 october_7th
 generic_drugs
 space_launch
@@ -1026,7 +1032,6 @@ loan_forgiveness
 south_america
 credible_fear
 negatively_impacted
-child_care
 notam_improvement_act
 death_row
 foreign_entities
@@ -1067,8 +1072,8 @@ yearlong_cr
 telework_policy
 moral_equivalency
 thinly_veiled
+professional_development
 disturbing_trend
-smoke_exposure_crop_insurance_act
 solemnly_swear
 extreme_rightwing
 bureau_of_indian_affairs
@@ -1095,7 +1100,6 @@ months_ago
 title_ii
 jones_act
 debt_relief
-house_foreign_affairs_committee
 empirical_evidence
 appropriation_bills
 strategic_forces
@@ -1130,6 +1134,7 @@ path_forward
 central_bank
 stark_contrast
 draconian_cuts
+pled_guilty
 environmental_protection
 deja_vu
 medical_marijuana
@@ -1221,7 +1226,6 @@ disaster_response
 large_scale
 sacred_sites
 medical_malpractice
-educational_opportunity
 nuclear_bomb
 foreign_policy
 circumvention_of_lawful_pathways
@@ -1309,7 +1313,6 @@ dobbs_opinion
 house_oversight_committee
 building_codes
 violent_offenders
-rural_health
 polluting_industries
 big_labor
 biden_administration
@@ -1322,7 +1325,7 @@ national_forests
 dobbs_ruling
 omnibus_appropriations
 auto_manufacturers
-federal_reserve_board
+investment_management
 jobs_act
 preexisting_condition
 porous_southern_border
@@ -1417,7 +1420,6 @@ territorial_integrity
 sacred_lands
 joint_employer
 food_and_drug_administration
-army_corps_of_engineers
 peaceful_protests
 gun_laws
 critical_materials
@@ -1440,7 +1442,6 @@ environmental_quality
 equal_access
 emergency_powers
 communist_party_of_china
-public_law
 net_worth
 directors_and_senior_executives
 meat_processing
@@ -1689,6 +1690,7 @@ learning_loss
 auto_insurance
 address_homelessness
 unfunded_priorities
+enacted_level
 runaway_and_homeless_youth
 damn_thing
 legitimate_concerns
@@ -1746,6 +1748,7 @@ chinese_americans
 stop_fentanyl
 institutions_of_higher_learning
 microloan_program
+northern_district_of_ohio
 trans_girls
 competitive_advantage
 central_somalia
@@ -1832,7 +1835,6 @@ families_and_small_businesses
 deeply_disturbing
 transmission_line
 transportation_and_infrastructure_committee
-brain_trust
 small_business_investment_companies
 pit_production
 critical_juncture
@@ -1844,6 +1846,7 @@ internal_combustion
 common_defense
 regulatory_burden
 monthly_payments
+inflection_point
 buy_american
 chopping_block
 hate_crime
@@ -1970,6 +1973,7 @@ unique_challenges
 critical_lifeline
 golden_state
 energy_policy
+western_district_of_washington
 pregnant_women
 royalty_rate
 immigration_law
@@ -2002,6 +2006,7 @@ watching_closely
 emergency_room
 authorizing_committees
 lifesaving_drugs
+chairman_rogers_and_ranking_member_smith
 considered_suicide
 nondefense_spending
 entitlement_programs
@@ -2018,7 +2023,6 @@ retirement_security
 solar_energy
 spending_cuts
 disabled_veterans
-gun_store
 reduce_carbon_emissions
 contaminated_water
 rural_students
@@ -2095,7 +2099,6 @@ assistance_programs
 deeply_unpopular
 constitutional_obligation
 international_travelers
-stood_shoulder_to_shoulder
 conditioning_aid
 gdp
 opportunity_act
@@ -2175,7 +2178,6 @@ childcare_crisis
 lethal_drugs
 gao_report
 voted_yea_on_rollcall
-national_police
 constitutional_responsibility
 facilitate_abortion
 federal_land
@@ -2203,7 +2205,6 @@ higher_taxes
 regulatory_actions
 running_rampant
 sheer_volume
-assistance_act
 playing_political_games
 gun_sales
 niger
@@ -2241,7 +2242,6 @@ strategic_plan
 coequal_branch_of_government
 create_jobs
 bipartisan_cooperation
-local_elected_officials
 disproportionately_affected
 policy_choices
 regulatory_uncertainty
@@ -2265,7 +2265,6 @@ final_rule
 safe_streets
 kavanaugh
 looming_debt
-afghanistan_safe_haven_to_america
 free_market
 national_strategy
 real_wages
@@ -2411,7 +2410,6 @@ strong_bipartisan_support
 uae
 statutory_language
 europe
-house_rules_committee
 jews
 domestic_terrorists
 democrat
@@ -2435,13 +2433,11 @@ original_intent
 pompeo
 support_act
 denali
-fallon
 voting_representation
 national_intelligence
 yemeni
 budget_request
 gao
-turning_point
 strongly_support
 care_act
 policy_dispute
@@ -2454,7 +2450,6 @@ leed
 local_law_enforcement
 republicans
 bad_policy
-arabian
 snap
 personal_health
 appropriations_package
@@ -2525,13 +2520,13 @@ reclamation
 burdensome_requirements
 fra
 dna
-panama
 mpd
 academic_freedom
 percent_cut
 bipartisan_cosponsors
 rural_electric
 remarks_and_include_extraneous_materials
+senate_office_building
 run_rampant
 democrats
 land_claims
@@ -2559,6 +2554,7 @@ tribal_communities
 energy_crisis
 severe_weather
 legal_opinion
+scalia
 no_child_left_inside_act
 intervening_action_or_debate
 duval
@@ -2570,10 +2566,8 @@ sacred_responsibility
 living_wage
 extremely_important
 social_policy
-stellantis
 shared_values
 china
-fogarty
 baltic
 fiscal_policy
 inflation_rate
@@ -2584,7 +2578,6 @@ xinjiang
 oversight_responsibilities
 fauci
 electric_bills
-flight_operations
 agency_guidance
 care_providers
 feds
@@ -2636,9 +2629,9 @@ spectrum_auction
 nobel
 family_planning
 closed_rules
-boozman
 partisan_bills
 extreme_position
+chaco
 pala
 abundant_energy
 charging_infrastructure
@@ -2646,12 +2639,15 @@ manchin
 final_moments
 percent_decrease
 personal_gain
+milley
+leahy
 bipartisan_budget_agreement
 transportation_systems
 travel_policy
 international_partners
 mccarthy
 mentioned_earlier
+iga
 oversight_and_accountability_committee
 fiscal_years
 conservation_practices
@@ -2682,8 +2678,11 @@ global_economy
 duly_chosen_and_sworn
 puts_polluters
 garland
+federalist
+national_health_service
 cbo
 hours_ago
+young_children
 mayorkas
 economic_disaster
 collective_defense
@@ -2709,6 +2708,7 @@ au
 expanded_medicaid
 drug_trade
 spend_money
+enes
 save_consumers
 foreign_entity
 face_act
@@ -2722,11 +2722,9 @@ prosperous_future
 obama
 judiciary
 unauthorized_programs
-chile
 career_pathways
 policy_committee
 pfas
-maui
 nepa
 aapi_community
 snap_program
@@ -2745,7 +2743,6 @@ fulbright
 american
 taking_place
 commonsense_measures
-hong
 independents
 timely_manner
 equal_opportunities
@@ -2755,6 +2752,7 @@ justice
 legal_basis
 committee_on_financial_services
 investors_act
+speaking_truth
 ar
 desantis
 coordinated_effort
@@ -2849,8 +2847,8 @@ ndaa
 harmful_policies
 floor_tonight
 granholm
+tyre
 answer_questions
-npr
 federal_permitting_process
 schiff
 violent_attacks
@@ -2874,10 +2872,12 @@ buying_food
 passed_unanimously
 chesapeake
 twitter
+tester
 fully_funds
 executive_action
 wep
 tibet
+seek_recognition
 wray
 bipartisan_package
 registry
@@ -2897,7 +2897,6 @@ nuclear_program
 multiple_administrations
 secretaries
 hud
-typhoon
 economic_policies
 becerra
 economic_and_national_security
@@ -2968,7 +2967,6 @@ reduce_spending
 pay_taxes
 future_administrations
 includes_provisions
-elk
 interior
 senior_poverty
 hitler
@@ -2979,6 +2977,7 @@ educational_systems
 housing_market
 devastating_default
 altar
+green
 type_2_diabetes
 policy_decisions
 cfa
@@ -2991,7 +2990,6 @@ minuteman
 locally_elected
 heaven
 memorandum
-corridor
 geological
 pay_gap
 economic_stability
@@ -3003,7 +3001,6 @@ ordering
 co2
 provide_clarity
 raised_taxes
-fought_alongside
 intelligence_community
 bear_arms
 bureau_of_reclamation
@@ -3015,7 +3012,6 @@ financial_services_and_general_government_appropriations
 ptsd
 safe_return
 tiktok
-ghost
 empower_parents
 gang
 dramatically_worse
@@ -3026,7 +3022,6 @@ stand_ready
 fugitive
 freedom_of_information_act
 current_form
-iraqi
 cdc
 cut_medicare
 foreign_intelligence
@@ -3066,6 +3061,7 @@ existing_federal
 international_organization
 retirement_plan
 lethal_force
+jewish_faith
 falls
 jewish_state
 administrative_costs
@@ -3087,11 +3083,11 @@ soy
 adequately_address
 domestic_supply_chain
 crater
+chip
 historic_levels
 omicron
 offender
 real_growth
-google
 proposed_rules
 private_school
 funding_request
@@ -3100,7 +3096,6 @@ intergovernmental
 maga_majority
 balanced_budget_amendment
 empowering_china
-anthem
 major
 vest
 global_pandemic
@@ -3149,6 +3144,7 @@ sanctuary_city
 budget_cuts
 emergency_funding
 access_care
+elected_leaders
 home_care
 reduce_penalties
 require_va
@@ -3177,7 +3173,6 @@ economic_strength
 severe_disease
 extremist_agenda
 discretionary_funding
-juice
 interstate
 continuing_education
 atomic
@@ -3191,11 +3186,11 @@ emissions_reduction
 hardworking_families
 billion_shortfall
 foreign_investments
-delbene
 highest_rate
 ayatollah
 bank
 federal
+catering
 bureau
 chips
 pages_long
@@ -3225,12 +3220,10 @@ bad_faith
 total_cost
 ongoing_efforts
 brought_forward
-thirty
 energy_development
 powerful_message
 continental_united_states
 global_stability
-grizzly
 devastating_disease
 classification
 reserves
@@ -3244,13 +3237,13 @@ illegal_drug
 peaks
 clear_and_present_danger
 voices_heard
-road
 pulmonary
 local_police
 woke_policies
 special_inspector_general_for
 haiti
 aided_and_abetted
+holman
 dreamers
 real_world
 development_projects
@@ -3266,7 +3259,6 @@ labor
 hyde
 magnet
 boebert
-search_and_rescue
 newhouse
 retirement_age
 cfpb
@@ -3280,7 +3272,6 @@ eighteen
 treason
 trust_funds
 pharmaceutical_industry
-computing
 significant_reduction
 deadly_drug
 predictive
@@ -3296,7 +3287,6 @@ national_emergency_declaration
 pbms
 regular_appropriations
 triple
-administrative
 barack
 blind
 negative_impacts
@@ -3308,6 +3298,7 @@ pharma
 kicks
 open_southern_border
 corporate_interests
+earth
 small_group
 contiguous
 study_conducted
@@ -3325,9 +3316,7 @@ foundations
 increase_spending
 commerce
 failed_policies
-peak
 tunnel
-reservists
 pace
 semiconductor
 rein_in_act
@@ -3356,7 +3345,6 @@ combatant
 cut_spending
 ultimate_price
 nsf
-banking
 significant_improvements
 snake
 seeking_reproductive
@@ -3366,6 +3354,7 @@ vitamin
 power_generation
 seminal
 sanctuary
+speakership
 talking_point
 canal
 chair_and_vice_chair
@@ -3386,12 +3375,10 @@ ig
 addressing_climate_change
 broken_border
 facebook
-terror_attack
 atrocities_committed
 border_policy
 pay_raise
 raised_concerns
-extremely_dangerous
 nickel
 declassify
 transportation_safety
@@ -3438,6 +3425,7 @@ welfare_programs
 covid_emergency
 image
 refinery
+cop
 violent_attack
 takes_effect
 tcja
@@ -3466,7 +3454,6 @@ devastating_effect
 extremely_difficult
 visa
 azerbaijan
-cardiovascular
 pell
 opm
 cost_of_prescription_drugs
@@ -3491,7 +3478,6 @@ ip
 overrule
 important_aspect
 tooth_and_nail
-children_aged
 passive
 regulatory_process
 fixed_incomes
@@ -3542,7 +3528,6 @@ remain_competitive
 nics
 graphite
 adopted_rules
-moms
 youtube
 farmers_and_ranchers
 insurance
@@ -3563,7 +3548,6 @@ fec
 families_act
 generic
 basic_rights
-seeking_care
 affordable_homes
 strongest_military
 pay_our_military
@@ -3587,7 +3571,6 @@ disapproving
 trades
 enhancement
 air_traffic
-islanders
 innovative_ways
 line_items
 tax_break
@@ -3644,7 +3627,6 @@ lifesaving_research
 passing_bills
 socialism
 global_threat
-pulse
 budget_process
 dramatically_increase
 wage_war
@@ -3659,7 +3641,6 @@ record_low
 energy_industry
 real_economic
 healthy_environment
-infertility
 hsi
 proposed_standard
 return_to_regular_order
@@ -3713,6 +3694,7 @@ gray_wolf
 appropriations_act
 dealers
 stay_open
+tip
 envy
 hold_hearings
 admissions
@@ -3724,6 +3706,7 @@ envoy
 local_schools
 disclosure
 excuse
+trucking_industry
 finding_ways
 cyber
 projection
@@ -3776,7 +3759,7 @@ impeachment
 jail
 cave
 reign_of_terror
-dca
+fish
 safe_housing
 modification
 coyotes
@@ -3825,6 +3808,7 @@ unprovoked_attack
 direct_spending
 tap
 leasing_plan
+development
 pay_attention
 revolving
 stock
@@ -3894,9 +3878,7 @@ rise_today_to_discuss
 protecting_public_health
 additional_costs
 constitution
-custom
 legal_process
-gm
 proceedings
 swift
 water
@@ -3940,7 +3922,6 @@ patent
 lactose
 conduct_oversight
 economic_pain
-channel
 gross
 technical
 involuntary
@@ -3973,11 +3954,10 @@ nutritional
 cures
 surveillance
 hra
+economic_justice
 bend
 cancellations
 light
-ash
-services
 cisa
 foia
 criminal_history
@@ -3990,7 +3970,6 @@ test
 visibility
 grant_money
 soft_on_crime
-southern
 greatest_ally
 shutdowns
 imagine
@@ -4000,12 +3979,14 @@ racial_and_ethnic
 workforce
 directly_impacted
 lyft
+chilean
 crimes_committed
 minutes_ago
 everyday_lives
 settlement
 analytics
 minority_communities
+unprecedented_challenges
 islamist
 dove
 compensated
@@ -4033,6 +4014,7 @@ massive_amounts
 feel_safe
 shield
 sackett
+fully_repay
 propublica
 securities_and_exchange
 strategic
@@ -4050,6 +4032,7 @@ wildlife
 umbrella
 compare
 nutrient
+bradsher
 gazans
 element
 past_administration
@@ -4092,7 +4075,6 @@ financial_institution
 missile
 revised_criminal_code_act_of_2022
 medical
-syed
 amazing_thing
 million_workers
 frankly
@@ -4126,6 +4108,7 @@ big_oil_friends
 great_nations
 reap
 unfinished_business
+pursuant
 job_losses
 devastating_impacts
 authority
@@ -4156,7 +4139,6 @@ feel_confident
 big_spending
 coincidence
 creating_jobs
-cea
 dtc
 increase_domestic_energy_production
 grenades
@@ -4177,11 +4159,13 @@ innocent_citizens
 houstonians
 icbms
 exxonmobil
+christianity
 bop
 current_federal
 nigerian
 base
 main
+hillel
 genocide
 usda
 neck
@@ -4235,7 +4219,6 @@ baltics
 stinger
 justice40
 specifically_designed
-bipartisan_deal
 hopes_and_dreams
 imports
 immigration
@@ -4371,6 +4354,7 @@ difficult_decisions
 slips
 fencing
 sba
+sbir
 attacked_israel
 firstenergy
 maternal
@@ -4387,7 +4371,6 @@ billionaires
 newsguard
 observers
 paygo
-rushing
 un
 deserve_answers
 domestic_supply
@@ -4435,7 +4418,6 @@ frame
 critical_funding
 local_entities
 czar
-servicemen_and_servicewomen
 extreme_cuts
 easterly
 trek
@@ -4481,7 +4463,6 @@ disrespect
 takes_steps
 isc
 shipping
-countless_families
 largest_economy
 multiple_studies
 subject_matter_contained_in
@@ -4492,6 +4473,7 @@ automatic
 introduced_legislation
 manufacturing
 aleppo
+uganda
 continuation
 historically
 babies_born
@@ -4520,6 +4502,7 @@ npdes
 solitary
 cumulative
 stark
+trans
 concession
 autopilot
 hunters
@@ -4540,6 +4523,7 @@ voice_vote
 diet
 spending_billions
 levinson
+inclusion
 simple_solution
 humane
 restore_trust
@@ -4550,7 +4534,6 @@ bipartisan_compromise
 short
 bureaus
 external
-parliamentary
 borne
 database
 section_401
@@ -4569,7 +4552,6 @@ bipartisan_proposal
 communism
 prohibiting
 negroes
-kuwait
 fully_understand
 law
 secondary
@@ -4584,7 +4566,6 @@ freedom
 homelessness
 putting_politics
 fentanyl
-casualty
 unlimited
 prudence
 ambient
@@ -4594,7 +4575,6 @@ depletion
 parochial
 verbal
 taiwanese
-visual
 camps
 allowing_biological
 rois
@@ -4618,6 +4598,7 @@ dea
 blm
 infiltrate
 brink
+cart
 drunken
 significant_effect
 freedom_of_speech
@@ -4632,6 +4613,7 @@ saudis
 sham
 investor
 core
+peoples
 recovery
 trillion_of_borrowing
 close_calls
@@ -4664,6 +4646,7 @@ exports
 promote_transparency
 restore_fiscal
 caps
+exile
 original_mission
 protocol
 women_and_girls
@@ -4673,6 +4656,7 @@ negative_impact
 israelis_and_palestinians
 eqip
 sdpi
+mafmc
 cars_and_trucks
 paralyzed
 photovoltaic
@@ -4712,6 +4696,7 @@ formula
 compounds
 bipartisan_coalition
 reauthorization
+the_senior_assistant_legislative_clerk_called
 coal
 ballistic
 assurance
@@ -4727,7 +4712,6 @@ stream
 working_middle_class
 industrial_policy
 freight
-translation
 towers
 open_process
 viral
@@ -4797,7 +4781,6 @@ banks
 trial
 bitcoin
 quit
-bucha
 employer
 amendment_simply_requires
 puco
@@ -4817,7 +4800,6 @@ investigations
 amend_title
 living_with_hiv
 drunk
-deliver_results
 supplemental_aid
 rifles
 expand_medicaid
@@ -4844,7 +4826,6 @@ welfare_state
 grab
 readiness
 innovation
-vermonters
 restoring
 chargers
 adoption
@@ -4931,6 +4912,7 @@ record_inflation
 cliff
 owners_and_operators
 cash
+movement
 pathway_to_citizenship
 budget_authority
 funds_provided
@@ -4939,7 +4921,6 @@ pick_and_choose
 saving_money
 school_facilities_to_provide_shelter
 antibodies
-earthquake
 grave_threat
 nonviolent
 legislatures
@@ -4948,6 +4929,7 @@ check
 high
 cashew
 thing_called
+young_person
 positive_effect
 keohane
 bioshield
@@ -4977,6 +4959,7 @@ electric
 conference_process
 gap
 blanket
+moves_to_recommit
 tens_of_thousands
 punching
 wrecking
@@ -5032,6 +5015,7 @@ breakthrough
 missing_in_action
 partners_and_allies
 specifically
+officers
 solar
 deterrent
 worse
@@ -5043,7 +5027,6 @@ defend_democracy
 pentagon
 committee_unanimously
 fy23
-tides
 taxpayer_resources
 voted
 millionaires
@@ -5061,7 +5044,6 @@ conversion
 bottle
 housing_illegal_immigrants
 state_and_local_law_enforcement
-drama
 burn
 social_issues
 reclaimed
@@ -5076,7 +5058,7 @@ world_economy
 embargo
 strategic_national
 greatest_threats
-folks
+healthy_democracy
 firefighters
 final_vote
 holds_true
@@ -5128,6 +5110,7 @@ real_action
 heating
 gig
 record_levels
+reconnecting
 agreement
 codes
 refineries
@@ -5175,6 +5158,7 @@ securities
 held_hostage_by_hamas
 register
 oath
+retreat
 funding_provided
 evacuate
 gain_of_function
@@ -5199,6 +5183,7 @@ obamacare
 girls_and_women
 accountants
 dark
+supreme
 salad
 miraculous
 divide
@@ -5208,7 +5193,6 @@ scan
 waterway
 28th_amendment
 ayatollahs
-accelerator
 repel
 complaint
 equity
@@ -5269,6 +5253,7 @@ traditional_energy
 highest_level
 war_criminal
 oral
+minnesotans
 spy
 bringing_jobs
 increased_costs
@@ -5283,12 +5268,10 @@ clean
 liver
 global_superpower
 collectors
-physicians
 public_access
 meddle
 sunset
 contractor
-introduce_legislation
 section_1071
 rogue
 commonsense_policies
@@ -5361,6 +5344,7 @@ economic_support
 wheels
 early_stages
 roadside
+graves_and_ranking_member
 group_health
 wealthy_tax
 research_and_development
@@ -5388,6 +5372,7 @@ termination
 wildfire
 unbelievable
 information
+installment
 passing_legislation
 cafeterias
 independence
@@ -5428,7 +5413,6 @@ proposed_legislation
 expansion
 lousy
 jaddou
-farmingdale
 riots
 cleanup
 shale
@@ -5452,6 +5436,7 @@ correa
 simple_and_straightforward
 commissions
 removal
+the_remaining_electronic_vote
 denying
 efforts_to_defund_or_dismantle
 taking_action
@@ -5461,6 +5446,7 @@ oleksandr
 shabelle
 bek
 protect_kids
+race
 safer_communities
 percent_higher
 forcibly
@@ -5501,7 +5487,6 @@ reciprocity
 competitiveness
 preceding
 eliminates_funding
-inspector
 cutting
 kids_safe
 transparency
@@ -5510,7 +5495,6 @@ huge_step
 polls
 engagement
 militia
-ballpark
 bipartisan_manner
 busting
 recent_data
@@ -5527,7 +5511,6 @@ relief
 authors
 important_issue
 nuclear
-ending
 wastewater
 critical_safety
 simple_amendment
@@ -5696,6 +5679,7 @@ bmd
 insurgency
 defense_industrial
 republican_budget
+cards
 rails
 real_issue
 medically
@@ -5713,7 +5697,6 @@ brush
 drilling
 semiconductors
 styles
-advisors
 trade
 concurrent
 unleashing
@@ -5721,7 +5704,6 @@ buyback
 presidentially
 blockchain
 current_funding
-residential
 cosponsoring
 days_ahead
 innocent_children
@@ -5740,7 +5722,6 @@ allergic
 persons_with_disabilities
 diplomatic
 place
-writers
 copies
 dots
 journalists
@@ -5759,7 +5740,6 @@ neurological
 decarbonization
 overwhelming_support
 littered
-providing_services
 equivalency
 vicinity
 accords
@@ -5798,6 +5778,7 @@ current_debt
 violent_criminal
 personal_decision
 mental_and_physical
+rating
 grapes
 madness
 state_laws
@@ -5814,6 +5795,7 @@ oddly
 worse_and_worse
 fight_inflation
 restrain
+social
 real_cost
 current_crisis
 fifth_circuit
@@ -5821,6 +5803,7 @@ democracies
 converting
 real_life
 flip
+million_students
 healthcare
 international_community
 victims_of_gun_violence
@@ -5891,7 +5874,6 @@ motion_to_commit
 hijack
 abridged
 deposit
-thousand
 prior_years
 passengers
 operators
@@ -5948,6 +5930,7 @@ structural
 trillions_and_trillions
 meaningful_legislation
 real_threats
+ship
 preterm
 assured
 working_americans
@@ -5959,10 +5942,8 @@ authorization_to_use_military_force
 paying_jobs
 dollar_spent
 current_situation
-delinquency
 resumption
 rap
-schools
 poverty
 power
 breaching
@@ -5984,6 +5965,7 @@ regulatory_state
 intervention
 control
 grips
+innovators
 groundhog
 saturated
 ndaa_process
@@ -5991,6 +5973,7 @@ sounds
 overwhelming_majority_of_americans
 failure
 determining
+pardons
 wages_and_benefits
 reinforce
 dignity_and_respect
@@ -5999,6 +5982,7 @@ beds
 voices
 outbound
 whale
+cbra
 nf
 clans
 rural_and_underserved
@@ -6060,7 +6044,9 @@ challenge
 committee_report
 federal_prison
 macadamia
+referendum
 recently_introduced
+undersigned
 defraud
 administration_supports
 laws_passed_by_congress
@@ -6114,6 +6100,7 @@ liquidity
 spike
 shake
 shockingly
+room
 stockpile
 small_government
 trillion_in_national_debt
@@ -6181,6 +6168,7 @@ unelected
 color
 quarantine
 massive_economic
+providing_essential
 sellers
 hostilities
 yogurt
@@ -6194,6 +6182,7 @@ critical_programs
 advance_policies
 past_decades
 respiratory
+residents_and_visitors
 historic_step
 continuing
 duty_and_responsibility
@@ -6222,7 +6211,6 @@ suffers
 chance_to_compete
 authorizing
 holdings
-provisional
 commonsense_policy
 criminal
 higher_and_higher
@@ -6257,10 +6245,10 @@ stake
 higher_interest_rates
 unlocking
 renewing
-surface
 deregulation
 command_and_control
 option
+mine
 important_provision
 economic
 legal
@@ -6355,6 +6343,7 @@ amenable
 future_success
 kill_americans
 military_budget
+called
 composition
 beryllium
 change
@@ -6506,6 +6495,7 @@ passed_laws
 foreign_energy
 bad_thing
 subway
+countless_veterans
 silent
 wasteful_government
 economic_foundational
@@ -6599,7 +6589,6 @@ coequal
 plug
 department_of_defense
 turkiye_and_syria
-unite
 riddled
 dispense
 solutions
@@ -6666,6 +6655,7 @@ sanctions
 levee
 raising
 transfer
+unanimous_vote
 ton
 create_opportunities
 democracy
@@ -6707,7 +6697,6 @@ rolls
 none
 aframe
 rahimi
-recruiting
 millions_of_dollars
 forecast
 rulers
@@ -6849,7 +6838,6 @@ reminiscent
 indicative
 criminal_background
 helping_americans
-climb
 preventing
 outage
 rise_today_in_strong_opposition
@@ -6875,6 +6863,7 @@ spill
 tweet
 thousands_and_thousands
 sign
+new_yorkers
 percentages
 impact
 oxygen
@@ -6986,6 +6975,7 @@ dirty
 workers
 perpetrator
 revenge
+awaited
 disorder
 grams
 rear
@@ -6996,6 +6986,7 @@ imposing
 increase_energy_costs
 excessive
 domestic_and_international
+hearing
 pave
 violence
 lethal
@@ -7062,7 +7053,7 @@ reimagine
 spur
 incite
 upwards
-copy
+outpatient
 advance_legislation
 enrollment
 slave
@@ -7075,7 +7066,6 @@ customer
 flow
 viability
 reproductive
-continue_fighting
 likewise
 harder
 parallel
@@ -7170,6 +7160,7 @@ eligible
 lead
 qualifies
 cryptocurrency
+preserve_and_protect
 pilots
 complexities
 impeaching
@@ -7315,6 +7306,7 @@ enacted_into_law
 piece_of_bipartisan_legislation
 gi_bill
 approximately
+cusp
 turning
 cowardice
 deals
@@ -7488,6 +7480,7 @@ inalienable
 oftentimes
 ownership
 winegrape
+briefs
 activists
 pipelines
 layer
@@ -7513,6 +7506,7 @@ provide_affordable
 supremacists
 bifurcated
 extortion
+hallways
 bodies_of_water
 myths
 new_mexicans
@@ -7557,6 +7551,7 @@ governing
 leak
 overlooks
 dwell
+formulation
 rumor
 mutilating
 misrepresentation
@@ -7602,7 +7597,6 @@ warrantless
 birthrate
 malinformation
 jurors
-coups
 clocks
 engineered
 users
@@ -7610,7 +7604,6 @@ contents
 system
 solution
 lodging
-opining
 defending
 emotional
 forensic
@@ -7713,6 +7706,7 @@ shamefully
 excess
 parcel
 derived
+fishermen
 quarterly
 vote
 interference
@@ -7789,7 +7783,6 @@ effectiveness
 needle
 support
 relocate
-figure
 increasing
 morality
 assurances
@@ -8029,7 +8022,6 @@ districts
 intrusion
 granting
 conduct
-traced
 tough
 redouble
 consultants
@@ -8062,7 +8054,6 @@ if
 curb
 deadly
 reforming
-shout
 evils
 electrifying
 publicity
@@ -8103,6 +8094,7 @@ horror
 erosion
 privatize
 there
+smiling
 heels
 prevalent
 thwart
@@ -8131,7 +8123,6 @@ last
 wasteful
 nefarious
 body
-scratch
 codifying
 internally
 ordinary
@@ -8193,7 +8184,6 @@ reservoirs
 librarians
 leftwing
 bills
-remarkably
 reaffirming
 purports
 typically
@@ -8236,6 +8226,7 @@ addicted
 job_security
 abiding
 sides
+spark
 windfall
 strings
 clauses
@@ -8315,7 +8306,6 @@ trusting
 slaves
 feasibility
 headlines
-unarmed
 decent
 penalty
 suddenly
@@ -8346,7 +8336,6 @@ cyberattacks
 superiority
 reimburse
 door
-repairing
 substitute
 accelerating
 authoritarianism
@@ -8358,7 +8347,6 @@ disparities
 lifeblood
 consent
 reimpose
-checkout
 revisionist
 subtract
 rigging
@@ -8373,6 +8361,7 @@ veil
 cranky
 receipts
 psychiatrists
+reclassified
 sediment
 haircut
 subverting
@@ -8382,12 +8371,12 @@ verified
 revises
 adjudication
 redline
+cooperated
 oppress
 substandard
 mudslides
 inactive
 expended
-healthiest
 hackers
 scales
 supersede
@@ -8423,7 +8412,6 @@ contracts
 intervening
 burying
 pulpit
-dispatchers
 impeachments
 infusion
 unconscious
@@ -8502,6 +8490,7 @@ distinguish
 economists
 lavish
 anger
+cemeteries
 aimed
 illustrate
 marginal
@@ -8576,6 +8565,7 @@ document
 infected
 supplier
 fool
+schooling
 shameless
 depleting
 pets
@@ -8712,7 +8702,6 @@ slight
 annexation
 savagery
 vests
-butchering
 continuum
 selfish
 inflicts
@@ -8862,7 +8851,6 @@ people
 evolve
 severity
 strikes
-females
 rectify
 shocking
 opponents
@@ -8871,7 +8859,6 @@ defrauded
 originalist
 brake
 gonna
-sorties
 paroled
 occupations
 startling
@@ -8885,6 +8872,7 @@ trick
 ban
 localities
 inject
+obsequious
 meanwhile
 necessities
 guidance
@@ -8921,6 +8909,7 @@ articulate
 material
 by
 borrower
+speak
 confined
 eliminate
 balancing
@@ -8938,10 +8927,12 @@ reversing
 delays
 some
 limbo
+airwaves
 interesting
 gouging
 essential
 snowpack
+through
 burdened
 buyer
 melting
@@ -9015,7 +9006,6 @@ importer
 insulated
 legislated
 posters
-considerate
 cropland
 tips
 noses
@@ -9109,7 +9099,6 @@ justifiably
 glorify
 rededicate
 tangled
-wrestle
 ratify
 problem
 ecosystems
@@ -9139,6 +9128,7 @@ creatures
 grownups
 reactions
 preferential
+symbolism
 addendum
 sicker
 turnover
@@ -9269,6 +9259,7 @@ minerals
 lest
 minimizing
 referencing
+enemy
 searching
 amended
 migrants
@@ -9312,7 +9303,6 @@ operative
 modeling
 articulated
 rescinding
-flavors
 grasslands
 toe
 tracking
@@ -9358,6 +9348,7 @@ padding
 decapitated
 televised
 interprets
+relax
 spurious
 clicks
 spurring
@@ -9372,6 +9363,7 @@ invalidate
 radicalized
 beheading
 bankroll
+hesitated
 repayments
 worsens
 offend
@@ -9429,7 +9421,6 @@ onsite
 binds
 headache
 incitement
-disbanded
 overgrown
 nonenforcement
 widen
@@ -9736,6 +9727,7 @@ misnomer
 boils
 underline
 cautioned
+aired
 interruptions
 fabricated
 foul
@@ -9771,6 +9763,7 @@ sided
 leveraged
 versions
 municipality
+succeed
 unwillingness
 escalation
 leads
@@ -9879,7 +9872,6 @@ squander
 derive
 reenter
 paternalistic
-commuters
 obstacle
 wholesale
 prescribe
@@ -9930,9 +9922,9 @@ exacerbating
 proportion
 detaining
 pollution
+darkest
 drought
 allocate
-residence
 qualifying
 outcome
 activities
@@ -10028,7 +10020,6 @@ overthrow
 unleash
 issues
 respect
-bringing
 conflict
 woke
 confidential
@@ -10110,7 +10101,6 @@ objecting
 unexpectedly
 highs
 redtape
-optimism
 shelf
 counts
 researching
@@ -10143,6 +10133,7 @@ illogical
 supercharged
 strapped
 deposited
+combines
 abdicating
 thresholds
 deluge
@@ -10161,6 +10152,7 @@ illuminating
 categorically
 amplified
 delicate
+informative
 actionable
 shatter
 erroneous
@@ -10290,7 +10282,6 @@ approving
 intends
 ensuring
 shift
-incredibly
 most
 vested
 facilities
@@ -10350,6 +10341,7 @@ projections
 captive
 brazen
 disruption
+unconditional
 user
 shipyards
 bury
@@ -10407,6 +10399,7 @@ stonewalling
 analogy
 jammed
 mood
+citizenry
 reprieve
 headaches
 peddle
@@ -10451,7 +10444,6 @@ forms
 overrun
 conferees
 objectives
-integrate
 sometime
 dose
 choosing
@@ -10499,7 +10491,6 @@ dangerous
 recession
 assure
 cleaning
-front
 fall
 innocent
 tend
@@ -10578,6 +10569,7 @@ palpable
 forgoing
 warped
 sprawling
+plumbers
 unresolved
 fractured
 manifest
@@ -10591,7 +10583,6 @@ excessively
 rescues
 viciously
 betrayed
-arranging
 omissions
 augment
 labored
@@ -10605,6 +10596,7 @@ imperil
 eradicating
 approves
 singularly
+prestige
 plunged
 devised
 laudable
@@ -10863,6 +10855,7 @@ singled
 reminders
 solvent
 stresses
+infinite
 ingredient
 guessed
 lifts
@@ -10896,6 +10889,7 @@ text
 abroad
 directing
 drawdown
+surprising
 meaning
 excluded
 although
@@ -10990,6 +10984,7 @@ interviews
 crazy
 aftermath
 waved
+lectured
 detected
 callousness
 conveyed
@@ -11051,19 +11046,19 @@ terrorized
 racked
 resistant
 interfered
-gesture
 scrambling
 arresting
 invaders
 unprotected
 smell
+demolished
 corrupted
 resentment
 disgusted
 assuring
-tapped
 outsourcing
 presses
+caved
 cosponsorship
 stagnant
 rivals
@@ -11143,7 +11138,6 @@ floors
 helpless
 excludes
 drowned
-adamant
 fracking
 reshape
 surrendering
@@ -11187,12 +11181,14 @@ wrought
 ceded
 powerfully
 revolutionize
+pursues
 proclaiming
 workable
 overarching
 obstructed
 enablers
 stretching
+indulgence
 contradiction
 visions
 blows
@@ -11229,7 +11225,6 @@ wield
 doomed
 interrupt
 recklessness
-persevere
 punishes
 hoops
 tout
@@ -11311,6 +11306,7 @@ lingering
 push
 favor
 sanity
+adjacent
 distant
 opioids
 legislating
@@ -11465,7 +11461,6 @@ acreage
 predicting
 predictions
 solves
-spelled
 forthcoming
 tweets
 ambush
@@ -11574,6 +11569,7 @@ pill
 censoring
 projects
 communicate
+called
 productivity
 sorts
 monsters
@@ -11684,6 +11680,7 @@ upstream
 slipped
 workload
 bragging
+unconditionally
 ambiguous
 obsolete
 abject
@@ -11725,7 +11722,6 @@ replied
 upgrade
 undue
 circumvent
-jailed
 disrupting
 solely
 seeking
@@ -11828,6 +11824,7 @@ objectively
 thoughtfully
 redirect
 identifies
+resonate
 reunite
 lucrative
 nervous
@@ -11931,6 +11928,7 @@ viruses
 specifics
 humanely
 neutral
+construct
 prosecutors
 addresses
 supplied
@@ -12038,7 +12036,6 @@ poorly
 checking
 absolute
 singlehandedly
-hid
 relevance
 unattainable
 streaming
@@ -12295,6 +12292,7 @@ blew
 resisted
 erased
 increases
+unites
 begged
 roadblocks
 buys
@@ -12302,6 +12300,7 @@ streamlined
 concentrated
 shutdown
 effectively
+published
 existential
 wasting
 reward
@@ -12320,7 +12319,6 @@ rightfully
 subjects
 orchestrated
 degrading
-handles
 admitting
 literal
 descended
@@ -12369,7 +12367,6 @@ unhinged
 dehumanize
 attrition
 delivers
-coastline
 understandable
 doorstep
 preposterous
@@ -12409,7 +12406,6 @@ newer
 breathtaking
 misdemeanor
 farther
-conservationists
 scarce
 misused
 shortcomings
@@ -12483,7 +12479,6 @@ deteriorating
 obscene
 untouched
 entries
-rallying
 unfathomable
 lifetimes
 misunderstanding
@@ -12542,10 +12537,12 @@ downright
 rescinds
 totally
 polluting
+heartbreaking
 heard
 isolated
 extent
 wounds
+constituents
 immunity
 propaganda
 hoping
@@ -12556,7 +12553,6 @@ sourced
 lowest
 increased
 enemies
-servicemember
 prevail
 undermines
 routine
@@ -12682,7 +12678,6 @@ focuses
 debating
 bleeding
 aggravated
-posting
 gatherings
 safeguarded
 translated
@@ -12722,6 +12717,7 @@ very
 eat
 rate
 expenses
+submarines
 dependent
 evaluated
 measurable
@@ -12729,6 +12725,7 @@ prerogative
 5g
 examples
 controls
+strength
 insert
 flexibilities
 inadvertently
@@ -12821,6 +12818,7 @@ pulled
 perpetuating
 documentation
 candid
+spends
 18f
 pose
 rapidly
@@ -12907,6 +12905,7 @@ pragmatic
 fairer
 distributed
 differences
+slogan
 why
 overnight
 assessed
@@ -12957,7 +12956,7 @@ bizarre
 multilateral
 completely
 exposed
-annually
+flourish
 equivalent
 navigating
 discipline
@@ -12979,6 +12978,7 @@ outlining
 pocketbooks
 begs
 hurdles
+called
 tens
 billions
 threshold
@@ -13079,6 +13079,7 @@ gain
 puts
 forgiven
 redundant
+testified
 scary
 enormous
 perpetrated
@@ -13140,7 +13141,6 @@ barriers
 lie
 allegations
 unfinished
-servants
 narrative
 strictly
 nonexistent
@@ -13149,7 +13149,6 @@ societal
 exercised
 administering
 compromising
-risen
 adversary
 destroyed
 supposed
@@ -13210,7 +13209,6 @@ rhetoric
 facilitate
 punished
 accidents
-evacuated
 scenarios
 quietly
 richer
@@ -13362,6 +13360,7 @@ prevailed
 argument
 unexpected
 undertaking
+fell
 550
 achieve
 crap
@@ -13413,7 +13412,6 @@ affirmed
 fines
 strengthen
 catastrophe
-2026
 imposed
 disproportionately
 humans
@@ -13479,6 +13477,7 @@ slowly
 blatantly
 lying
 egregious
+liberated
 imprisonment
 lawfully
 exploit
@@ -13661,6 +13660,7 @@ correct
 retain
 awaiting
 schemes
+1
 put
 slowed
 knowledgeable
@@ -13785,6 +13785,7 @@ recommended
 functions
 dismissed
 explained
+owe
 unfolding
 mechanisms
 2608
@@ -13795,7 +13796,6 @@ enable
 floods
 emphasize
 facilitates
-exploring
 270
 345
 weaponized
@@ -14036,6 +14036,7 @@ violated
 concluded
 toward
 see
+entertain
 thin
 716
 491
@@ -14073,6 +14074,7 @@ willing
 value
 redesignate
 rescinded
+230
 concerning
 sends
 217
@@ -14087,7 +14089,6 @@ never
 able
 344
 215
-500
 actually
 likely
 done
@@ -14119,6 +14120,7 @@ tried
 ones
 918
 necessary
+124
 anywhere
 shall
 272
@@ -14132,7 +14134,6 @@ forth
 147
 80
 92
-275
 find
 seems
 1338
@@ -14146,7 +14147,6 @@ else
 599
 538
 153
-164
 529
 379
 262
@@ -14222,7 +14222,6 @@ up
 172
 676
 4367
-314
 320
 1163
 saying
@@ -14230,7 +14229,6 @@ becomes
 177
 247
 680
-78
 302
 85
 mean
@@ -14256,7 +14254,6 @@ asking
 346
 143
 193
-174
 provides
 95
 347
@@ -14327,7 +14324,6 @@ can
 290
 cry
 are
-112
 would
 850
 382
@@ -14362,7 +14358,6 @@ child
 including
 450
 climate
-500
 114
 peace
 safe
@@ -14370,19 +14365,19 @@ safe
 160
 158
 300
+1
 a_4
 a_10
 research
 amendment
 80
-a_7
+1
 a_20
 whereas
 say
 115
 said
 90
-read_through
 a_level
 individuals
 saying
