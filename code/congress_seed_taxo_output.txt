@@ -1,9 +1,0 @@
-*/commerce	energy,commerce,taxation
-*/law	immigration,education,law,health
-*/commerce/taxation	taxation
-*/commerce/energy	energy
-*/commerce/commerce	commerce
-*/law/education	education
-*/law/immigration	immigration
-*/law/law	law
-*/law/health	health

@@ -4,5 +4,3 @@ code/josd
 data/arxiv/input/
 *.DS_Store
 data/congress/speeches_114.txt
-*embeddings.txt
-AutoPhrase-master/data/EN/input.txt

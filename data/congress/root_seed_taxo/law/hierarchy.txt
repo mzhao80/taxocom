@@ -1,4 +1,0 @@
-education	law
-immigration	law
-law	law
-health	law

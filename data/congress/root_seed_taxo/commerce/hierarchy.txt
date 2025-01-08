@@ -1,3 +1,0 @@
-taxation	commerce
-energy	commerce
-commerce	commerce
