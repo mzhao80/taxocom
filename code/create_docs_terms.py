@@ -3,18 +3,24 @@ import re
 
 def clean_phrase(phrase):
     """Clean and normalize a phrase"""
-    # Remove special characters except underscore
+    # Remove special characters except underscore and hyphen
     cleaned = re.sub(r'[^\w\s_-]', ' ', phrase)
-    # Replace spaces with underscores for multi-word phrases
+    # Replace spaces with underscores within phrases
     cleaned = '_'.join(cleaned.split())
     return cleaned.lower()
+
+def clean_text(text):
+    """Clean non-phrase text"""
+    # Remove special characters except hyphen
+    cleaned = re.sub(r'[^\w\s-]', ' ', text)
+    return ' '.join(cleaned.lower().split())
 
 def process_autophrase_output(segmentation_file, autophrase_file, docs_output, terms_output, min_phrase_freq=5):
     # First pass: collect phrases and their frequencies
     phrase_counts = {}
     
     # Regular expression to match AutoPhrase quality scores and phrases
-    phrase_pattern = r'<phrase_q_([0-9.]+)_([^>]+)>([^<]+)</phrase>'
+    phrase_pattern = r'<phrase_q_([0-9.]+)_[^>]+>([^<]+)</phrase>'
     
     with open(segmentation_file, 'r', encoding='utf-8') as f:
         for line in f:
@@ -22,7 +28,7 @@ def process_autophrase_output(segmentation_file, autophrase_file, docs_output, t
             phrases = re.finditer(phrase_pattern, line)
             for match in phrases:
                 score = float(match.group(1))
-                phrase_text = match.group(3).strip()
+                phrase_text = match.group(2).strip()
                 if score >= 0.5:  # Only collect high-quality phrases
                     cleaned_phrase = clean_phrase(phrase_text)
                     if cleaned_phrase:
@@ -47,23 +53,34 @@ def process_autophrase_output(segmentation_file, autophrase_file, docs_output, t
             if count >= min_phrase_freq:
                 f.write(phrase + '\n')
 
-    # Write docs.txt - tokenized documents with phrases
+    # Write docs.txt - tokenized documents
     with open(docs_output, 'w', encoding='utf-8') as f_out:
         with open(segmentation_file, 'r', encoding='utf-8') as f_in:
             for line in f_in:
-                # Replace quality phrases with their cleaned versions
+                # Process phrases first
                 def replace_phrase(match):
-                    phrase_text = match.group(3).strip()
-                    return clean_phrase(phrase_text)
+                    return clean_phrase(match.group(2))
                 
-                # Process the line
+                # Replace phrases with their cleaned versions (with underscores)
                 processed_line = re.sub(phrase_pattern, replace_phrase, line)
-                # Clean remaining text (non-phrases)
-                processed_line = ' '.join(token.strip() for token in processed_line.split())
-                processed_line = clean_phrase(processed_line)
                 
-                if processed_line:
-                    f_out.write(processed_line + '\n')
+                # Split the line into parts (alternating between non-phrase and phrase text)
+                parts = re.split(r'(<phrase_q_[0-9.]+_[^>]+>[^<]+</phrase>)', processed_line)
+                
+                # Clean each part appropriately
+                cleaned_parts = []
+                for part in parts:
+                    if part.startswith('<phrase_q_'):
+                        # This is a phrase - already cleaned by the replace_phrase function
+                        cleaned_parts.append(re.sub(phrase_pattern, r'\1', part))
+                    else:
+                        # This is non-phrase text - clean without underscores
+                        cleaned_parts.append(clean_text(part))
+                
+                # Join all parts with spaces
+                final_line = ' '.join(p for p in cleaned_parts if p.strip())
+                if final_line:
+                    f_out.write(final_line + '\n')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Create docs.txt and terms.txt from AutoPhrase output')
