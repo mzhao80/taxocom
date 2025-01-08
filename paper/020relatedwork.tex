@@ -1,0 +1,41 @@
+% In this section, we briefly review the literature on (i) topic taxonomy construction to find out the latent topic structure of a text corpus, (ii) entity-level taxonomy (or set) expansion to discover new entity pairs in the hypernym-hyponym relation, and (iii) novelty detection for text data to determine whether each term or document belongs to given (or inlier) topics or not.
+
+\smallsection{Topic Taxonomy Construction}
+\label{subsec:taxogen}
+Early work on hierarchical topic discovery mainly focused on generative probabilistic topic models, such as hierarchical Latent Dirichlet Allocation (\hlda)~\cite{blei2003hierarchical} and hierarchical Pachinko Allocation Model (hPAM)~\cite{mimno2007mixtures}.
+They describe the topic hierarchy in a generative process and then estimate parameters by using inference algorithms, including variational Bayesian inference~\cite{blei2003latent} and collapsed Gibbs sampling~\cite{griffiths2004finding}.
+With the advances in text embedding techniques, several recent studies started to employ hierarchical clustering methods on a term embedding space, where textual semantic information is effectively captured. 
+By doing so, they can construct a \textit{topic taxonomy} whose node corresponds to a term cluster representing a single topic.
+Specifically, to find out hierarchical topic clusters, \taxogen~\cite{zhang2018taxogen} recursively performed text embedding and clustering for each sub-topic cluster, and \nettaxo~\cite{shang2020nettaxo} additionally leveraged network-motifs extracted from text-rich networks.
+However, since all of them are unsupervised methods that primarily utilize the input text corpus, the high-level architecture of their output taxonomies does not usually match well with the one designed by a human.
+
+% To improve the quality and accuracy of the topic taxonomy, there have been several attempts to incorporate a user's prior knowledge about the latent topic structure;
+% it is usually provided as a hierarchy of topic surface names or that of topic-specific keywords.
+% Using the given hierarchy as the minimum guidance (i.e., weak supervision), they tried to mine the set of representative terms for each topic~\cite{meng2020hierarchical} or classify each document into one of the topics~\cite{meng2019weakly, shen2021taxoclass}.
+% Nevertheless, the weakly supervised methods can consider only the topics in the given hierarchy, which may not cover the entire text collection.
+% In other words, their outputs are limited to the given topic hierarchy, and it results in vulnerability to incompleteness of the supervision.
+% For this reason, they are employed for mining the narrow topics that a user has prior knowledge about or be interested in, rather than identifying the full topic taxonomy.
+
+\smallsection{Entity Taxonomy Expansion}
+\label{subsec:taxoexpan}
+Recently, there have been several attempts to construct the entity (or term-level) taxonomy from a text corpus by expanding a given seed taxonomy~\cite{shen2017setexpan,shen2018hiexpan,shen2020taxoexpan,huang2020corel,zeng2021enhancing,mao2020octet,yu2020steam}.
+Note that the main difference of an entity taxonomy from a topic (or cluster-level) taxonomy is that its node represents a single entity or term, so it mainly focuses on the entity-level semantic relationships.
+They basically discover new entities that need to be inserted into the taxonomy, by learning the ``is-a'' (i.e., hypernym-hyponym) relation of parent-child entity pairs in the seed taxonomy.
+To infer the ``is-a''  relation of an input entity pair, they train a relation classifier based on entity embeddings~\cite{shen2018hiexpan}, a pre-trained language model~\cite{huang2020corel}, and graph neural networks (GNNs)~\cite{shen2020taxoexpan}.
+%or additionally optimize the entity decoder to directly generate the new entity at a target position~\cite{zeng2021enhancing}.
+%They mainly bootstrap the seed entities by the help of high-quality patterns or contexts extracted from the corpus~\cite{shen2017setexpan, huang2020guiding}.
+Despite their effectiveness, the entity taxonomy cannot either show the semantic relationships among high-level concepts (i.e., topics or term clusters) or capture term co-occurrences in the documents; this makes its nodes difficult to correspond to the topic classes of documents. 
+%Despite their effectiveness, they only focus on the entity-level semantic coherence within each cluster, without considering the intrinsic topic of each document at all.
+Therefore, they are not suitable for expanding the latent topic hierarchy of documents, rather be useful for enhancing a knowledge base.
+
+\smallsection{Novelty Detection for Text Data}
+\label{subsec:novelty}
+Novelty (or outlier) detection for text data,\footnote{Both \textit{novelties} and \textit{outliers} are assumed to be semantically deviating in an input corpus, but the novelties can form a dense cluster whereas the outliers cannot.}
+which aims to detect the documents that do not belong to any of the given (or inlier) topics, has been researched in a wide range of NLP applications.
+They define the novel-ness (or outlier-ness) based on how far each document is located from semantic regions representing the normality.
+To this end, most unsupervised detectors measure the local/global density~\cite{breunig2000lof, sathe2016subspace} or estimate the normal data distribution~\cite{zhuang2017identifying,ruff2019self,manolache2021date} in a low-dimensional text embedding space.
+On the other hand, supervised/weakly supervised novelty detectors~\cite{hendrycks2020pretrained, lee2020multi, lee2021out, zeng2021adversarial, fouche2020mining} also have been developed to fully utilize the auxiliary information about the inlier topics.\footnote{The topic labels of training documents are available for a supervised setting~\cite{fouche2020mining, lee2020multi, hendrycks2020pretrained, zeng2021adversarial}, and only topic names are provided for a weakly supervised setting~\cite{lee2021out}.}
+They further optimize the embedding space to be discriminative among the topics, so as to clearly determine whether a document belongs to each inlier topic.
+However, none of them considers the hierarchical relationships among the inlier topics, 
+which makes them ineffective to identify novel topics from a large text corpus having a topic hierarchy.
+%\footnote{It is also known as \textit{anomaly detection}, where only normal texts of a single topic class are given for training~\cite{ruff2019self, manolache2021date}, or \textit{out-of-domain detection}, where only in-domain texts of multiple topic classes are given for training~\cite{hendrycks2020pretrained}.}

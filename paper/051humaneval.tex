@@ -1,0 +1,30 @@
+\begin{table}[t]
+\caption{Human evaluation on the output topic taxonomy.}
+\centering
+\resizebox{0.99\linewidth}{!}{%
+\begin{tabular}{ccRRRR}
+    \toprule
+     \multirow{2.5}{*}{\shortstack{\textbf{Given}\\$\mathbf{\bm{\mathcal{H}^0}}$}} & \multirow{2.5}{*}{\shortstack{\textbf{Methods}}} & \multicolumn{2}{c}{\textbf{\nyt}} & \multicolumn{2}{c}{\textbf{\arxiv}} \\\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+    & & {\small\textbf{Coherency}} & {\small\textbf{Complete.}} & {\small\textbf{Coherency}} & {\small\textbf{Complete.}} \\\midrule
+    \multirow{2}{*}{-} 
+    & \hlda & 0.3033 & 0.3161 & 0.2211 & 0.3755 \\
+    & \taxogen & 0.7406 & 0.5640 & 0.7644 & 0.5242 \\\midrule
+    
+    \multirow{3.2}{*}{$\taxoa$}
+    & \josh & 0.8781 & 0.8387 & 0.8753 & 0.7843 \\
+    & \corel & 0.8690 & 0.8452 & 0.8369 & 0.8458 \\
+    & \proposed & \textbf{0.8811} & \textbf{0.9640} & \textbf{0.8913} & \textbf{0.9379} \\\midrule
+    
+    \multirow{3.2}{*}{$\taxob$}
+    & \josh & 0.8583 & 0.7742 & 0.8364 & 0.7647 \\
+    & \corel & 0.8431 & 0.9052 & 0.8429 & 0.8350 \\
+    & \proposed & \textbf{0.8633} & \textbf{0.9303} & \textbf{0.8667} & \textbf{0.8556} \\\midrule
+    
+    \multirow{3.2}{*}{$\taxoc$} 
+    & \josh & 0.8467 & 0.7419 & 0.8585 & 0.5882 \\
+    & \corel & 0.8347 & 0.8426 & 0.8433 & 0.7046 \\
+    & \proposed & \textbf{0.8556} & \textbf{0.9077} & \textbf{0.8613} & \textbf{0.8951} \\\bottomrule
+\end{tabular}
+}
+\label{tbl:humaneval}
+\end{table}

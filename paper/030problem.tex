@@ -1,0 +1,29 @@
+% In this section, we formally describe our new problem and notations, and clarify its difference from the previous problem setting.
+
+\subsection{Concept Definition}
+\label{subsec:definition}
+
+\begin{definition}[Topic taxonomy]
+A \textit{topic taxonomy} $\taxo$ refers to a tree structure about the latent topic hierarchy of terms $\termset$ and documents $\docuset$.
+Each node $c\in\taxo$ is described by a cluster of terms $\topicterms{c} (\subset \termset)$ representing a single conceptual topic.
+The most representative term for the node becomes a \textit{center term} $t_{c}\in\topicterms{c}$, usually regarded as the topic surface name.
+The child nodes of each topic node correspond to its sub-topics.\footnote{The terms ``child nodes'' and ``sub-topics'' are used interchangeably in this paper.}
+For each node $c$, the set of its $K_c$ child nodes is denoted by $\topicchilds{c} (\subset\taxo) = \{s_{c,1}, \ldots, s_{c,K_c}\}$.
+\end{definition}
+
+\subsection{Topic Taxonomy Completion}
+\label{subsec:problem}
+%Based on the definition in Section~\ref{subsec:definition}, we introduce our target task.
+\begin{definition}[Topic taxonomy completion]
+The inputs are a text corpus $\docuset$, its term set $\termset$,\footnote{This term set can be automatically extracted from the input text corpus.}
+and a partial hierarchy $\taxo^0$ of topic surface names.\footnote{This problem setting presumes that a single representative term of a topic node (e.g., topic name) can be easily given as minimum guidance to complete the topic taxonomy.}
+The goal of topic taxonomy completion is to complete the topic taxonomy $\taxo(\supset\taxo^0)$ so that it can cover the entire topic structure of the corpus, being guided by the given topic hierarchy.
+For each node in the taxonomy $c\in\taxo$, it finds out the set of topic terms $\topicterms{c}$ that are semantically coherent.
+In other words, the given topic hierarchy is extended into a larger one by identifying and inserting new topic nodes, while allocating each term into either one of the existing nodes ($\in\taxo^0$) or newly-created nodes ($\in\taxo\textbackslash\taxo^0$).
+%, where $K_c$ is the number of its child nodes.
+\end{definition}
+
+Figure~\ref{fig:problem} shows an example of topic taxonomy completion for a news corpus.
+Similar to unsupervised topic taxonomy construction~\cite{zhang2018taxogen, shang2020nettaxo}, our task works on the set of unlabeled documents whose topic information (e.g., topic class label) is not available.
+The main difference is that a partial topic hierarchy is additionally provided, which can be a user's incomplete prior knowledge or an out-dated topic taxonomy of a growing text collection.
+From the perspective that the given hierarchy serves as auxiliary supervision for discovering the entire topic structure, this task can be categorized as a \textit{weakly supervised} hierarchical topic discovery.

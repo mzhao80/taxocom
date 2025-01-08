@@ -1,0 +1,222 @@
+% In this section, we propose \proposed, a topic modeling framework that expands a given topic hierarchy into the complete topic taxonomy.
+% We first introduce the overview of \proposed, then present the details of its embedding and clustering procedures;
+% for each topic node, \proposed assigns each term and document into one of the sub-topic nodes while discovering novel sub-topic clusters.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\linewidth]{FIG/framework.pdf}
+    \caption{The overview of the \proposed framework which discovers the complete topic taxonomy by the recursive expansion of the given topic hierarchy. Starting from the root node, it performs (i) locally discriminative embedding and (ii) novelty adaptive clustering, to selectively assign the terms (of each node) into one of the child nodes. Best viewed in color.}
+    \label{fig:framework}
+\end{figure*}
+
+\subsection{Overview}
+\label{subsec:overview}
+The proposed \proposed framework recursively expands the given hierarchy in a top-down approach.
+Starting from the root node, \proposed performs (i) text embedding and (ii) text clustering for each node, to find out sub-topic clusters corresponding to its child nodes.
+The key challenge here is to identify the term clusters for \textit{known} (i.e., given) sub-topics as well as \textit{novel} sub-topics, which cannot be covered by any of the known sub-topics, by leveraging the initial hierarchy as weak supervision.
+\begin{itemize}
+    \item \textbf{Locally discriminative embedding}: 
+    \proposed optimizes the embedding space for the terms assigned to the current node $\topicterms{c} (\subset \termset)$.
+    %by using the local text corpus that only contains the documents relevant to $\topicterms{c}$.
+    Utilizing the topic surface names in the given hierarchy, the term embedding vectors are enforced to be discriminative among the known sub-topics, 
+    so as to effectively compute the sub-topic membership of each term.
+    
+    \item \textbf{Novelty adaptive clustering}: 
+    By using the term embeddings, 
+    %\proposed finds out multiple term clusters of both known and novel sub-topics. 
+    \proposed determines whether each term belongs to the known sub-topics or not based on its sub-topic membership.
+    Then, it performs clustering which assigns each term into either one of the known sub-topics or novel sub-topics.
+\end{itemize}
+The taxonomy is expanded by inserting the obtained novel sub-topic clusters as the child nodes of the current node.
+To fully utilize the documents relevant to $\topicterms{c}$ for both embedding and clustering, \proposed also produces the sub-corpus for each topic node $\topicdocs{c}(\subset\docuset)$ by assigning the documents into one of the sub-topics.\footnote{Although a document can cover multiple topics, we assign it into the most relevant sub-topic to exploit textual information from the topic sub-corpus during the process.}
+%In addition, the set of anchor terms for each sub-topic is retrieved to recursively perform this process for its child nodes.
+Figure~\ref{fig:framework} illustrates the overall process of \proposed.
+
+\subsection{Locally Discriminative Text Embedding}
+\label{subsec:embedding}
+The goal of the embedding step is to obtain the low-dimensional embedding space that effectively encodes the textual similarity (or distance) among the terms assigned to a target topic node.
+%to identify sub-topic clusters on the embedding space where
+However, as pointed out in~\cite{gui2018expert, zhang2018taxogen, shang2020nettaxo}, the global embedding space trained on the entire text corpus is not good at capturing the distinctiveness among the topics, especially for lower-level topics.
+For this reason, \proposed adopts the two strategies:
+(i) \textit{local embedding}~\cite{gui2018expert}, which uses the subset of the entire corpus containing only the documents relevant to a target topic (e.g., the documents assigned to a specific topic node), and
+(ii) \textit{keyword-guided discriminative embedding}~\cite{meng2020discriminative, meng2020hierarchical}, which additionally minimizes the semantic correlation among the pre-defined topics by utilizing their keyword sets.
+%Since we have a prior knowledge of the sub-topics (i.e., child nodes) of the target node, we make the term vectors discriminative with each other,
+
+\subsubsection{Local embedding}
+\label{subsubsec:locemb}
+To enhance the discriminative power of term embeddings at lower levels of the taxonomy by effectively capturing their finer-grained semantic information, \proposed employs the local embedding~\cite{gui2018expert} that uses the sub-corpus only relevant to the current topic $c$ instead of the entire corpus.
+The most straightforward way to get the sub-corpus is simply using the set of documents assigned to the topic $c$, denoted by $\topicdocs{c}(\subset\docuset)$.
+For the lower-level topics, however, it is more likely to include a small number of documents, which are not enough to accurately tune the embeddings.
+For this reason, \proposed retrieves more relevant documents and uses them together with $\topicdocs{c}$.
+Using the center term embedding of the topic $c$ as a query, it retrieves the top-$M$ closest terms and collects all the documents containing the terms.
+
+\subsubsection{Keyword-guided discriminative embedding}
+\label{subsubsec:disemb}
+\proposed basically employs a spherical text embedding framework~\cite{meng2019spherical} to directly capture the semantic coherence among the terms into the directional (i.e., cosine) similarity in the spherical space.
+Compared to other text embedding techniques learned in the Euclidean space~\cite{mikolov2013distributed, bojanowski2017enriching, pennington2014glove}, the spherical embedding is particularly effective for term clustering and similarity search, because it eliminates the discrepancy between its training procedure and practical usage.
+
+From the given topic hierarchy, \proposed first builds the sub-topic keyword sets $\{\mathcal{K}_{s_{c,k}}\mid s_{c,k}\in\topicchilds{c}\}$ for the current node $c$, in order to use them as weak supervision for guiding the discrimination among the sub-topics. 
+Each keyword set $\mathcal{K}_{s_{c,k}}$ collects all the center terms in the sub-tree rooted at the sub-topic node $s_{c,k}$.
+For example, in Figure~\ref{fig:framework}, the center terms of sub-tree nodes (colored in orange, blue, and green, respectively) become the keywords of each sub-topic.
+Since all topic names covered by each sub-tree surely belong to the corresponding sub-topic, they can serve as the sub-topic keywords for optimizing the discriminative embedding space.
+
+The main objective of our text embedding is to maximize the probability $p(t_j| t_i)$ for the pairs of a term $t_i$ and its context term $t_j$ co-occurring in a local context window.
+To model the generative likelihood of terms conditioned on each sub-topic $s_{c,k}$, it also maximizes $p(t|s_{c,k})$ for all terms in its keyword set $t\in\mathcal{K}_{s_{c,k}}$.
+In addition, it makes the topic-conditional likelihood distribution $p(t|s_{c,k})$ clearly separable from each other, by minimizing the semantic correlation among the sub-topics $p(s_{c,j}|s_{c,i})$.
+To sum up, the loss function for the node $c$ is described as follows.
+\begin{equation}
+\label{eq:josdloss}
+\begin{split}
+    \mathcal{L}_{emb} = &-\log \prod_{d\in\topicdocs{c}} \prod_{t_i\in d} \prod_{t_j\in\text{cw}(t_i;d)} p(t_j|t_i) \\
+    &-\log \prod_{s_{c,k}\in\topicchilds{c}}\prod_{t_i\in\mathcal{K}_{s_{c,k}}} p(t_i|s_{c,k}) +\log \prod_{s_{c,i},s_{c,j}\in\topicchilds{c}} p(s_{c,j}|s_{c,i}),
+\end{split}
+\raisetag{48pt}
+\end{equation}
+where $\text{cw}(t_i;d)$ is the set of surrounding terms included in a local context window for a term $t_i$ in a document $d$.
+
+Each probability (or likelihood) in Equation~\eqref{eq:josdloss} is modeled by using the embedding vector of each term $t_i$ and sub-topic $s_{c,k}$ (denoted by boldface letters $\tvec{i}$ and $\svec{c,k}$, respectively).
+$p(t_i|s_{c,k})$ is defined by the von Mises-Fisher (vMF) distribution, which is a spherical distribution centered around the sub-topic embedding vector $\svec{c, k}$.
+\begin{equation}
+\label{eq:vmf}
+    %p(d_i|c_k) &= \text{vMF}(\dvec{i};\cvec{k},\kappa_{c_k}) = n(\kappa_{c_k})\exp(\kappa_{c_k}\cos(\dvec{i}, \cvec{k})) \\
+    p(t_i|s_{c,k}) = \text{vMF}(\tvec{i};\svec{c,k},\kappa_{s_{c,k}}) = C_{s_{c,k}}\exp(\kappa_{s_{c,k}}\cos(\tvec{i}, \svec{c,k}))
+\end{equation}
+where $\kappa_{s_{c,k}}\geq 0$ is the \textit{concentration} parameter, $C_{s_{c,k}}$ is the normalization constant, and the \textit{mean direction} of each vMF distribution is modeled by the sub-topic embedding vector $\svec{c,k}$.
+The probability of term co-occurrence, $p(t_j|t_i)$, as well as that of inter-topic correlation, $p(s_{c,j}|s_{c,i})$ is simply defined by using the cosine similarity, % between their embedding vectors,
+i.e., $p(t_j|t_i)\propto\exp(\cos(\tvec{i},\tvec{j}))$ and $p(s_{c,j}|s_{c,i})\propto\exp(\cos(\svec{c,i},\svec{c,j}))$.
+
+Combining a max-margin loss function~\cite{vilnis2015word, vendrov2016order, ganea2018hyperbolic, meng2019spherical} with the probability (or likelihood) defined above, the objective of our text embedding in Equation~\eqref{eq:josdloss} is summarized as follows.
+\begin{equation}
+\label{eq:josdopt}
+\begin{split}
+    &\sum_{d\in\topicdocs{c}} \sum_{t_i\in d}\hspace{-18pt} \sum_{\qquad t_j\in\text{cw}(t_i;d)} \hspace{-12pt}  \left[\tvec{i}{}^\top\vvec{j'} - \tvec{i}{}^\top\vvec{j} + m \right]_+ + \hspace{-4pt}\sum_{s_{c,i},s_{c,j}\in\topicchilds{c}}\hspace{-4pt}\left[\svec{c,i}{}^\top\svec{c,j} - m\right]_+ \\
+    &\quad - \sum_{s_{c,k}\in\topicchilds{c}}\sum_{t_i\in\mathcal{K}_{s_{c,k}}} \left(\log(C_{s_{c,k}}) + \kappa_{s_{c,k}}\tvec{i}{}^\top\svec{c,k}\right) \cdot \mathbbm{1}\left[\tvec{i}{}^\top\svec{c,k} < m\right]\\
+    &\qquad \text{s.t.}\quad \forall t\in\topicterms{c}, s\in\topicchilds{c}, \quad \lVert\tvec{ }\rVert=\lVert\vvec{ }\rVert=\lVert\svec{ }\rVert=1, \kappa_c \geq 0,
+\end{split}
+\raisetag{12pt}
+\end{equation}
+where $[z]_+=\max(z,0)$ and $m$ is the margin size.
+%, and $\mathbbm{1}$ is the indicator function.
+Similar to previous work on text embedding~\cite{mikolov2013distributed, pennington2014glove}, a term $t_i$ has two independent embedding vectors as the target term $\tvec{i}$ and the context term $\vvec{i}$, and the negative terms $t_{j'}$ are randomly selected from the vocabulary.
+
+% To sum up, the first term optimizes the similarity of each document and its words, and each word and its context words.
+% The second term pulls the topic-indicative words (i.e., the given topic names) close to the corresponding topic vectors, while the third term makes the topic vectors far apart from each other.
+
+\subsection{Novelty Adaptive Text Clustering}
+\label{subsec:clustering}
+\subsubsection{Novel-topic term identification}
+\label{subsubsec:novelty}
+The first step for novelty adaptive clustering is to determine whether each term can be assigned to one of the given sub-topics or not.
+In other words, it distinguishes the terms that are relevant to the given sub-topics, referred to as \textit{known-topic terms} $\topickterms{c}$, from the terms that cannot be covered by them, referred to as \textit{novel-topic terms} $\topicnterms{c}$.
+Since the vMF distributions for the given sub-topics are already modeled in the embedding space (Section~\ref{subsec:embedding}), they can be utilized for computing the confidence score that indicates how confidently each term belongs to one of the given sub-topics.
+Specifically, the sub-topic membership of a term is defined by the softmax probability of its distance from each vMF distribution (i.e., sub-topic embedding vector), and the maximum softmax value is used as the confidence~\cite{hendrycks2020pretrained, lee2020multi}.
+In the end, the novelty score of each term is defined as follows.
+\begin{equation}
+\label{eq:novscore}
+    score_{nov}(t) = 1 - \max_{s_{c,k}\in\topicchilds{c}} \frac{\exp( \cos(\tvec{}, \svec{c,k})/T)} {\sum_{s_{c,k'}\in\topicchilds{c}} \exp(\cos(\tvec{}, \svec{c,k'}))/T)},
+\end{equation}
+where $T$ is the temperature parameter that controls the sharpness of the distribution.
+Using the novelty threshold $\tau_{nov}$, the terms for the node $c$ is divided into the set of known-topic terms and novel-topic terms according to their novelty score.
+\begin{equation}
+\begin{split}
+    \topickterms{c} &= \left\{t \mid score_{nov}(t) < \tau_{nov}, t\in\topicterms{c}\right\} \\
+    \topicnterms{c} &= \left\{t \mid score_{nov}(t) \geq \tau_{nov}, t\in\topicterms{c}\right\}
+\end{split}
+\end{equation}
+ 
+The novelty threshold is determined based on the number of the sub-topics $K_c$, i.e., $\tau_{nov} = \left(1-{1}/{K_c} \right)^\beta$ where $\beta\geq1$ is the hyperparameter to control the boundary of known-topic terms.
+Note that a larger $\beta$ value incurs a smaller threshold value, which allows to identify a larger number of novel-topic terms, and vice versa.
+The novelty score ranges in $(0, 1-{1}/{K_c}]$ because of the softmax on similarities with $K_c$ known sub-topics in Equation~\eqref{eq:novscore}.
+
+\subsubsection{Spherical term clustering}
+\label{subsubsec:clustering}
+\proposed discovers the term clusters which cover both the known and novel sub-topics.
+Namely, it assigns each known-topic term $t\in\topickterms{c}$ into one of the existing sub-topics $\topicchilds{c}$, and simultaneously, assigns each novel-topic term $t\in\topicnterms{c}$ into one of the newly-identified novel sub-topics $\novelchilds{c}$.
+Finally, it outputs the sub-topic cluster assignment variables $\{z_t\mid t\in\topicterms{c}\}$.
+%and $z_d$ for all the terms $t\in\topicterms{c}$ and documents $d\in\topicdocs{c}$.
+
+\smallsection{Known-topic term clustering}
+In terms of known-topic terms $\topickterms{c}$, \proposed allocates each term into its closest known sub-topic in the embedding space;
+i.e., $z_t = \argmax_{s_{c,k}\in\topicchilds{c}} \cos(\tvec{}, \svec{c, k})$.
+%The embedding vector of each sub-topic $s_{c,k}$ is denoted by boldface letters $\svec{c, k}$.
+%\footnote{Instead of the sub-topic vector $\svec{c, k}$, its center term vector $\tvec{s_{c,k}}$ also can be used.}
+% \begin{equation}
+% \label{eq:termassign}
+%     z_t = \argmax_{s_{c,k}\in\topicchilds{c}} \ \cos(\tvec{}, \svec{c, k}).
+% \end{equation}
+
+\smallsection{Novel-topic term clustering}
+Unlike known sub-topics whose embedding vector $\svec{c,k}$ and center term vector $\tvec{s_{c,k}}$ are available for clustering, there does not exist any information about novel sub-topics.
+For this reason, \proposed performs $K_c^*$-means spherical clustering~\cite{dhillon2001concept} on the novel-topic terms $\topicnterms{c}$, thereby obtaining the mean vector and center term of each cluster.\footnote{We also considered density-based clustering (e.g., DBSCAN~\cite{campello2015hierarchical}) for identifying novel sub-topics, but we empirically found that it is quite sensitive to hyperparameters as well as cannot consider the semantic relevance to the center terms of each sub-topic.}
+The number of novel sub-topic clusters $K_c^*$ is determined to balance the semantic specificity among clusters, which will be discussed in Section~\ref{subsubsec:movmf}.
+%One remaining challenge is to select the number of the clusters for spherical clustering, and we will discuss about it in Section~\ref{subsubsec:movmf}.
+%For the node $c$, the set of novel sub-topics is denoted by $\novelchilds{c}$.
+
+
+\subsubsection{Anchor term selection}
+\label{subsubsec:anchorterm}
+The initial term clustering results from Section~\ref{subsubsec:clustering} contain the cluster assignment variable of all the terms, but not every term of a topic necessarily belongs to one of its sub-topics.
+For example, the term \textit{game} in the topic node \textit{sports} does not belong to any of its child nodes, representing specific sport sub-categories, such as \textit{tennis}, \textit{baseball}, and \textit{soccer}.
+Thus, it is necessary to carefully mine the set of anchor terms, which are apparently relevant to each sub-topic $s_{c,k}$.
+%, and filter out non-anchor terms to their parent node $c$.
+
+To this end, \proposed defines the significance score of a term by considering both its \textit{semantic relevance} to each sub-topic cluster, denoted by $rel(t, s_{c,k})$, and the \textit{representativeness} in the corresponding sub-corpus $\topicdocs{s_{c,k}}$, denoted by $rep(t, s_{c,k})$.
+\begin{equation}
+\label{eq:sigscore}
+    score_{sig}(t) = \max_{s_{c,k}\in\topicchilds{c}\cup\novelchilds{c}} \left[rel(t, s_{c,k}) \times rep(t, s_{c,k})\right].
+\end{equation}
+To be specific, the semantic relevance is computed by the cosine similarity between their embedding vectors, while the representativeness is obtained based on the term frequency in the sub-corpus.
+By doing so, it can make use of both information from the embedding space and the term occurrences.
+\begin{equation}
+\begin{split}
+\label{eq:relrepscore}
+    rel(t, s_{c,k}) &= \cos(\mathbf{t}, \svec{c,k}) \\
+    rep(t, s_{c,k}) &= \left(int(t, s_{c,k}) \times dis(t, s_{c,k}) \times pop(t, s_{c,k}) \right)^{1/3}.
+\end{split}
+\end{equation}
+
+%Next, to obtain the sub-corpus for each sub-topic \proposed assigns each document into one of the sub-topics $\topicchilds{c}\cup\novelchilds{c}$, by aggregating the cluster assignment of its terms based on the tf-idf weights.
+For mining the representativeness from the sub-corpus $\topicdocs{s_{c,k}}$, \proposed collects the documents by aggregating the cluster assignment of their terms based on the tf-idf weights.
+That is, a document chooses its sub-topic cluster based on how many terms are assigned to each sub-topic cluster considering their importance as well.
+The cluster assignment of a document $z_d$ is defined as follows.
+%is described as follows.
+%obtained by using the cluster-specific tf-idf score based on the term-cluster assignment $z_t$.
+\begin{equation}
+\label{eq:docassign}
+    z_d = \argmax_{s_{c,k}\in\topicchilds{c}\cup\novelchilds{c}} \sum_{t\in d} \mathbb{I}[z_t==s_{c,k}]\cdot \text{tf}(t, d) \cdot \text{idf}(t).
+\end{equation}
+%
+Motivated by context-aware semantic online analytical processing (\caseolap)~\cite{tao2016multi},
+the representativeness is defined as a function of three criteria:
+(i) \textit{Integrity} -- A term with high integrity refers to a meaningful and understandable concept.
+This score can be simply calculated by the state-of-the-art phrase mining technique, such as \segphrase~\cite{liu2015mining} and \autophrase~\cite{shang2018automated}.
+(ii) \textit{Distinctiveness} -- A distinctive term has relatively strong relevance to the sub-corpus of the target sub-topic, distinguished from its relevance to other sub-corpora of sibling sub-topics.
+The distinctiveness score is defined by using the BM25 relevance measure,
+$dis(t, s_{c,k})$ $={\exp (\text{BM25}(t, \topicdocs{s_{c,k}}))}/$ ${(1 + \sum_{s_{c,k'}\in\topicchilds{c}\cup\novelchilds{c}}\exp (\text{BM25}(t, \topicdocs{s_{c,k'}})))}$.
+(iii) \textit{Popularity} -- A term with a high popularity score appears more frequently in the sub-corpus of the target sub-topic than the others, $pop(t, s_{c,k}) = {\log ( \text{tf}(t, \topicdocs{s_{c,k}}) + 1)}/{\log (\sum_{t'\in\topicterms{c}}\text{tf}(t', \topicdocs{s_{c,k}}))}$.
+% \begin{equation}
+% \begin{split}
+%     dis(t, s_{c,k}) &=\frac{\exp (BM25(t, \topicdocs{s_{c,k}}))}{1 + \sum_{s_{c,k'}\in\topicchilds{c}\cup\novelchilds{c}}\exp (BM25(t, \topicdocs{s_{c,k'}}))} \\
+%     pop(t, s_{c,k}) &=\frac{\log ( \text{tf}(t, \topicdocs{s_{c,k}}) + 1)}{\log (\sum_{t'\in\topicterms{c}}\text{tf}(t', \topicdocs{s_{c,k}}))}.
+% \end{split}
+% \end{equation}
+
+Finally, \proposed only keeps the anchor terms whose significance score is larger than the threshold $\tau_{{sig}}$,
+after filtering out the general terms that are less informative to represent each sub-topic.
+%, which means that it is more general term and less likely to belong to one of sub-topics.
+%Low-scored terms, indicating are not representative for any sub-topics, are considered as general terms and pushed back to the parent.
+\begin{equation}
+\begin{split}
+\label{eq:termassign}
+    \topicterms{s_{c,k}} &= \left\{t\mid z_t==s_{c,k}, score_{sig}(t)\geq\tau_{sig}, \forall t\in\topicterms{c}, \right\} \\
+    %\topicdocs{s_{c,k}} &= \left\{d\mid z_d==s_{c,k}, \forall d\in\topicdocs{c}\right\}
+\end{split}
+\end{equation}
+
+\subsubsection{Novel sub-topic cluster refinement}
+\label{subsubsec:movmf}
+Using the set of anchor terms, \proposed estimates the vMF distribution (i.e., mean vector and concentration parameter) for each sub-topic cluster in the embedding space.
+This final step is designed to choose the proper number of novel clusters $K_c^*$ (in Section~\ref{subsubsec:clustering}), with the help of the estimated concentration values indicating the semantic specificity of each sub-topic cluster.
+Formally, it selects the $K_c^*$ value so that it can minimize the standard deviation of all the concentrations, i.e., $\argmin_{K_c^*} \text{stdev}\left[\{\kappa_{s_{c,k}} \mid \forall s_{c,k}\in\topicchilds{c}\cup\novelchilds{c}\}\right]$.
+In this process, to measure the standard deviation based on the identified novel sub-topics $\novelchilds{c}$ for each $K_c^*$ value, a part of the clustering step (from Section~\ref{subsubsec:clustering} to~\ref{subsubsec:movmf}) are repeated.
+Notably, \proposed is capable of automatically finding the total number of sub-topics, by harmonizing the semantic specificity of novel sub-topics with that of known sub-topics, whereas unsupervised methods for topic taxonomy construction rely on a user's manual selection.

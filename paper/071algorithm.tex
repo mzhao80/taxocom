@@ -1,0 +1,46 @@
+\begin{algorithm}
+    \DontPrintSemicolon
+    \SetKwProg{Fn}{Function}{:}{}
+    \SetKwComment{Comment}{$\triangleright$\ }{} 
+	%\Comment*[r]{write comment here}
+	
+	\KwIn{An input text corpus $\docuset$ with its term set $\termset$, and a partial topic hierarchy $\taxo^0$} 
+	%\KwOut{The complete taxonomy $\taxo$ and the set of terms and documents assigned to each node $\{\topicdocs{c}, \topicterms{c}\}$}
+	
+	\vspace{5pt}
+	$\taxo \leftarrow \taxo^0$\;
+	$q \leftarrow queue([(\taxo^0.rootNode, \termset, \docuset)])$ \;
+    \While{$not$ $q.isEmpty()$}{
+    $(c, \topicterms{c}, \topicdocs{c}) \leftarrow q.pop()$ \Comment*[r]{Current node}
+    %$\topicdocs{c}^* \leftarrow$ \leftarrow RetrieveRelevantDocs($\topicterms{c}, \topicdocs{c};\docuset$)\;
+    $\mathcal{E}_{c} \leftarrow$ \textsc{{Embedding}}($\topicterms{c},\topicdocs{c};\taxo$)  \Comment*[r]{Section~\ref{subsec:embedding}}
+    $\mathcal{R}_c\leftarrow$ \textsc{{Clustering}}($\mathcal{E}_{c},\topicterms{c},\topicdocs{c};\taxo$) \Comment*[r]{Section~\ref{subsec:clustering}}
+    \For{$(s, \topicterms{s}, \topicdocs{s})\in \mathcal{R}_c$}{
+            $\taxo.updateChildNodes(c, (s, \topicterms{s}, \topicdocs{s}))$\;
+            $q.push((s, \topicterms{s}, \topicdocs{s}))$\;
+        }
+    }
+    \Return $\taxo$
+    
+\caption{The overall process of \proposed.}
+\label{alg:overview}
+\end{algorithm}
+
+% \begin{algorithm}
+%     \DontPrintSemicolon
+%     \SetKwProg{Fn}{Function}{:}{}
+%     \SetKwComment{Comment}{$\triangleright$\ }{} 
+	
+% 	\KwIn{A target topic $C$, the set of terms and documents $\topicterms{C}$ and $\topicdocs{C}$, and embedding vectors of the terms $\mathcal{U}$ } 
+% 	\KwOut{$\topicterms{1}, \ldots, \topicterms{\numnc}$}
+% 	\Comment*[r]{1. Novel Term Identification}
+%     NovelTermIdentification \; 
+%     \For{$\numnc \in [0, \ldots, |Child|]$}{
+%     \Comment*[r]{2. Spherical Clustering}
+%     \Comment*[r]{3. Anchor Term Selection}
+%     \Comment*[r]{4. Mixture of vMF estimation}
+%     }
+%     \Return \{abcd\}
+% \caption{Novelty adaptive clustering.}
+% \label{alg:clustering}
+% \end{algorithm}

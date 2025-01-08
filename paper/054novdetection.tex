@@ -1,0 +1,31 @@
+
+\begin{table}[t]
+\caption{Performance for document-level novelty detection.}
+\centering
+\resizebox{0.99\linewidth}{!}{%
+\begin{tabular}{cccQQQQQQ}
+    \toprule
+     \multirow{2.5}{*}{\shortstack{\textbf{Given}\\$\mathbf{\bm{\mathcal{H}^0}}$}} & \multirow{2.5}{*}{\textbf{LE}} & \multirow{2.5}{*}{\textbf{DE}} & \multicolumn{3}{c}{\textbf{\nyt}} & \multicolumn{3}{c}{\textbf{\arxiv}} \\\cmidrule(lr){4-6}\cmidrule(lr){7-9}
+    & & & \textbf{P} & \textbf{R} & \textbf{F1} & \textbf{P} & \textbf{R} & \textbf{F1} \\\midrule
+    \multirow{4}{*}{$\taxoa$} 
+    & & & 0.5833 & 0.6483 & 0.6141 & 0.2962 & 0.6440 & 0.4058   \\
+    & \checkmark & & 0.6355 & 0.6298 & 0.6326 & 0.4235 & 0.5668 & 0.4848  \\
+    & & \checkmark & 0.7033 & 0.6924 & 0.6978 & 0.4715 & 0.6664 & 0.5523   \\
+    & \checkmark & \checkmark & \textbf{0.7878} & \textbf{0.7176} & \textbf{0.7511} & \textbf{0.5510} & \textbf{0.8424} & \textbf{0.6662}  \\\midrule
+    
+    \multirow{4}{*}{$\taxob$} 
+    & & & 0.7308 & 0.5719 & 0.6417 & 0.2743 & 0.5514 & 0.3664  \\
+    & \checkmark & & 0.7508 & 0.5725 & 0.6496 & 0.2994 & \textbf{0.5824} & 0.3955  \\
+    & & \checkmark & 0.8082 & 0.5806 & 0.6758 & 0.3679 & 0.5330 & 0.4353   \\
+    & \checkmark & \checkmark & \textbf{0.8470} & \textbf{0.7852} & \textbf{0.8149} & \textbf{0.5399} & 0.5042 & \textbf{0.5214} \\\midrule
+    
+    \multirow{4}{*}{$\taxoc$} 
+    & & & 0.4090 & 0.6930 & 0.5144 & 0.4723 & 0.8315 & 0.6024   \\
+    & \checkmark & & 0.5318 & 0.7358 & 0.6174 & 0.4321 & 0.7925 & 0.5593 \\
+    & & \checkmark & 0.4532 & 0.7210 & 0.5566 & 0.5721 & 0.8527 & 0.6848 \\
+    & \checkmark & \checkmark & \textbf{0.8761} & \textbf{0.7798} & \textbf{0.8251} & \textbf{0.6222} & \textbf{0.8808} & \textbf{0.7293 } \\\bottomrule
+    
+\end{tabular}
+}
+\label{tbl:docdetection}
+\end{table}
