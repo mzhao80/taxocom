@@ -38,13 +38,8 @@ echo "Step 4: Extracting term integrity scores..."
 python extract_term_integrity.py $AUTOPHRASE_DIR/models/DBLP/AutoPhrase.txt $INPUT_DIR/term_integrity.txt
 
 echo "Step 5: create docs.txt and terms.txt"
-# Create docs.txt and terms.txt from AutoPhrase output
-python create_docs_terms.py \
-    --segmentation $RAW_DIR/segmented_speeches.txt \
-    --autophrase $AUTOPHRASE_DIR/models/DBLP/AutoPhrase.txt \
-    --docs_output $RAW_DIR/docs.txt \
-    --terms_output $RAW_DIR/terms.txt \
-    --min_freq 5
+# Process the segmented speeches to create docs.txt and terms.txt
+python process_docs.py $RAW_DIR/segmented_speeches.txt $RAW_DIR/docs.txt $RAW_DIR/terms.txt
 
 echo "Step 6: Running standard preprocessing..."
 # Run the standard preprocessing pipeline
