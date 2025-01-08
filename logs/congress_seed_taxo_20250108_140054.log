@@ -1,0 +1,29 @@
+Starting TaxoCom run at Wed Jan  8 14:00:54 EST 2025
+Dataset: congress
+Seed Taxonomy: seed_taxo
+
+Compile the discriminative embedding module
+Create root folder for taxonomy
+Run TaxoCom
+[Main] Done reading the full data - 3.0718588829040527 seconds
+============================= Running level  0  and node  * =============================
+Starting cell * with 50434 docs.
+Starting training using file ../data/congress/root_seed_taxo/docs.txt
+1M2M3M4M5M6M7M8MLoading embedding from file ../data/congress/root_seed_taxo/embeddings.txt
+Category name file: ../data/congress/root_seed_taxo/child_names.txt
+Target category agriculture_and_food : [ERROR] Category name agriculture_and_food not found in vocabulary!
+[Main] Finish locally discriminative embedding - 6.951425552368164 seconds
+Traceback (most recent call last):
+  File "main.py", line 71, in <module>
+    main(args)
+  File "main.py", line 58, in main
+    recur(input_corpus, root_dir, '*', args.filter_tau, args.n_locterms, args.betas, 0)
+  File "main.py", line 23, in recur
+    child_names = run_clustering(input_corpus, filter_tau, betas, node_name, node_dir, level)
+  File "/n/home09/michaelzhao/Downloads/taxocom/code/clustering.py", line 110, in run_clustering
+    known_clusters, known_scores = known_cluster_assignment(dataset)
+  File "/n/home09/michaelzhao/Downloads/taxocom/code/clustering.py", line 212, in known_cluster_assignment
+    term_membership = np.matmul(dataset.term_embeddings, centers.T)
+AttributeError: 'list' object has no attribute 'T'
+Compress the output taxonomy
+Finished TaxoCom run at Wed Jan  8 14:01:21 EST 2025

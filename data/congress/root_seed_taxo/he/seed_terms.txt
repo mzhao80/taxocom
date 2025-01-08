@@ -5,7 +5,6 @@ sonoma_county
 dianne_feinstein
 traverse_city
 camp_pendleton
-barack_obama
 lake_tahoe
 rotary_club
 special_olympics
@@ -47,6 +46,7 @@ kevin_hern
 loyola_university
 santa_ana
 upper_peninsula
+prime_minister
 ame_church
 santa_rosa
 julie_rikelman
@@ -78,6 +78,7 @@ marin_county
 green_bay
 fort_bragg
 orange_county
+northern_mariana_islands
 night_stalkers
 agent_orange
 montgomery_county
@@ -105,7 +106,6 @@ rhode_islanders
 united_methodist_church
 virgin_islands
 fort_benning
-representative_marjorie_taylor_greene
 cornell_university
 redstone_arsenal
 north_pole
@@ -114,7 +114,6 @@ harry_belafonte
 negro_leagues
 defense_superior_service_medal
 west_virginia
-sandy_hook
 jimmy_buffett
 hampton_roads
 theodore_roosevelt
@@ -145,7 +144,6 @@ sierra_nevada
 marcy_kaptur
 osceola_county
 lockheed_martin
-el_paso
 world_series
 napa_valley
 pierce_county
@@ -226,6 +224,7 @@ bruce_westerman
 mississippi_river
 santa_maria
 fort_gordon
+daniel_webster
 harry_truman
 kamala_harris
 notre_dame
@@ -262,6 +261,7 @@ mississippi_valley_state_university
 south_bend
 boot_camp
 berryessa_snow_mountain_national_monument
+emancipation_hall
 elementary_school
 corman_railroad
 glynn_county
@@ -306,7 +306,6 @@ electric_cooperative
 advisory_board
 american_legion
 cub_scout
-commemorative_coin
 travis_air_force_base
 allegany_county
 elizabeth_peratrovich
@@ -329,7 +328,6 @@ heisman_trophy
 command_sergeant_major
 narragansett_bay
 defense_intelligence_agency
-missile_defense_agency
 field_artillery
 bryce_canyon
 bronze_star
@@ -425,6 +423,7 @@ science_olympiad
 des_moines
 omega_psi_phi
 special_operations
+cortez_masto
 hettie_simmons
 special_operations_command
 grays_harbor
@@ -438,7 +437,6 @@ camden_county
 circuit_court
 iowa_state_university
 south_carolina
-behavioral_health
 wake_county
 yolo_county
 iowa_hawkeyes
@@ -485,6 +483,7 @@ north_africa
 vietnam_service_medal
 nir_oz
 bowling_green
+grand_jury
 major_general
 navajo_nation
 livingston_county
@@ -531,6 +530,7 @@ african_american
 lisle_corporation
 platte_county
 pasco_county
+grizzly_bear
 monterey_county
 unsung_hero
 pulaski_county
@@ -551,6 +551,7 @@ john_adams
 yosemite_national_park
 senator_van_hollen
 bay_area
+equal_rights_amendment
 motor_transport
 nuclear_propulsion
 eighth_grade
@@ -583,7 +584,6 @@ wheat_ridge
 petty_officer
 santa_clara_county
 northern_nevada
-chief_economist
 wynona_lipman
 senior_airman
 niagara_county
@@ -597,7 +597,6 @@ army_national_guard
 penngrove_social
 congenital_heart_disease
 san_joaquin_county
-gulf_war
 cardiac_arrest
 latin_american
 hip_hop
@@ -609,7 +608,6 @@ henrico_county
 noncommissioned_officer
 grand_traverse_county
 development_corporation
-general_assembly
 marshall_county
 san_francisco_bay
 rotary_international
@@ -665,7 +663,6 @@ barbara_lee
 unsung_heroes
 athletic_director
 paul_woods
-organ_donation
 forces_command
 equal_employment_opportunity_commission
 senior_master_sergeant
@@ -682,6 +679,7 @@ highway_patrol
 city_manager
 centennial_anniversary
 northeastern_pennsylvania
+charter_schools
 oklahoma_city
 southern_tier
 national_historical_park
@@ -715,6 +713,7 @@ ranking_member
 brunswick_county
 merit_badges
 diplomatic_corps
+george_washington
 steering_committee
 charter_school
 bankers_association
@@ -724,7 +723,6 @@ penn_state
 minnesota_national_guard
 chatham_county
 congressional_study_groups
-asian_americans
 sacramento_county
 child_abuse
 naval_aviator
@@ -753,7 +751,6 @@ eighth_congressional_district
 anderson_university
 chief_master_sergeant
 clark_county
-foreign_affairs
 montford_point_marines
 letter_carrier
 summa_cum_laude
@@ -821,6 +818,7 @@ team_usa
 seal_team
 post_office
 special_warfare
+north_star
 assistant_coach
 250th_anniversary
 2nd_battalion
@@ -851,7 +849,6 @@ ninth_congressional_district
 recorded_vote
 3rd_battalion
 assistant_administrator
-higher_education
 southern_university
 space_shuttle
 sixth_district
@@ -861,7 +858,6 @@ alma_mater
 95th_birthday
 warrant_officer
 doctoral_degree
-black_men
 air_base
 andrew_jackson
 speaks_volumes
@@ -914,6 +910,7 @@ emergency_medical_services
 civic_engagement
 chief_executive_officer
 national_bank
+mike_johnson
 82nd_airborne_division
 excellence_award
 senate_intelligence_committee
@@ -956,7 +953,6 @@ circuit_court_judge
 jim_risch
 iowa_national_guard
 junior_high
-commanding_officers
 staff_director
 community_development_financial_institutions
 west_texas
@@ -969,6 +965,7 @@ north_texas
 undefeated_season
 oral_arguments
 petty_officer_3rd_class
+racial_justice
 pennsylvania_avenue
 test_pilot
 sacred_site
@@ -996,6 +993,7 @@ brother_michael
 liberty_university
 sporting_events
 indian_affairs
+congressional_caucus
 100th_birthday
 highly_regarded
 extracurricular_activities
@@ -1043,6 +1041,7 @@ italian_american
 campaign_medal
 united_states_military_academy
 cultural_heritage
+rehabilitation_act
 square_feet
 necessarily_absent
 mistakenly_recorded
@@ -1182,6 +1181,7 @@ catholic_school
 space_systems
 united_states_navy
 summer_camp
+voted_yea
 times_leader
 world_peace
 happily_married
@@ -1197,7 +1197,6 @@ deepest_sympathies
 law_school
 task_forces
 meritorious_service
-economic_opportunity
 confirmed_en_bloc
 worked_tirelessly
 marriage_equality
@@ -1211,7 +1210,6 @@ heartfelt_congratulations
 personally_attest
 eastern_district_of_michigan
 nomination_postcloture
-federal_reserve_board
 major_league
 future_endeavors
 townhall_meeting
@@ -1238,7 +1236,6 @@ air_force_reserve
 civil_division
 carson_city
 county_bar_association
-age_group
 american_bar_association_unanimously_rated
 historic_preservation
 program_manager
@@ -1330,6 +1327,7 @@ deepest_gratitude
 james_thomas
 selection_committee
 rollcall_votes
+equality_act
 founding_father
 economic_empowerment
 county_seat
@@ -1526,6 +1524,7 @@ environmental_education
 wounded_soldiers
 chief_executive
 fallen_officers
+voted_yea
 georgia_state
 vice_chairman
 senior_living
@@ -1543,11 +1542,11 @@ civilian_service
 late_nights
 annual_national
 outstanding_achievement
+western_district_of_washington
 rollcall_vote
 university_of_south_florida
 special_events
 training_program
-young_adults
 legal_advice
 received_numerous_awards
 michigan_state
@@ -1571,7 +1570,6 @@ international_association
 arkansas
 space_exploration
 founding_principles
-graduation_rates
 10th_congressional_district
 national_medal
 memorial_service
@@ -1641,7 +1639,6 @@ tireless_champion
 training_facility
 hispanic
 training_school
-national_police
 ohio
 minnesota
 senate_resume_legislative_session
@@ -1651,7 +1648,6 @@ detroit
 selflessly_served
 bravely_served
 deeply_missed
-pivotal_moment
 jordan
 michigan
 oldest_son
@@ -1808,7 +1804,6 @@ micronesia
 canton
 global_war_on_terrorism_continues_moving
 spain
-willow
 dallas
 rafael
 fullerton
@@ -1988,7 +1983,6 @@ russell
 arlington
 disney
 franklin
-turning_point
 ronald
 working_tirelessly
 gonzalez
@@ -2291,6 +2285,7 @@ lasting_impact
 military_service
 bragg
 byron
+menendez
 entire_life
 institute
 eli
@@ -2672,6 +2667,7 @@ darryl
 cuellar
 donald
 tcu
+bahamas
 reinhardt
 auschwitz
 bethlehem
@@ -2690,7 +2686,6 @@ assistant_fire_chief
 spa
 sierra
 consortium
-hong
 october
 johns
 trio
@@ -3005,7 +3000,6 @@ pike
 adrian
 loyola
 alyssa
-dulles
 metals
 certification_program
 nixon
@@ -3294,11 +3288,11 @@ renaissance
 dam
 motors
 heights
+strickland
 local_news
 endowment
 mack
 pat
-plasma
 nieces_and_nephews
 douglas
 nrcs
@@ -3360,7 +3354,6 @@ weicker
 kay
 thunder
 andrew
-elk
 cakrani
 nursing
 yacht
@@ -3374,6 +3367,7 @@ riley
 bonner
 alexander
 expeditionary
+titus
 reservoir
 rodney
 carpenter
@@ -3438,6 +3432,7 @@ commons
 regiment
 spring
 irene
+wilderness
 gaffney
 chair
 hal
@@ -3446,6 +3441,7 @@ counselor
 nicolas
 irvin
 brian
+representatives
 chapter
 coach
 latin
@@ -3453,12 +3449,12 @@ ordinance
 cathy
 daniel
 brady
-corridor
 wheeler
 bonnie
 solicitor
 jenkins
 doris
+nation
 squad
 quirarte
 tanya
@@ -3515,7 +3511,6 @@ brent
 mcdonald
 bite
 brewer
-iraqi
 murphy
 rise_today_to_coanchor
 psychiatry
@@ -3591,6 +3586,7 @@ intermediate
 helping_young
 remarkable_accomplishment
 woodstock
+rouzer
 fairfield
 clemon
 ogles
@@ -3745,6 +3741,7 @@ janice
 terry
 kosovo
 malcolm
+aderholt
 pew
 bishop
 glen
@@ -3832,6 +3829,7 @@ herrera
 gottheimer
 vital_resource
 francis
+vargas
 bethel
 airlift
 poetry
@@ -3869,6 +3867,7 @@ mid
 holland
 gosar
 awakening
+reserves
 appeals
 gallery
 depot
@@ -3932,7 +3931,6 @@ commissioners
 carey
 master
 randall
-search_and_rescue
 conventions
 morgan
 corrections
@@ -3972,7 +3970,6 @@ weaver
 himes
 rosendale
 ray
-administrative
 finance
 pantry
 mason
@@ -4355,7 +4352,6 @@ kingdom
 chemistry
 apple
 pond
-islanders
 lone
 sir
 seventh
@@ -4415,10 +4411,8 @@ downtown
 freshman
 seiu
 citation
-pulse
 katherine
 desert
-auto
 steelworkers
 dixon
 thoughts_and_prayers
@@ -4459,7 +4453,6 @@ hayes
 dedicated_public_servant
 valor
 science
-adaptive
 dave
 csm
 ywca
@@ -4526,6 +4519,7 @@ route
 marching
 music
 griffin
+fish
 equality
 ninth
 fredericksburg
@@ -4570,6 +4564,7 @@ studio
 surrounding_communities
 helm
 dental
+development
 guy
 campus
 creator
@@ -4773,6 +4768,7 @@ ernie
 physics
 enduring_impact
 rams
+chilean
 hbcu
 wesley
 duncan
@@ -4783,8 +4779,8 @@ law_enforcement_training
 rdml
 dakota
 area
+unprecedented_challenges
 working_alongside
-angelenos
 guadalcanal
 sadie
 farrell
@@ -4846,6 +4842,7 @@ board_of_directors
 latinx
 arkansas_state
 personal_office
+bradsher
 santiago
 amarillo
 cunningham
@@ -4946,6 +4943,7 @@ claude
 horse
 originally_founded
 rural
+pursuant
 board_of_trustees
 hyundai
 somerset
@@ -4989,7 +4987,6 @@ champion
 voice
 diligent_worker
 f
-edan
 shiloh
 janelle
 javier
@@ -4999,7 +4996,6 @@ sugar
 iris
 ages
 arrc
-cea
 folk
 teaching_career
 3rd_district
@@ -5015,6 +5011,7 @@ nightclub
 joint_session_of_congress
 leigh
 elmer
+christianity
 raider
 trailblazer
 yankees
@@ -5031,6 +5028,7 @@ inupiat
 olympia
 flynn
 erickson
+neck
 iu
 surgeon
 chartered
@@ -5069,6 +5067,7 @@ bond
 carolyn
 edith
 lcpl
+rutherford
 kyle
 ministry
 gail
@@ -5115,6 +5114,7 @@ expert
 journey_began
 helped_introduce
 kotagal
+mahoney
 matthews
 dart
 gregory
@@ -5199,12 +5199,12 @@ lena
 roll_call_vote
 awards_and_decorations
 ffa
-onset
 sixth
 jeannie
 waco
 johnathan
 excellent_service
+abudu
 bert
 courtroom
 legal_professionals
@@ -5536,7 +5536,6 @@ srjc
 chc
 nrl
 alvarez
-countless_families
 ricky
 bean
 powerhouse
@@ -5545,6 +5544,7 @@ hsu
 enrique
 cornerstone
 alma
+uganda
 emilia
 k
 guillot
@@ -5628,7 +5628,6 @@ steady_leadership
 introduction
 alumnus
 irma
-kuwait
 staff_members
 stuart
 area_chamber_of_commerce
@@ -5639,12 +5638,10 @@ apprenticeship
 lundy
 mechanic
 los
-casualty
 devoted_husband
 beverage
 student
 interns
-visual
 echoes
 patrol
 stalker
@@ -5701,6 +5698,7 @@ helmick
 law_clerk
 future_leaders
 cancer
+peoples
 founder
 office
 guard
@@ -5718,6 +5716,7 @@ diversity
 entire_family
 addison
 kendall
+adolescent
 helped_develop
 montanan
 tanner
@@ -5745,6 +5744,7 @@ illinoisans
 tireless_advocate
 row
 relations
+the_senior_assistant_legislative_clerk_called
 history
 curtis
 inaugural
@@ -5785,6 +5785,7 @@ m
 local_politics
 technical_education
 edition
+months_ahead
 vasquez
 netherlands
 celebrating
@@ -5859,7 +5860,6 @@ seapower
 fine
 selfless_commitment
 happy_100th_birthday
-deliver_results
 evening
 early_days
 tricia
@@ -5985,6 +5985,7 @@ barr
 poet
 faithful
 joyful
+dive
 horne
 countless_contributions
 doctorate
@@ -6061,13 +6062,14 @@ enlisting
 endowed
 rise_to_pay_tribute
 nevadans
+diversity_and_inclusion
 trailer
 anniversary
 commodore
 heavy_heart
-germans
 wyche
 crouch
+officers
 building_relationships
 remarkable_contributions
 graphics
@@ -6076,6 +6078,7 @@ reyes
 tides
 sharpshooter
 rocio
+blanton
 nicodemus
 marisa
 trocaire
@@ -6104,6 +6107,7 @@ century
 kind_words
 rochon
 architectural
+firefighters
 national_organizations
 chairs
 magical
@@ -6138,7 +6142,6 @@ apartment
 recently
 louise
 support_group
-advocacy_organizations
 marker
 volunteerism
 midshipman
@@ -6166,7 +6169,6 @@ hispanics
 great_strides
 wife_mary
 fifth_congressional_district
-pettersen
 dedicated_servant
 ida
 highest_per_capita
@@ -6204,6 +6206,7 @@ second_world_war
 ranches
 land_forces
 treasure
+salad
 kilo
 golfer
 originally
@@ -6247,6 +6250,7 @@ commendation
 sessions
 marsh
 morocco
+minnesotans
 montanans
 millennium
 horses
@@ -6271,6 +6275,7 @@ quigley
 physicians
 houchin
 alaskans
+public
 tyler
 winner
 swim
@@ -6352,6 +6357,7 @@ susannah
 mcallister
 schumacher
 groves
+mcgovern
 wings
 selection
 cohoes
@@ -6375,6 +6381,7 @@ respectfully
 huizenga
 salon
 noah
+installment
 rodriguez
 sandra
 courtney
@@ -6424,6 +6431,7 @@ important_role
 helps_students
 fork
 senate_small_business_of
+correa
 arevalo
 loise
 cris
@@ -6452,6 +6460,7 @@ bosworth
 nacogdoches
 degray
 clerked_for_judge
+race
 dogs
 citizenship
 heather
@@ -6549,7 +6558,6 @@ icebreaker
 safe_room
 onward
 fearless
-sin
 extraordinary_woman
 celebrate_national
 trailers
@@ -6564,6 +6572,7 @@ exemplary
 threads
 connector
 post_342
+lecom
 devoted_public_servant
 63rd
 neguse
@@ -6657,14 +6666,12 @@ university_of_south_carolina
 current_role
 began_teaching
 decades_of_public_service
-advisors
 chaplains
 generation
 rangeland
 yard
 please
 math
-residential
 jessica
 iowans
 bright
@@ -6691,7 +6698,6 @@ earned_numerous
 local_hospital
 achievement
 great_city
-providing_services
 culture
 cammack
 unavoidably_detained_and_unable_to_cast
@@ -6701,7 +6707,6 @@ patience
 tenney
 orchard
 delegation
-motion_to_adjourn
 culinary
 qualification
 nhc
@@ -6721,6 +6726,7 @@ creating_opportunities
 countless_individuals
 teachers_and_administrators
 perfect
+rating
 burchett
 pride_and_joy
 coming_home
@@ -6738,7 +6744,6 @@ colleagues_join
 calendar
 literature
 kiley
-ageism
 wiles
 owned_and_operated
 mill
@@ -6774,6 +6779,7 @@ rogers_of_alabama
 dentistry
 defender
 chocolates
+helmets
 raising_funds
 north_carolina_state
 sportfishing
@@ -6811,6 +6817,7 @@ interparliamentary
 scheduler
 joining
 chess
+ship
 dedicated_service
 variety
 cooking
@@ -6823,7 +6830,6 @@ handy
 delinquency
 candidate
 bounce
-schools
 pay_tribute
 timothy
 plaza
@@ -6925,6 +6931,7 @@ salvation
 woman
 composite
 significant_contributions
+providing_essential
 induction
 signature
 plane
@@ -6941,6 +6948,7 @@ detachment
 ramirez
 remarkable_woman
 visitation
+residents_and_visitors
 weekend
 learning
 asset
@@ -6968,7 +6976,6 @@ seventeen
 clerk_read
 beautiful
 solo
-surface
 holster
 restaurants
 eternity
@@ -7031,13 +7038,12 @@ barnaby
 wonderful_family
 deeply_involved
 graves_of_missouri
-track
 shine
+called
 permitted_to_speak
 career
 served_in_leadership_roles
 ribbons
-boycott
 maykel
 academically
 leaders
@@ -7074,7 +7080,6 @@ composed
 healing
 grgich
 teaching
-brighter_future
 mission
 remarkable_service
 cattle
@@ -7165,6 +7170,7 @@ duvall
 holsenbeck
 recently_recognized
 great_achievement
+spine
 cadet
 ministers
 cradle
@@ -7191,6 +7197,7 @@ moh
 support_staff
 entertainment
 vets
+introduced_earlier
 worker
 little_league_baseball
 playoffs
@@ -7205,7 +7212,6 @@ uncles
 ceremonial
 enlightenment
 bride
-perimeter
 provided_critical
 31st
 agribusiness
@@ -7254,7 +7260,6 @@ gruen
 whisenhunt
 flatside
 young_african_american
-recruiting
 molinaro_of_new_york_page
 antique
 staples
@@ -7348,7 +7353,6 @@ respect_and_gratitude
 applause
 patch
 legacy
-graphic
 actor
 honey
 motion_to_recommit
@@ -7365,6 +7369,7 @@ albums
 grade_of_rear_admiral
 remarkable_leadership
 council_members
+hurry
 brave_americans
 debut
 met_and_married
@@ -7398,7 +7403,6 @@ passionate_advocate
 span
 sacred_and_constitutional_obligation_to_remain
 happily
-new_dems
 safer_place
 true_american_hero
 concurrently
@@ -7425,10 +7429,10 @@ motto
 commending
 roster
 board_of_commissioners
+helped_secure
 ranged
 meals
 midshipmen
-caseworkers
 goodwill
 scholars
 trace
@@ -7443,7 +7447,6 @@ alongside
 prisoner_of_war
 venture
 farming_community
-continue_fighting
 relocating
 biography
 moderator
@@ -7459,7 +7462,6 @@ happiest
 warriors
 wealth_of_knowledge
 plumbing
-tension
 intensive
 26th
 staff_positions
@@ -7592,6 +7594,7 @@ dedicated_individuals
 unable_to_attend_votes
 past_weekend
 distinguished_colleagues
+companion
 quality_of_life
 after
 welcoming
@@ -7612,8 +7615,8 @@ navigator
 homebound
 expertly
 relaxation
-worlds
 broadened
+hogs
 splash
 fireworks
 passion_for_public_service
@@ -7622,6 +7625,7 @@ faculty
 wreath
 welcoming_community
 cornhole
+briefs
 canine
 world_record
 top
@@ -7639,7 +7643,6 @@ reader
 deep_commitment
 sacrifice_and_service
 por
-washing
 fateful
 engulfed
 equally
@@ -7676,6 +7679,7 @@ alumna
 excelling
 energized
 vows
+dialogues
 acutely
 courage
 clerks
@@ -7719,6 +7723,7 @@ paramedics
 cafeteria
 servicemen
 shopping
+fishermen
 religion
 shoreline
 anniversaries
@@ -7870,6 +7875,7 @@ garage
 homegrown
 indebted
 vitality
+smiling
 sage
 completion
 initially
@@ -7884,7 +7890,6 @@ standout
 colors
 subsequently
 sparked
-scratch
 brave
 vocation
 afterschool
@@ -7906,7 +7911,6 @@ sixties
 creativity
 crowds
 certificates
-remarkably
 playground
 esteem
 students
@@ -7963,6 +7967,7 @@ worshippers
 wrestled
 films
 lanes
+kiss
 priceless
 deed
 awe
@@ -7979,7 +7984,6 @@ famed
 seminars
 professionalism
 walking
-harmony
 camping
 mentorship
 enjoyment
@@ -7992,7 +7996,6 @@ invention
 incorporation
 preside
 wavered
-mechanics
 80th
 programming
 untimely
@@ -8010,10 +8013,10 @@ rounded
 moments
 tommy
 53rd
-hits
 display
 hats
 birth
+schooling
 que
 observations
 bobby
@@ -8040,7 +8043,6 @@ encompassing
 featuring
 con
 studying
-minded
 deserving
 rated
 settlers
@@ -8055,7 +8057,6 @@ observing
 attending
 ambassador_at_large
 luck
-trainers
 comforted
 sympathetic
 format
@@ -8112,7 +8113,6 @@ embarks
 spokesperson
 innovative
 eldest
-sorties
 formal
 subcommittees
 renowned
@@ -8137,6 +8137,7 @@ breadth
 forefront
 guide
 friend
+airwaves
 stories
 assignment
 performers
@@ -8147,14 +8148,12 @@ subtitle
 cultivate
 riding
 designating
-hesitate
 blended
 33rd
 prominently
 29th
 immeasurably
 64th
-considerate
 parishioner
 5a
 unfailing
@@ -8255,7 +8254,6 @@ cherishes
 bastion
 unflinching
 ropes
-riches
 watchful
 aircrafts
 breakfasts
@@ -8280,7 +8278,6 @@ commemorated
 finishing
 attest
 tragedy
-shy
 soon
 passionate
 musicians
@@ -8313,7 +8310,6 @@ participating
 solace
 credited
 rankings
-apparel
 102nd
 occupy
 upstanding
@@ -8404,6 +8400,7 @@ scene
 excitement
 sixty
 poster
+darkest
 toys
 righteous
 honorees
@@ -8442,6 +8439,7 @@ sadness
 seasoned
 grassroots
 teachings
+respect
 community_television
 situated
 singles
@@ -8458,7 +8456,6 @@ calm
 laugh
 presence
 altruism
-endorsements
 logo
 epitomizes
 fundraise
@@ -8472,6 +8469,7 @@ lively
 facilitator
 consoled
 calmly
+informative
 serviced
 shined
 attentive
@@ -8566,7 +8564,6 @@ boldly
 constructing
 recognized
 teenager
-integrate
 recognize
 serve
 reside
@@ -8606,7 +8603,6 @@ reassigned
 dedicates
 unforgettable
 dignitaries
-realization
 arranging
 golfing
 lover
@@ -8739,7 +8735,6 @@ propel
 3rd
 for
 migrated
-exchanged
 gesture
 everlasting
 earns
@@ -8755,19 +8750,18 @@ passed
 undoubtedly
 disrepair
 symbolizes
-fanfare
 senselessly
 flesh
 chased
 1917
 lasted
 positive
+entirety
 infectious
 tenacious
 tours
 credits
 neighbor
-soybeans
 candidacy
 unrivaled
 depart
@@ -8775,13 +8769,13 @@ erected
 solidified
 laborer
 positivity
+gunshots
 30th
 located
 marrying
 radios
 skillful
 saddens
-persevere
 performs
 researched
 renovated
@@ -8797,7 +8791,6 @@ progressed
 multigenerational
 skillfully
 merged
-bore
 signifies
 faithfulness
 mornings
@@ -8806,6 +8799,7 @@ learner
 predeceased
 attribute
 devotes
+hangs
 39th
 vibrancy
 distinctive
@@ -8830,6 +8824,7 @@ boasted
 finishes
 1903
 wounded
+adjacent
 continues
 gifts
 enlisted
@@ -8877,7 +8872,6 @@ averaged
 preacher
 sincerity
 52nd
-repaired
 spelled
 shepherded
 touchdowns
@@ -8887,6 +8881,7 @@ overseas
 25th
 rise
 confirm
+frequently
 educating
 beginnings
 arranged
@@ -8915,6 +8910,7 @@ ambushed
 winners
 counted
 adventures
+called
 audiences
 7th
 tradition
@@ -8952,7 +8948,6 @@ toured
 nurture
 escorted
 richly
-fervent
 outgoing
 steadfastly
 eagerly
@@ -8975,11 +8970,11 @@ departing
 summertime
 prayed
 stature
-youths
 recounted
 entrance
 75th
 numerous
+familiar
 kindly
 prepares
 dedicate
@@ -8989,6 +8984,7 @@ races
 appointment
 tireless
 shirts
+resonate
 touring
 lovingly
 hobbies
@@ -9014,11 +9010,12 @@ patriotism
 teammate
 achievements
 weddings
+followers
+construct
 upcoming
 attributes
 diversified
 enrolling
-depicted
 clothes
 gather
 minute
@@ -9041,15 +9038,12 @@ steadily
 boast
 36th
 enjoyable
-stricken
 enlistment
 congratulate
 recruited
 preserved
-hid
 impeccable
 staged
-boosted
 storied
 lawmaker
 wished
@@ -9083,6 +9077,7 @@ empathy
 privilege
 descent
 235
+vacant
 receiving
 utmost
 widow
@@ -9128,10 +9123,10 @@ honorably
 distinct
 yearly
 delighted
-handles
 resumed
 instilling
 foresight
+laughed
 coaching
 educates
 grandsons
@@ -9156,8 +9151,8 @@ stretches
 thanked
 boundless
 embodying
-cooked
 reopened
+counterpart
 bust
 character
 elevated
@@ -9223,6 +9218,7 @@ proudly
 reputation
 grandchildren
 concluding
+thoughtfulness
 flew
 discharged
 highest
@@ -9272,6 +9268,7 @@ generous
 stood
 comrades
 patrons
+submarines
 confident
 welcome
 lesson
@@ -9364,7 +9361,6 @@ begins
 broke
 passions
 lived
-launched
 inherited
 sacrifices
 13th
@@ -9373,7 +9369,6 @@ consecutive
 passion
 profound
 614
-annually
 successfully
 commemorate
 spent
@@ -9382,6 +9377,7 @@ condolences
 endeavors
 hosted
 appreciates
+called
 devoted
 life_support
 abilities
@@ -9526,7 +9522,6 @@ grandkids
 esteemed
 unyielding
 titled
-extends
 briefly
 mobilized
 attracted
@@ -9565,8 +9560,8 @@ battles
 hiking
 launching
 traveled
-scheduled
 firsthand
+liberated
 compassionate
 convinced
 relentlessly
@@ -9595,7 +9590,6 @@ invited
 reminded
 brings
 locations
-7
 opened
 grew
 embraced
@@ -9644,7 +9638,9 @@ announce
 determination
 played
 joined
+rollcall
 away
+1
 celebrated
 gathered
 injured
@@ -9699,7 +9695,6 @@ nickname
 time
 1908
 1898
-inviting
 assembled
 reached
 ordained
@@ -9707,7 +9702,6 @@ name
 continuously
 intellect
 touching
-exploring
 authored
 329
 1893
@@ -9718,6 +9712,7 @@ overseen
 understands
 1978
 genuine
+1217
 spans
 grandparents
 understood
@@ -9744,13 +9739,13 @@ reminding
 jim
 acquired
 601
-305
 1888
 555
 1905
 402
 950
 recalled
+describes
 forming
 exemplify
 holds
@@ -9863,7 +9858,6 @@ james
 1981
 2010
 430
-500
 69
 sincere
 1968
@@ -9871,7 +9865,6 @@ sincere
 1966
 45
 also
-84
 1971
 1947
 200
@@ -9915,7 +9908,6 @@ had
 38
 1930
 370
-275
 near
 1950
 61
@@ -9927,7 +9919,6 @@ near
 1965
 1969
 1992
-therein
 68
 31
 76
@@ -9940,7 +9931,6 @@ always
 2017
 1997
 362
-72
 168
 137
 113
@@ -9951,6 +9941,7 @@ always
 18
 51
 1953
+149
 took
 108
 read
@@ -9979,6 +9970,7 @@ kept
 130
 1964
 57
+88
 49
 1936
 560
@@ -10080,7 +10072,6 @@ words
 boys
 35
 o
-500
 700
 sons
 350
@@ -10096,13 +10087,14 @@ e
 125
 t
 150
+1
 53
 100
 75
 250
+1
 48
 at_large
-a_7
 11
 15
 t
@@ -10143,7 +10135,6 @@ sit_in
 d
 40
 34
-7
 27
 13
 3
