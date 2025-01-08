@@ -11,8 +11,8 @@ mkdir -p $RAW_DIR
 mkdir -p $INPUT_DIR
 
 echo "Step 1: Cleaning crec2023.csv..."
-# Extract the speech field from CSV
-tail -n +2 $RAW_DIR/crec2023.csv | cut -d',' -f2 > $RAW_DIR/cleaned_speeches.txt
+# Use Python script to properly extract speeches from CSV
+python extract_speeches.py $RAW_DIR/crec2023.csv $RAW_DIR/cleaned_speeches.txt
 
 echo "Step 2: Running AutoPhrase for tokenization..."
 # Copy cleaned speeches to AutoPhrase input and set environment variables
