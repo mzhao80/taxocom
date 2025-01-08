@@ -6,17 +6,13 @@ RAW_DIR="$CONGRESS_DIR/raw"
 INPUT_DIR="$CONGRESS_DIR/input"
 AUTOPHRASE_DIR="../AutoPhrase-master"
 
-# Create necessary directories
-mkdir -p $RAW_DIR
-mkdir -p $INPUT_DIR
-
 echo "Step 1: Cleaning crec2023.csv..."
 # Use Python script to properly extract speeches from CSV
 python extract_speeches.py $RAW_DIR/crec2023.csv $RAW_DIR/cleaned_speeches.txt
 
 echo "Step 2: Running AutoPhrase for tokenization..."
 # Copy cleaned speeches to AutoPhrase input and set environment variables
-cp $RAW_DIR/cleaned_speeches.txt $AUTOPHRASE_DIR/data/input.txt
+cp $RAW_DIR/cleaned_speeches.txt $AUTOPHRASE_DIR/data/EN/input.txt
 
 # Run AutoPhrase with correct input file
 cd $AUTOPHRASE_DIR
