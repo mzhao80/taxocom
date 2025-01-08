@@ -1,0 +1,7 @@
+Starting TaxoCom run at Wed Jan  8 14:56:35 EST 2025
+Dataset: congress
+Seed Taxonomy: seed_taxo
+
+Compile the discriminative embedding module
+Create root folder for taxonomy
+Run TaxoCom

@@ -1,6 +1,7 @@
-*/he	church,pastor,savannah,congregation,excelled,barbara,dedication,legendary,career,baptist
-*/these	biden_administration,or,these,already,administration,government,congress,even,instead,should
-*/he/community	festival,founded,vibrant,music,community,community,1908,hosts,lovers,prizes
-*/he/served	sergeant,lieutenant,officer,commander,navy,air_force,marine_corps,rank,army,corporal
-*/these/but	jews,tyrant,israeli,protests,hamas,crossfire,communists,tropes,islamist,protesters
-*/these/program	program,projects,reduction,research,research,programs,industry,investment,requirements,increase
+*/agriculture	agriculture,agricultural,ag,development,farm,farmers,livestock,farming,producers,research
+*/understandably	referencing,illinois_national_guard,covenant_school_shooting,majority_whip,occupants,weicker,oswaldo_paya,stop_csam_act,ted_stevens,decorum
+*/agriculture/or	bill,existing,congress,or,biden_administration,federal_government,any,already,legislation,federal
+*/agriculture/she	church,career,high_school,served,pastor,savannah,club,knight,baptist,honorary
+*/understandably/oswaldo_paya	majority_whip
+*/understandably/refrain	refrain,referencing,occupants
+*/understandably/covenant_school_shooting	covenant_school_shooting
